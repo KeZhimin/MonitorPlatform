@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ffcs.mp.dao.CommSeverOrgInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.mp.entity.CommSeverOrgInfo" >
+    <id column="ORG_ID" property="orgId" jdbcType="DECIMAL" />
+    <result column="COM_ORG_ID" property="comOrgId" jdbcType="DECIMAL" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="PORG_ID" property="porgId" jdbcType="DECIMAL" />
+    <result column="IS_LEAF" property="isLeaf" jdbcType="DECIMAL" />
+    <result column="ORG_DESC" property="orgDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ORG_ID, COM_ORG_ID, ORG_NAME, PORG_ID, IS_LEAF, ORG_DESC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from COMM_SEVER_ORG_INFO
+    where ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from COMM_SEVER_ORG_INFO
+    where ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ffcs.mp.entity.CommSeverOrgInfo" >
+    insert into COMM_SEVER_ORG_INFO (ORG_ID, COM_ORG_ID, ORG_NAME, 
+      PORG_ID, IS_LEAF, ORG_DESC
+      )
+    values (#{orgId,jdbcType=DECIMAL}, #{comOrgId,jdbcType=DECIMAL}, #{orgName,jdbcType=VARCHAR}, 
+      #{porgId,jdbcType=DECIMAL}, #{isLeaf,jdbcType=DECIMAL}, #{orgDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ffcs.mp.entity.CommSeverOrgInfo" >
+    insert into COMM_SEVER_ORG_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="comOrgId != null" >
+        COM_ORG_ID,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+      <if test="porgId != null" >
+        PORG_ID,
+      </if>
+      <if test="isLeaf != null" >
+        IS_LEAF,
+      </if>
+      <if test="orgDesc != null" >
+        ORG_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        #{orgId,jdbcType=DECIMAL},
+      </if>
+      <if test="comOrgId != null" >
+        #{comOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="porgId != null" >
+        #{porgId,jdbcType=DECIMAL},
+      </if>
+      <if test="isLeaf != null" >
+        #{isLeaf,jdbcType=DECIMAL},
+      </if>
+      <if test="orgDesc != null" >
+        #{orgDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.entity.CommSeverOrgInfo" >
+    update COMM_SEVER_ORG_INFO
+    <set >
+      <if test="comOrgId != null" >
+        COM_ORG_ID = #{comOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="porgId != null" >
+        PORG_ID = #{porgId,jdbcType=DECIMAL},
+      </if>
+      <if test="isLeaf != null" >
+        IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
+      </if>
+      <if test="orgDesc != null" >
+        ORG_DESC = #{orgDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.entity.CommSeverOrgInfo" >
+    update COMM_SEVER_ORG_INFO
+    set COM_ORG_ID = #{comOrgId,jdbcType=DECIMAL},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      PORG_ID = #{porgId,jdbcType=DECIMAL},
+      IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
+      ORG_DESC = #{orgDesc,jdbcType=VARCHAR}
+    where ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </update>
+</mapper>

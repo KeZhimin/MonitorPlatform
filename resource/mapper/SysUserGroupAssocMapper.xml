@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ffcs.mp.pri.dao.SysUserGroupAssocMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.mp.pri.entity.SysUserGroupAssoc" >
+    <result column="GROUPID" property="groupid" jdbcType="DECIMAL" />
+    <result column="USERID" property="userid" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insert" parameterType="com.ffcs.mp.pri.entity.SysUserGroupAssoc" >
+    insert into SYS_USER_GROUP_ASSOC (GROUPID, USERID)
+    values (#{groupid,jdbcType=DECIMAL}, #{userid,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ffcs.mp.pri.entity.SysUserGroupAssoc" >
+    insert into SYS_USER_GROUP_ASSOC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupid != null" >
+        GROUPID,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupid != null" >
+        #{groupid,jdbcType=DECIMAL},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

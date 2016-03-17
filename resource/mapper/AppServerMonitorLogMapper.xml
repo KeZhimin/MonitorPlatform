@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ffcs.mp.dao.AppServerMonitorLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.mp.entity.AppServerMonitorLog" >
+    <id column="LOG_ID" property="logId" jdbcType="DECIMAL" />
+    <result column="SEVER_ID" property="severId" jdbcType="DECIMAL" />
+    <result column="IDX_ITEM_ID" property="idxItemId" jdbcType="DECIMAL" />
+    <result column="IDX_ITEM_VALUE" property="idxItemValue" jdbcType="DECIMAL" />
+    <result column="CTIME1" property="ctime1" jdbcType="TIMESTAMP" />
+    <result column="IS_ALARM" property="isAlarm" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LOG_ID, SEVER_ID, IDX_ITEM_ID, IDX_ITEM_VALUE, CTIME1, IS_ALARM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from APP_SEVER_MONITOR_LOG
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from APP_SEVER_MONITOR_LOG
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ffcs.mp.entity.AppServerMonitorLog" >
+    insert into APP_SEVER_MONITOR_LOG (LOG_ID, SEVER_ID, IDX_ITEM_ID, 
+      IDX_ITEM_VALUE, CTIME1, IS_ALARM
+      )
+    values (#{logId,jdbcType=DECIMAL}, #{severId,jdbcType=DECIMAL}, #{idxItemId,jdbcType=DECIMAL}, 
+      #{idxItemValue,jdbcType=DECIMAL}, #{ctime1,jdbcType=TIMESTAMP}, #{isAlarm,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ffcs.mp.entity.AppServerMonitorLog" >
+    insert into APP_SEVER_MONITOR_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="severId != null" >
+        SEVER_ID,
+      </if>
+      <if test="idxItemId != null" >
+        IDX_ITEM_ID,
+      </if>
+      <if test="idxItemValue != null" >
+        IDX_ITEM_VALUE,
+      </if>
+      <if test="ctime1 != null" >
+        CTIME1,
+      </if>
+      <if test="isAlarm != null" >
+        IS_ALARM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=DECIMAL},
+      </if>
+      <if test="severId != null" >
+        #{severId,jdbcType=DECIMAL},
+      </if>
+      <if test="idxItemId != null" >
+        #{idxItemId,jdbcType=DECIMAL},
+      </if>
+      <if test="idxItemValue != null" >
+        #{idxItemValue,jdbcType=DECIMAL},
+      </if>
+      <if test="ctime1 != null" >
+        #{ctime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isAlarm != null" >
+        #{isAlarm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.entity.AppServerMonitorLog" >
+    update APP_SEVER_MONITOR_LOG
+    <set >
+      <if test="severId != null" >
+        SEVER_ID = #{severId,jdbcType=DECIMAL},
+      </if>
+      <if test="idxItemId != null" >
+        IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL},
+      </if>
+      <if test="idxItemValue != null" >
+        IDX_ITEM_VALUE = #{idxItemValue,jdbcType=DECIMAL},
+      </if>
+      <if test="ctime1 != null" >
+        CTIME1 = #{ctime1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isAlarm != null" >
+        IS_ALARM = #{isAlarm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.entity.AppServerMonitorLog" >
+    update APP_SEVER_MONITOR_LOG
+    set SEVER_ID = #{severId,jdbcType=DECIMAL},
+      IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL},
+      IDX_ITEM_VALUE = #{idxItemValue,jdbcType=DECIMAL},
+      CTIME1 = #{ctime1,jdbcType=TIMESTAMP},
+      IS_ALARM = #{isAlarm,jdbcType=VARCHAR}
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </update>
+</mapper>

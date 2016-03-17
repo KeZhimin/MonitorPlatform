@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ffcs.mp.pri.dao.SysStructureInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.mp.pri.entity.SysStructureInfo" >
+    <id column="STRUCTURE_ID" property="structureId" jdbcType="DECIMAL" />
+    <result column="STRUCTURE_NAME" property="structureName" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
+    <result column="ORDER_NUM" property="orderNum" jdbcType="DECIMAL" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="IS_DELETED" property="isDeleted" jdbcType="DECIMAL" />
+    <result column="IS_LEAF" property="isLeaf" jdbcType="DECIMAL" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    STRUCTURE_ID, STRUCTURE_NAME, PARENT_ID, ORDER_NUM, URL, IS_DELETED, IS_LEAF, DESCRIPTION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_STRUCTURE_INFO
+    where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_STRUCTURE_INFO
+    where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ffcs.mp.pri.entity.SysStructureInfo" >
+    insert into SYS_STRUCTURE_INFO (STRUCTURE_ID, STRUCTURE_NAME, PARENT_ID, 
+      ORDER_NUM, URL, IS_DELETED, 
+      IS_LEAF, DESCRIPTION)
+    values (#{structureId,jdbcType=DECIMAL}, #{structureName,jdbcType=VARCHAR}, #{parentId,jdbcType=DECIMAL}, 
+      #{orderNum,jdbcType=DECIMAL}, #{url,jdbcType=VARCHAR}, #{isDeleted,jdbcType=DECIMAL}, 
+      #{isLeaf,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ffcs.mp.pri.entity.SysStructureInfo" >
+    insert into SYS_STRUCTURE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="structureId != null" >
+        STRUCTURE_ID,
+      </if>
+      <if test="structureName != null" >
+        STRUCTURE_NAME,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="isDeleted != null" >
+        IS_DELETED,
+      </if>
+      <if test="isLeaf != null" >
+        IS_LEAF,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="structureId != null" >
+        #{structureId,jdbcType=DECIMAL},
+      </if>
+      <if test="structureName != null" >
+        #{structureName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=DECIMAL},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="isLeaf != null" >
+        #{isLeaf,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.pri.entity.SysStructureInfo" >
+    update SYS_STRUCTURE_INFO
+    <set >
+      <if test="structureName != null" >
+        STRUCTURE_NAME = #{structureName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNum != null" >
+        ORDER_NUM = #{orderNum,jdbcType=DECIMAL},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="isLeaf != null" >
+        IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.pri.entity.SysStructureInfo" >
+    update SYS_STRUCTURE_INFO
+    set STRUCTURE_NAME = #{structureName,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      ORDER_NUM = #{orderNum,jdbcType=DECIMAL},
+      URL = #{url,jdbcType=VARCHAR},
+      IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
+      IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
+    where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
+  </update>
+</mapper>

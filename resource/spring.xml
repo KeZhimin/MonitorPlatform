@@ -35,10 +35,6 @@
 		<property name="basePackage" value="com.ffcs.mp.dao;com.ffcs.mp.pri.dao"></property>
 	</bean>
 
-
-
-
-
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="webBindingInitializer">

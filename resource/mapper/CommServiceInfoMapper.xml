@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ffcs.mp.dao.CommServiceInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.mp.entity.CommServiceInfo" >
+    <id column="SERV_ID" property="servId" jdbcType="DECIMAL" />
+    <result column="ORG_ID" property="orgId" jdbcType="DECIMAL" />
+    <result column="SERV_TITLE" property="servTitle" jdbcType="VARCHAR" />
+    <result column="SERV_UNIFY_URL" property="servUnifyUrl" jdbcType="VARCHAR" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="DECIMAL" />
+    <result column="IS_ENCRY" property="isEncry" jdbcType="DECIMAL" />
+    <result column="POV_CODE" property="povCode" jdbcType="DECIMAL" />
+    <result column="CITY_CODE" property="cityCode" jdbcType="DECIMAL" />
+    <result column="CTIME" property="ctime" jdbcType="TIMESTAMP" />
+    <result column="UTIME" property="utime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_AUTOR" property="updateAutor" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SERV_ID, ORG_ID, SERV_TITLE, SERV_UNIFY_URL, IS_ENABLE, IS_ENCRY, POV_CODE, CITY_CODE, 
+    CTIME, UTIME, UPDATE_AUTOR
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from COMM_SERVICE_INFO
+    where SERV_ID = #{servId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from COMM_SERVICE_INFO
+    where SERV_ID = #{servId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ffcs.mp.entity.CommServiceInfo" >
+    insert into COMM_SERVICE_INFO (SERV_ID, ORG_ID, SERV_TITLE, 
+      SERV_UNIFY_URL, IS_ENABLE, IS_ENCRY, 
+      POV_CODE, CITY_CODE, CTIME, 
+      UTIME, UPDATE_AUTOR)
+    values (#{servId,jdbcType=DECIMAL}, #{orgId,jdbcType=DECIMAL}, #{servTitle,jdbcType=VARCHAR}, 
+      #{servUnifyUrl,jdbcType=VARCHAR}, #{isEnable,jdbcType=DECIMAL}, #{isEncry,jdbcType=DECIMAL}, 
+      #{povCode,jdbcType=DECIMAL}, #{cityCode,jdbcType=DECIMAL}, #{ctime,jdbcType=TIMESTAMP}, 
+      #{utime,jdbcType=TIMESTAMP}, #{updateAutor,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ffcs.mp.entity.CommServiceInfo" >
+    insert into COMM_SERVICE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="servId != null" >
+        SERV_ID,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="servTitle != null" >
+        SERV_TITLE,
+      </if>
+      <if test="servUnifyUrl != null" >
+        SERV_UNIFY_URL,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+      <if test="isEncry != null" >
+        IS_ENCRY,
+      </if>
+      <if test="povCode != null" >
+        POV_CODE,
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE,
+      </if>
+      <if test="ctime != null" >
+        CTIME,
+      </if>
+      <if test="utime != null" >
+        UTIME,
+      </if>
+      <if test="updateAutor != null" >
+        UPDATE_AUTOR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="servId != null" >
+        #{servId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=DECIMAL},
+      </if>
+      <if test="servTitle != null" >
+        #{servTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="servUnifyUrl != null" >
+        #{servUnifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=DECIMAL},
+      </if>
+      <if test="isEncry != null" >
+        #{isEncry,jdbcType=DECIMAL},
+      </if>
+      <if test="povCode != null" >
+        #{povCode,jdbcType=DECIMAL},
+      </if>
+      <if test="cityCode != null" >
+        #{cityCode,jdbcType=DECIMAL},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="utime != null" >
+        #{utime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAutor != null" >
+        #{updateAutor,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.entity.CommServiceInfo" >
+    update COMM_SERVICE_INFO
+    <set >
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=DECIMAL},
+      </if>
+      <if test="servTitle != null" >
+        SERV_TITLE = #{servTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="servUnifyUrl != null" >
+        SERV_UNIFY_URL = #{servUnifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=DECIMAL},
+      </if>
+      <if test="isEncry != null" >
+        IS_ENCRY = #{isEncry,jdbcType=DECIMAL},
+      </if>
+      <if test="povCode != null" >
+        POV_CODE = #{povCode,jdbcType=DECIMAL},
+      </if>
+      <if test="cityCode != null" >
+        CITY_CODE = #{cityCode,jdbcType=DECIMAL},
+      </if>
+      <if test="ctime != null" >
+        CTIME = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="utime != null" >
+        UTIME = #{utime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAutor != null" >
+        UPDATE_AUTOR = #{updateAutor,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where SERV_ID = #{servId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.entity.CommServiceInfo" >
+    update COMM_SERVICE_INFO
+    set ORG_ID = #{orgId,jdbcType=DECIMAL},
+      SERV_TITLE = #{servTitle,jdbcType=VARCHAR},
+      SERV_UNIFY_URL = #{servUnifyUrl,jdbcType=VARCHAR},
+      IS_ENABLE = #{isEnable,jdbcType=DECIMAL},
+      IS_ENCRY = #{isEncry,jdbcType=DECIMAL},
+      POV_CODE = #{povCode,jdbcType=DECIMAL},
+      CITY_CODE = #{cityCode,jdbcType=DECIMAL},
+      CTIME = #{ctime,jdbcType=TIMESTAMP},
+      UTIME = #{utime,jdbcType=TIMESTAMP},
+      UPDATE_AUTOR = #{updateAutor,jdbcType=DECIMAL}
+    where SERV_ID = #{servId,jdbcType=DECIMAL}
+  </update>
+</mapper>

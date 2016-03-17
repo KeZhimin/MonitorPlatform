@@ -25,25 +25,145 @@
 			password="btss_monitor" />
 
 		<!-- 生成实体类 -->
-		<javaModelGenerator targetPackage="com.ffcs.mp.entity"
+		<javaModelGenerator targetPackage="com.ffcs.mp.pri.entity"
 			targetProject="MonitorPlatform" />
 
-		<!-- 生成Dao接口 -->
-		<sqlMapGenerator targetPackage="com.ffcs.mp.dao"
+		<!-- 生成Mapper.xml -->
+		<sqlMapGenerator targetPackage="mapper"
 			targetProject="MonitorPlatform" />
 
 		<!-- 生成mapper.xml -->
-		<javaClientGenerator targetPackage="mapper"
+		<javaClientGenerator targetPackage="com.ffcs.mp.pri.dao"
 			targetProject="MonitorPlatform" type="XMLMAPPER" />
 
 		<!-- 配置表生成对应代码 -->
+		<!--  
 		<table tableName="APP_SEVER_MONITOR_LOG" domainObjectName="AppServerMonitorLog"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 			<property name="ignoreQualifiersAtRuntime" value="false" />
-			<property name="useActualColumnNames" value="true" />
 		</table>
+		
+		<table tableName="APP_IFC_MONITOR_LOG" domainObjectName="AppIfcMonitorLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		
+		<table tableName="COMM_SERV_INTERFACE_INFO" domainObjectName="CommServInterfaceInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		
+		<table tableName="COMM_SERV_ORG_INFO" domainObjectName="CommServOrgInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		
+		<table tableName="COMM_SERVICE_INFO" domainObjectName="CommServiceInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		
+		
+		<table tableName="COMM_SEVER_IDX_ITEM" domainObjectName="CommServerIdxTiem"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		
+		
+		<table tableName="COMM_SEVER_INFO" domainObjectName="CommSeverInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		
+		<table tableName="COMM_SEVER_ORG_INFO" domainObjectName="CommSeverOrgInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		
+		<table tableName="COMM_SEVER_WARN_STRATEGY" domainObjectName="CommSeverWarnStrategy"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		
+		<table tableName="STAT_IFC_MONITOR_INFO" domainObjectName="StatIfcMonitorInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		
+		
+			<table tableName="SYS_GROUP" domainObjectName="SysGroup"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+			
+		
+			<table tableName="SYS_GROUP_SEVER_ACL" domainObjectName="SysGroupSeverAcl"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+			<table tableName="SYS_GROUP_STRUCTURE_ACL" domainObjectName="SysGroupStructureAcl"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+			<table tableName="SYS_SECURITY_LOG" domainObjectName="SysSecurityLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+			<table tableName="SYS_STRUCTURE_INFO" domainObjectName="SysStructureInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+			<table tableName="SYS_USER" domainObjectName="SysUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+			<table tableName="SYS_USER_GROUP_ASSOC" domainObjectName="SysUserGroupAssoc"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		-->
+		<table tableName="SYS_GROUP_SERV_ACL" domainObjectName="SysGroupServAcl"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		
+		
 
 	</context>
 </generatorConfiguration>

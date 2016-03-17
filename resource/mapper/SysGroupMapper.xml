@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ffcs.mp.pri.dao.SysGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.mp.pri.entity.SysGroup" >
+    <id column="GROUP_ID" property="groupId" jdbcType="DECIMAL" />
+    <result column="GROUP_NAME" property="groupName" jdbcType="VARCHAR" />
+    <result column="IS_ENABLED" property="isEnabled" jdbcType="DECIMAL" />
+    <result column="IS_DELETED" property="isDeleted" jdbcType="DECIMAL" />
+    <result column="GRADE" property="grade" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    GROUP_ID, GROUP_NAME, IS_ENABLED, IS_DELETED, GRADE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_GROUP
+    where GROUP_ID = #{groupId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_GROUP
+    where GROUP_ID = #{groupId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ffcs.mp.pri.entity.SysGroup" >
+    insert into SYS_GROUP (GROUP_ID, GROUP_NAME, IS_ENABLED, 
+      IS_DELETED, GRADE)
+    values (#{groupId,jdbcType=DECIMAL}, #{groupName,jdbcType=VARCHAR}, #{isEnabled,jdbcType=DECIMAL}, 
+      #{isDeleted,jdbcType=DECIMAL}, #{grade,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ffcs.mp.pri.entity.SysGroup" >
+    insert into SYS_GROUP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        GROUP_ID,
+      </if>
+      <if test="groupName != null" >
+        GROUP_NAME,
+      </if>
+      <if test="isEnabled != null" >
+        IS_ENABLED,
+      </if>
+      <if test="isDeleted != null" >
+        IS_DELETED,
+      </if>
+      <if test="grade != null" >
+        GRADE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=DECIMAL},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null" >
+        #{isEnabled,jdbcType=DECIMAL},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.pri.entity.SysGroup" >
+    update SYS_GROUP
+    <set >
+      <if test="groupName != null" >
+        GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="isEnabled != null" >
+        IS_ENABLED = #{isEnabled,jdbcType=DECIMAL},
+      </if>
+      <if test="isDeleted != null" >
+        IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
+      </if>
+      <if test="grade != null" >
+        GRADE = #{grade,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where GROUP_ID = #{groupId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.pri.entity.SysGroup" >
+    update SYS_GROUP
+    set GROUP_NAME = #{groupName,jdbcType=VARCHAR},
+      IS_ENABLED = #{isEnabled,jdbcType=DECIMAL},
+      IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
+      GRADE = #{grade,jdbcType=DECIMAL}
+    where GROUP_ID = #{groupId,jdbcType=DECIMAL}
+  </update>
+</mapper>

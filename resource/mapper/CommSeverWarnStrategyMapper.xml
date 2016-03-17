@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ffcs.mp.dao.CommSeverWarnStrategyMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.mp.entity.CommSeverWarnStrategy" >
+    <id column="STRATEGY_ID" property="strategyId" jdbcType="DECIMAL" />
+    <result column="SERV_ID" property="servId" jdbcType="DECIMAL" />
+    <result column="IDX_ITEM_ID" property="idxItemId" jdbcType="DECIMAL" />
+    <result column="LOGIC_OPERATOR" property="logicOperator" jdbcType="VARCHAR" />
+    <result column="STRATEGY_VALUE" property="strategyValue" jdbcType="DECIMAL" />
+    <result column="IS_ENABLE" property="isEnable" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    STRATEGY_ID, SERV_ID, IDX_ITEM_ID, LOGIC_OPERATOR, STRATEGY_VALUE, IS_ENABLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from COMM_SEVER_WARN_STRATEGY
+    where STRATEGY_ID = #{strategyId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from COMM_SEVER_WARN_STRATEGY
+    where STRATEGY_ID = #{strategyId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ffcs.mp.entity.CommSeverWarnStrategy" >
+    insert into COMM_SEVER_WARN_STRATEGY (STRATEGY_ID, SERV_ID, IDX_ITEM_ID, 
+      LOGIC_OPERATOR, STRATEGY_VALUE, IS_ENABLE
+      )
+    values (#{strategyId,jdbcType=DECIMAL}, #{servId,jdbcType=DECIMAL}, #{idxItemId,jdbcType=DECIMAL}, 
+      #{logicOperator,jdbcType=VARCHAR}, #{strategyValue,jdbcType=DECIMAL}, #{isEnable,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ffcs.mp.entity.CommSeverWarnStrategy" >
+    insert into COMM_SEVER_WARN_STRATEGY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="strategyId != null" >
+        STRATEGY_ID,
+      </if>
+      <if test="servId != null" >
+        SERV_ID,
+      </if>
+      <if test="idxItemId != null" >
+        IDX_ITEM_ID,
+      </if>
+      <if test="logicOperator != null" >
+        LOGIC_OPERATOR,
+      </if>
+      <if test="strategyValue != null" >
+        STRATEGY_VALUE,
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="strategyId != null" >
+        #{strategyId,jdbcType=DECIMAL},
+      </if>
+      <if test="servId != null" >
+        #{servId,jdbcType=DECIMAL},
+      </if>
+      <if test="idxItemId != null" >
+        #{idxItemId,jdbcType=DECIMAL},
+      </if>
+      <if test="logicOperator != null" >
+        #{logicOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="strategyValue != null" >
+        #{strategyValue,jdbcType=DECIMAL},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.entity.CommSeverWarnStrategy" >
+    update COMM_SEVER_WARN_STRATEGY
+    <set >
+      <if test="servId != null" >
+        SERV_ID = #{servId,jdbcType=DECIMAL},
+      </if>
+      <if test="idxItemId != null" >
+        IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL},
+      </if>
+      <if test="logicOperator != null" >
+        LOGIC_OPERATOR = #{logicOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="strategyValue != null" >
+        STRATEGY_VALUE = #{strategyValue,jdbcType=DECIMAL},
+      </if>
+      <if test="isEnable != null" >
+        IS_ENABLE = #{isEnable,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where STRATEGY_ID = #{strategyId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.entity.CommSeverWarnStrategy" >
+    update COMM_SEVER_WARN_STRATEGY
+    set SERV_ID = #{servId,jdbcType=DECIMAL},
+      IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL},
+      LOGIC_OPERATOR = #{logicOperator,jdbcType=VARCHAR},
+      STRATEGY_VALUE = #{strategyValue,jdbcType=DECIMAL},
+      IS_ENABLE = #{isEnable,jdbcType=DECIMAL}
+    where STRATEGY_ID = #{strategyId,jdbcType=DECIMAL}
+  </update>
+</mapper>

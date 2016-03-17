@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ffcs.mp.dao.CommServerIdxTiemMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.mp.entity.CommServerIdxTiem" >
+    <id column="IDX_ITEM_ID" property="idxItemId" jdbcType="DECIMAL" />
+    <result column="IDX_ITEM_NAME" property="idxItemName" jdbcType="VARCHAR" />
+    <result column="STRATEGY_VALUE" property="strategyValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    IDX_ITEM_ID, IDX_ITEM_NAME, STRATEGY_VALUE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from COMM_SEVER_IDX_ITEM
+    where IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from COMM_SEVER_IDX_ITEM
+    where IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ffcs.mp.entity.CommServerIdxTiem" >
+    insert into COMM_SEVER_IDX_ITEM (IDX_ITEM_ID, IDX_ITEM_NAME, STRATEGY_VALUE
+      )
+    values (#{idxItemId,jdbcType=DECIMAL}, #{idxItemName,jdbcType=VARCHAR}, #{strategyValue,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ffcs.mp.entity.CommServerIdxTiem" >
+    insert into COMM_SEVER_IDX_ITEM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idxItemId != null" >
+        IDX_ITEM_ID,
+      </if>
+      <if test="idxItemName != null" >
+        IDX_ITEM_NAME,
+      </if>
+      <if test="strategyValue != null" >
+        STRATEGY_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idxItemId != null" >
+        #{idxItemId,jdbcType=DECIMAL},
+      </if>
+      <if test="idxItemName != null" >
+        #{idxItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="strategyValue != null" >
+        #{strategyValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.entity.CommServerIdxTiem" >
+    update COMM_SEVER_IDX_ITEM
+    <set >
+      <if test="idxItemName != null" >
+        IDX_ITEM_NAME = #{idxItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="strategyValue != null" >
+        STRATEGY_VALUE = #{strategyValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.entity.CommServerIdxTiem" >
+    update COMM_SEVER_IDX_ITEM
+    set IDX_ITEM_NAME = #{idxItemName,jdbcType=VARCHAR},
+      STRATEGY_VALUE = #{strategyValue,jdbcType=VARCHAR}
+    where IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL}
+  </update>
+</mapper>
