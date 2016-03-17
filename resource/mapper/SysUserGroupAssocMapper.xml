@@ -5,11 +5,11 @@
     <result column="GROUPID" property="groupid" jdbcType="DECIMAL" />
     <result column="USERID" property="userid" jdbcType="DECIMAL" />
   </resultMap>
-  <insert id="insert" parameterType="com.ffcs.mp.pri.entity.SysUserGroupAssoc" >
+  <insert id="insert" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc" >
     insert into SYS_USER_GROUP_ASSOC (GROUPID, USERID)
     values (#{groupid,jdbcType=DECIMAL}, #{userid,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.mp.pri.entity.SysUserGroupAssoc" >
+  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc" >
     insert into SYS_USER_GROUP_ASSOC
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="groupid != null" >

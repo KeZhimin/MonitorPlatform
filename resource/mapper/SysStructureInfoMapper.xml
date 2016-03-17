@@ -24,7 +24,7 @@
     delete from SYS_STRUCTURE_INFO
     where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.ffcs.mp.pri.entity.SysStructureInfo" >
+  <insert id="insert" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
     insert into SYS_STRUCTURE_INFO (STRUCTURE_ID, STRUCTURE_NAME, PARENT_ID, 
       ORDER_NUM, URL, IS_DELETED, 
       IS_LEAF, DESCRIPTION)
@@ -32,7 +32,7 @@
       #{orderNum,jdbcType=DECIMAL}, #{url,jdbcType=VARCHAR}, #{isDeleted,jdbcType=DECIMAL}, 
       #{isLeaf,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.mp.pri.entity.SysStructureInfo" >
+  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
     insert into SYS_STRUCTURE_INFO
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="structureId != null" >
@@ -87,7 +87,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.pri.entity.SysStructureInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
     update SYS_STRUCTURE_INFO
     <set >
       <if test="structureName != null" >
@@ -114,7 +114,7 @@
     </set>
     where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.pri.entity.SysStructureInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
     update SYS_STRUCTURE_INFO
     set STRUCTURE_NAME = #{structureName,jdbcType=VARCHAR},
       PARENT_ID = #{parentId,jdbcType=DECIMAL},

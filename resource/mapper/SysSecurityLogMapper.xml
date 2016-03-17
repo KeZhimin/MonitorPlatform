@@ -21,13 +21,13 @@
     delete from SYS_SECURITY_LOG
     where LOGID = #{logid,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.ffcs.mp.pri.entity.SysSecurityLog" >
+  <insert id="insert" parameterType="com.ffcs.sys.entity.SysSecurityLog" >
     insert into SYS_SECURITY_LOG (LOGID, LOGIN_NAME, IPADDRESS, 
       OPERATION, CTIME)
     values (#{logid,jdbcType=DECIMAL}, #{loginName,jdbcType=VARCHAR}, #{ipaddress,jdbcType=VARCHAR}, 
       #{operation,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.mp.pri.entity.SysSecurityLog" >
+  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysSecurityLog" >
     insert into SYS_SECURITY_LOG
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="logid != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.pri.entity.SysSecurityLog" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysSecurityLog" >
     update SYS_SECURITY_LOG
     <set >
       <if test="loginName != null" >
@@ -82,7 +82,7 @@
     </set>
     where LOGID = #{logid,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.pri.entity.SysSecurityLog" >
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysSecurityLog" >
     update SYS_SECURITY_LOG
     set LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
       IPADDRESS = #{ipaddress,jdbcType=VARCHAR},

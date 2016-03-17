@@ -27,7 +27,7 @@
     delete from SYS_USER
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.ffcs.mp.pri.entity.SysUser" >
+  <insert id="insert" parameterType="com.ffcs.sys.entity.SysUser" >
     insert into SYS_USER (USER_ID, LONGIN_NAME, PASSWORD, 
       FULL_NAME, CTIME, IS_ENABLED, 
       IS_DELETED, POV_CODE, PHONE_NUM, 
@@ -37,7 +37,7 @@
       #{isDeleted,jdbcType=DECIMAL}, #{povCode,jdbcType=DECIMAL}, #{phoneNum,jdbcType=DECIMAL}, 
       #{email,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.mp.pri.entity.SysUser" >
+  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysUser" >
     insert into SYS_USER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.pri.entity.SysUser" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysUser" >
     update SYS_USER
     <set >
       <if test="longinName != null" >
@@ -137,7 +137,7 @@
     </set>
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.pri.entity.SysUser" >
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysUser" >
     update SYS_USER
     set LONGIN_NAME = #{longinName,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},

@@ -19,13 +19,13 @@
     delete from SYS_GROUP_SERV_ACL
     where SERV_ACL_ID = #{servAclId,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.ffcs.mp.pri.entity.SysGroupServAcl" >
+  <insert id="insert" parameterType="com.ffcs.sys.entity.SysGroupServAcl" >
     insert into SYS_GROUP_SERV_ACL (SERV_ACL_ID, USER_ID, SERV_ID
       )
     values (#{servAclId,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{servId,jdbcType=DECIMAL}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.mp.pri.entity.SysGroupServAcl" >
+  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysGroupServAcl" >
     insert into SYS_GROUP_SERV_ACL
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="servAclId != null" >
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.pri.entity.SysGroupServAcl" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysGroupServAcl" >
     update SYS_GROUP_SERV_ACL
     <set >
       <if test="userId != null" >
@@ -62,7 +62,7 @@
     </set>
     where SERV_ACL_ID = #{servAclId,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.pri.entity.SysGroupServAcl" >
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysGroupServAcl" >
     update SYS_GROUP_SERV_ACL
     set USER_ID = #{userId,jdbcType=DECIMAL},
       SERV_ID = #{servId,jdbcType=DECIMAL}

@@ -21,13 +21,13 @@
     delete from SYS_GROUP
     where GROUP_ID = #{groupId,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.ffcs.mp.pri.entity.SysGroup" >
+  <insert id="insert" parameterType="com.ffcs.sys.entity.SysGroup" >
     insert into SYS_GROUP (GROUP_ID, GROUP_NAME, IS_ENABLED, 
       IS_DELETED, GRADE)
     values (#{groupId,jdbcType=DECIMAL}, #{groupName,jdbcType=VARCHAR}, #{isEnabled,jdbcType=DECIMAL}, 
       #{isDeleted,jdbcType=DECIMAL}, #{grade,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.mp.pri.entity.SysGroup" >
+  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysGroup" >
     insert into SYS_GROUP
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="groupId != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.mp.pri.entity.SysGroup" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysGroup" >
     update SYS_GROUP
     <set >
       <if test="groupName != null" >
@@ -82,7 +82,7 @@
     </set>
     where GROUP_ID = #{groupId,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ffcs.mp.pri.entity.SysGroup" >
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysGroup" >
     update SYS_GROUP
     set GROUP_NAME = #{groupName,jdbcType=VARCHAR},
       IS_ENABLED = #{isEnabled,jdbcType=DECIMAL},
