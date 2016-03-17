@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="<@full_path path='js/jquery-2.1.1.min.js'/>"></script>
+<script type="text/javascript">
+function getUser(){
+	$.ajax({
+		url:"<@full_path path='getUser.json'/>",
+		type: 'get',
+		success: function(data){
+			console.log(data);
+		}
+	});
+}
+
+</script>
+</head>
+<body>
+this is index.html
+<button onclick="getUser()">getUser</button>
+</body>
+</html>
