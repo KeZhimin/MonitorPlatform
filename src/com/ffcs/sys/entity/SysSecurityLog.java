@@ -1,4 +1,4 @@
-package com.ffcs.mp.pri.entity;
+package com.ffcs.sys.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;

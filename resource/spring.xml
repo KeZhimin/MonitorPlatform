@@ -32,7 +32,7 @@
 
 	<!-- 注册接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.ffcs.mp.dao;com.ffcs.mp.pri.dao"></property>
+		<property name="basePackage" value="com.ffcs.mp.dao;com.ffcs.sys.dao"></property>
 	</bean>
 
 	<bean

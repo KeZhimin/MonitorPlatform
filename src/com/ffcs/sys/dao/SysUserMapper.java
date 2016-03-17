@@ -1,6 +1,6 @@
-package com.ffcs.mp.pri.dao;
+package com.ffcs.sys.dao;
 
-import com.ffcs.mp.pri.entity.SysUser;
+import com.ffcs.sys.entity.SysUser;
 
 public interface SysUserMapper {
     int deleteByPrimaryKey(Integer userId);

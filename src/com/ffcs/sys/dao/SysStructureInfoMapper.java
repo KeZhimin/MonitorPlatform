@@ -1,6 +1,6 @@
-package com.ffcs.mp.pri.dao;
+package com.ffcs.sys.dao;
 
-import com.ffcs.mp.pri.entity.SysStructureInfo;
+import com.ffcs.sys.entity.SysStructureInfo;
 
 public interface SysStructureInfoMapper {
     int deleteByPrimaryKey(Integer structureId);

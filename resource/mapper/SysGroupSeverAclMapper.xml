@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ffcs.mp.pri.dao.SysGroupSeverAclMapper" >
-  <resultMap id="BaseResultMap" type="com.ffcs.mp.pri.entity.SysGroupSeverAcl" >
+<mapper namespace="com.ffcs.sys.dao.SysGroupSeverAclMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysGroupSeverAcl" >
     <id column="SERV_ACL_ID" property="servAclId" jdbcType="DECIMAL" />
     <result column="USER_ID" property="userId" jdbcType="DECIMAL" />
     <result column="SERV_ID" property="servId" jdbcType="DECIMAL" />

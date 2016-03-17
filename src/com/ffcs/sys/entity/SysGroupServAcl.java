@@ -1,4 +1,4 @@
-package com.ffcs.mp.pri.entity;
+package com.ffcs.sys.entity;
 
 public class SysGroupServAcl {
     private Integer servAclId;

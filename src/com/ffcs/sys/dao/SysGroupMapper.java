@@ -1,6 +1,6 @@
-package com.ffcs.mp.pri.dao;
+package com.ffcs.sys.dao;
 
-import com.ffcs.mp.pri.entity.SysGroup;
+import com.ffcs.sys.entity.SysGroup;
 
 public interface SysGroupMapper {
     int deleteByPrimaryKey(Integer groupId);

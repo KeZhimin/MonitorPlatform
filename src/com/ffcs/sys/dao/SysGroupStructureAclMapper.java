@@ -1,6 +1,6 @@
-package com.ffcs.mp.pri.dao;
+package com.ffcs.sys.dao;
 
-import com.ffcs.mp.pri.entity.SysGroupStructureAcl;
+import com.ffcs.sys.entity.SysGroupStructureAcl;
 
 public interface SysGroupStructureAclMapper {
     int deleteByPrimaryKey(Integer aclId);

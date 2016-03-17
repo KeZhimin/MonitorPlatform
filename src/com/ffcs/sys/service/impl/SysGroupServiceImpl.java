@@ -1,11 +1,11 @@
-package com.ffcs.mp.pri.service.impl;
+package com.ffcs.sys.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ffcs.mp.pri.dao.SysGroupMapper;
-import com.ffcs.mp.pri.entity.SysGroup;
-import com.ffcs.mp.pri.service.SysGroupService;
+import com.ffcs.sys.dao.SysGroupMapper;
+import com.ffcs.sys.entity.SysGroup;
+import com.ffcs.sys.service.SysGroupService;
 
 
 @Service

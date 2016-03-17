@@ -1,6 +1,6 @@
-package com.ffcs.mp.pri.dao;
+package com.ffcs.sys.dao;
 
-import com.ffcs.mp.pri.entity.SysUserGroupAssoc;
+import com.ffcs.sys.entity.SysUserGroupAssoc;
 
 public interface SysUserGroupAssocMapper {
     int insert(SysUserGroupAssoc record);

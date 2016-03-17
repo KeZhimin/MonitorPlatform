@@ -1,6 +1,6 @@
-package com.ffcs.mp.pri.service;
+package com.ffcs.sys.service;
 
-import com.ffcs.mp.pri.entity.SysGroup;
+import com.ffcs.sys.entity.SysGroup;
 
 public interface SysGroupService {
     int deleteByPrimaryKey(Integer groupId);

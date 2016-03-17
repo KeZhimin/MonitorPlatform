@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ffcs.mp.pri.dao.SysSecurityLogMapper" >
-  <resultMap id="BaseResultMap" type="com.ffcs.mp.pri.entity.SysSecurityLog" >
+<mapper namespace="com.ffcs.sys.dao.SysSecurityLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysSecurityLog" >
     <id column="LOGID" property="logid" jdbcType="DECIMAL" />
     <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
     <result column="IPADDRESS" property="ipaddress" jdbcType="VARCHAR" />

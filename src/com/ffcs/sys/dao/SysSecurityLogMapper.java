@@ -1,7 +1,8 @@
-package com.ffcs.mp.pri.dao;
+package com.ffcs.sys.dao;
 
-import com.ffcs.mp.pri.entity.SysSecurityLog;
 import java.math.BigDecimal;
+
+import com.ffcs.sys.entity.SysSecurityLog;
 
 public interface SysSecurityLogMapper {
     int deleteByPrimaryKey(BigDecimal logid);

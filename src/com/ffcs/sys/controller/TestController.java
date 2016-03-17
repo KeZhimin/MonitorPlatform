@@ -1,4 +1,4 @@
-package com.ffcs.mp.pri.controller;
+package com.ffcs.sys.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

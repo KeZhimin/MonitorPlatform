@@ -1,6 +1,6 @@
-package com.ffcs.mp.pri.dao;
+package com.ffcs.sys.dao;
 
-import com.ffcs.mp.pri.entity.SysGroupSeverAcl;
+import com.ffcs.sys.entity.SysGroupSeverAcl;
 
 public interface SysGroupSeverAclMapper {
     int deleteByPrimaryKey(Integer servAclId);
