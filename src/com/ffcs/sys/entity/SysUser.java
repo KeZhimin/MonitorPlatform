@@ -102,4 +102,14 @@ public class SysUser {
     public void setEmail(String email) {
         this.email = email;
     }
+
+	@Override
+	public String toString() {
+		return "SysUser [userId=" + userId + ", longinName=" + longinName
+				+ ", password=" + password + ", fullName=" + fullName
+				+ ", ctime=" + ctime + ", isEnabled=" + isEnabled
+				+ ", isDeleted=" + isDeleted + ", povCode=" + povCode
+				+ ", phoneNum=" + phoneNum + ", email=" + email + "]";
+	}
+    
 }

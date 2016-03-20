@@ -1,5 +1,7 @@
 package com.ffcs.sys.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,12 @@ public class SysGroupServiceImpl implements SysGroupService{
 	@Override
 	public int updateByPrimaryKey(SysGroup record) {
 		return 0;
+	}
+
+	@Override
+	public List<SysGroup> selectList() {
+		
+		return sysGroupMapper.selectList();
 	}
 
 }

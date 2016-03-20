@@ -1,16 +1,17 @@
-package com.ffcs.sys.service;
+package com.ffcs.sys.dao;
 
 import java.util.List;
 
-
-public interface CommService<T> {
+public interface CommMapper<T> {
 	int deleteByPrimaryKey(Integer primaryKey);
 
     int insert(T entity);
 
     int insertSelective(T entity);
-    List<T> selectList();
+
     T selectByPrimaryKey(Integer primaryKey);
+    
+    List<T> selectList();
 
     int updateByPrimaryKeySelective(T entity);
 

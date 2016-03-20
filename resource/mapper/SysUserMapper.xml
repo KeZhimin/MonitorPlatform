@@ -17,6 +17,11 @@
     USER_ID, LONGIN_NAME, PASSWORD, FULL_NAME, CTIME, IS_ENABLED, IS_DELETED, POV_CODE, 
     PHONE_NUM, EMAIL
   </sql>
+  <select id="getSysUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from SYS_USER where LONGIN_NAME = #{longinName,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

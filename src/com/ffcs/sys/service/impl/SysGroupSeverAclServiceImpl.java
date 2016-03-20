@@ -1,10 +1,11 @@
 package com.ffcs.sys.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ffcs.sys.dao.SysGroupSeverAclMapper;
-import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.entity.SysGroupSeverAcl;
 import com.ffcs.sys.service.SysGroupSeverAclService;
 @Service
@@ -12,6 +13,7 @@ public class SysGroupSeverAclServiceImpl implements SysGroupSeverAclService {
 
 	@Autowired
 	private SysGroupSeverAclMapper sysGroupSeverAclMapper;
+
 	@Override
 	public int deleteByPrimaryKey(Integer primaryKey) {
 		// TODO Auto-generated method stub
@@ -31,7 +33,7 @@ public class SysGroupSeverAclServiceImpl implements SysGroupSeverAclService {
 	}
 
 	@Override
-	public SysGroup selectByPrimaryKey(Integer primaryKey) {
+	public SysGroupSeverAcl selectByPrimaryKey(Integer primaryKey) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -47,5 +49,12 @@ public class SysGroupSeverAclServiceImpl implements SysGroupSeverAclService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public List<SysGroupSeverAcl> selectList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }

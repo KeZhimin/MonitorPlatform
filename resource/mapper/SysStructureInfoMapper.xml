@@ -14,6 +14,11 @@
   <sql id="Base_Column_List" >
     STRUCTURE_ID, STRUCTURE_NAME, PARENT_ID, ORDER_NUM, URL, IS_DELETED, IS_LEAF, DESCRIPTION
   </sql>
+  <select id="selectList">
+   select 
+   <include refid="Base_Column_List" />
+   from SYS_STRUCTURE_INFO
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

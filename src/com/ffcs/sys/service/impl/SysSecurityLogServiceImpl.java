@@ -1,10 +1,11 @@
 package com.ffcs.sys.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ffcs.sys.dao.SysSecurityLogMapper;
-import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.entity.SysSecurityLog;
 import com.ffcs.sys.service.SysSecurityLogService;
 @Service
@@ -12,9 +13,10 @@ public class SysSecurityLogServiceImpl implements SysSecurityLogService {
 
 	@Autowired
 	private SysSecurityLogMapper sysSecurityLogMapper;
+
 	@Override
 	public int deleteByPrimaryKey(Integer primaryKey) {
-		
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -31,7 +33,7 @@ public class SysSecurityLogServiceImpl implements SysSecurityLogService {
 	}
 
 	@Override
-	public SysGroup selectByPrimaryKey(Integer primaryKey) {
+	public SysSecurityLog selectByPrimaryKey(Integer primaryKey) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -47,5 +49,12 @@ public class SysSecurityLogServiceImpl implements SysSecurityLogService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public List<SysSecurityLog> selectList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }
