@@ -3,35 +3,51 @@ package com.ffcs.sys.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.entity.SysUser;
+import com.ffcs.sys.entity.SysUserGroupAssoc;
+import com.ffcs.sys.service.SysUserGroupAssocService;
 import com.ffcs.sys.service.SysUserService;
 
 @Controller
+@RequestMapping("/sysUser")
 public class SysUserController {
 
 	@Autowired
 	private SysUserService sysUserService;
-
-	@RequestMapping("login")
-	@ResponseBody
-	public Object getLoginSysUser(SysUser sysUser){
+	@Autowired
+	private SysUserGroupAssocService sysUserGroupAssocService;
+     private SysUserGroupAssoc sysUserGroupAssoc;
+	@RequestMapping("/login")
+	public String getLoginSysUser(SysUser sysUser){
 		SysUser user = sysUserService.getSysUserByName("admin");
-		System.out.println(user.toString());
-		return user;
-		/*String userName = sysUser.getLonginName();
-		SysUser user = null;
-		if(userName!=null && "".equals(userName)){
-		  user = sysUserService.getSysUserByName(userName);
-		}
-		  if(user==null){
-			  return "login";
-					  
-		  }else if(!user.getPassword().equals(sysUser.getPassword())){
-			  return "login";
-		  }
-		return "";*/
+	
+		return "sys/add";
 		
 	}
+	@RequestMapping("/addUser")
+	public String addUser(SysUser sysUser,SysGroup sysGroup){
+		sysUserService.insertSelective(sysUser);
+		sysUserGroupAssoc =setSysUserGroupAssocValue(sysUser,sysGroup);
+		sysUserGroupAssocService.insertSelective(sysUserGroupAssoc);
+		return "sys/index";
+	}
+	
+	@RequestMapping("updateUser")
+	public String updateUser(SysUser sysUser,SysGroup sysGroup){
+		
+		sysUserService.updateByPrimaryKeySelective(sysUser);
+		sysUserGroupAssoc =setSysUserGroupAssocValue(sysUser,sysGroup);
+		sysUserGroupAssocService.updateByPrimaryKeySelective(sysUserGroupAssoc);
+	    return "sys/index";
+	}
+	
+	private SysUserGroupAssoc setSysUserGroupAssocValue(SysUser sysUser,SysGroup sysGroup){
+		sysUserGroupAssoc = new SysUserGroupAssoc();
+		sysUserGroupAssoc.setGroupid(sysGroup.getGroupId());
+		sysUserGroupAssoc.setUserid(sysUser.getUserId());
+		return sysUserGroupAssoc;
+	}
+	
 }

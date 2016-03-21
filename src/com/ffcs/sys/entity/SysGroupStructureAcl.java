@@ -1,5 +1,7 @@
 package com.ffcs.sys.entity;
 
+import java.util.List;
+
 public class SysGroupStructureAcl {
     private Integer aclId;
 
@@ -8,8 +10,9 @@ public class SysGroupStructureAcl {
     private Integer structureId;
 
     private Short privs;
+ 
 
-    public Integer getAclId() {
+	public Integer getAclId() {
         return aclId;
     }
 
@@ -25,15 +28,19 @@ public class SysGroupStructureAcl {
         this.groupId = groupId;
     }
 
-    public Integer getStructureId() {
-        return structureId;
-    }
+   
 
-    public void setStructureId(Integer structureId) {
-        this.structureId = structureId;
-    }
+   
 
-    public Short getPrivs() {
+	public Integer getStructureId() {
+		return structureId;
+	}
+
+	public void setStructureId(Integer structureId) {
+		this.structureId = structureId;
+	}
+
+	public Short getPrivs() {
         return privs;
     }
 

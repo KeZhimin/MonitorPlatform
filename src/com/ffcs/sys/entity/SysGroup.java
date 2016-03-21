@@ -1,5 +1,7 @@
 package com.ffcs.sys.entity;
 
+import java.util.List;
+
 public class SysGroup {
 	private Integer groupId;
 
@@ -10,6 +12,16 @@ public class SysGroup {
 	private Short isDeleted;
 
 	private Short grade;
+	private List<SysStructureInfo> sysStructureInfo;
+
+	
+	public List<SysStructureInfo> getSysStructureInfo() {
+		return sysStructureInfo;
+	}
+
+	public void setSysStructureInfo(List<SysStructureInfo> sysStructureInfo) {
+		this.sysStructureInfo = sysStructureInfo;
+	}
 
 	public Integer getGroupId() {
 		return groupId;

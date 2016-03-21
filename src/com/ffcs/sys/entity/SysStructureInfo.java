@@ -1,5 +1,9 @@
 package com.ffcs.sys.entity;
 
+/**
+ * @author LONG
+ *
+ */
 public class SysStructureInfo {
     private Integer structureId;
 
@@ -80,4 +84,14 @@ public class SysStructureInfo {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	@Override
+	public String toString() {
+		return "SysStructureInfo [structureId=" + structureId
+				+ ", structureName=" + structureName + ", parentId=" + parentId
+				+ ", orderNum=" + orderNum + ", url=" + url + ", isDeleted="
+				+ isDeleted + ", isLeaf=" + isLeaf + ", description="
+				+ description + "]";
+	}
+    
 }

@@ -42,12 +42,14 @@
       #{isDeleted,jdbcType=DECIMAL}, #{povCode,jdbcType=DECIMAL}, #{phoneNum,jdbcType=DECIMAL}, 
       #{email,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysUser" >
-    insert into SYS_USER
+  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysUser">
+ <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="userId">  
+       SELECT SYS_USER_USERID.NEXTVAL from DUAL  
+   </selectKey>  
+    insert into SYS_USER 
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
+     
         USER_ID,
-      </if>
       <if test="longinName != null" >
         LONGIN_NAME,
       </if>
@@ -77,9 +79,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
+      
         #{userId,jdbcType=DECIMAL},
-      </if>
+     
       <if test="longinName != null" >
         #{longinName,jdbcType=VARCHAR},
       </if>

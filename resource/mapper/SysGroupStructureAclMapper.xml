@@ -16,6 +16,12 @@
     from SYS_GROUP_STRUCTURE_ACL
     where ACL_ID = #{aclId,jdbcType=DECIMAL}
   </select>
+   <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc" >
+    select 
+     <include refid="Base_Column_List" />
+    from SYS_GROUP_STRUCTURE_ACL
+    where GROUP_ID = #{GroupId,jdbcType=DECIMAL}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from SYS_GROUP_STRUCTURE_ACL
     where ACL_ID = #{aclId,jdbcType=DECIMAL}

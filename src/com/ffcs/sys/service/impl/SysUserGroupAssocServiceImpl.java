@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ffcs.sys.dao.SysUserGroupAssocMapper;
+import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.entity.SysUserGroupAssoc;
 import com.ffcs.sys.service.SysUserGroupAssocService;
 @Service
@@ -28,8 +29,8 @@ public class SysUserGroupAssocServiceImpl implements SysUserGroupAssocService {
 
 	@Override
 	public int insertSelective(SysUserGroupAssoc entity) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sysUserGroupAssocMapper.insertSelective(entity);
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public class SysUserGroupAssocServiceImpl implements SysUserGroupAssocService {
 	@Override
 	public int updateByPrimaryKeySelective(SysUserGroupAssoc entity) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sysUserGroupAssocMapper.updateByPrimaryKeySelective(entity);
 	}
 
 	@Override
@@ -54,6 +55,13 @@ public class SysUserGroupAssocServiceImpl implements SysUserGroupAssocService {
 	public List<SysUserGroupAssoc> selectList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<SysUserGroupAssoc> getGroupByUserId(SysUser sysUser) {
+		    
+		return sysUserGroupAssocMapper.getGroupByUserId(sysUser);
+		     
 	}
 
 

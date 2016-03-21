@@ -1,23 +1,30 @@
 package com.ffcs.sys.service.impl;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ffcs.sys.dao.SysGroupStructureAclMapper;
 import com.ffcs.sys.dao.SysStructureInfoMapper;
+import com.ffcs.sys.dao.SysUserGroupAssocMapper;
+import com.ffcs.sys.entity.SysGroupStructureAcl;
 import com.ffcs.sys.entity.SysStructureInfo;
+import com.ffcs.sys.entity.SysUser;
+import com.ffcs.sys.entity.SysUserGroupAssoc;
 import com.ffcs.sys.service.SysStructureInfoService;
 @Service
 public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 
 	@Autowired
 	private SysStructureInfoMapper sysStructureInfoMapper;
-
+	
 	@Override
 	public int deleteByPrimaryKey(Integer primaryKey) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+		return sysStructureInfoMapper.deleteByPrimaryKey(primaryKey);
 	}
 
 	@Override
@@ -35,7 +42,7 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 	@Override
 	public SysStructureInfo selectByPrimaryKey(Integer primaryKey) {
 		// TODO Auto-generated method stub
-		return null;
+		return sysStructureInfoMapper.selectByPrimaryKey(primaryKey);
 	}
 
 	@Override
@@ -46,14 +53,31 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 
 	@Override
 	public int updateByPrimaryKey(SysStructureInfo entity) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
+
+	public List<SysStructureInfo> selectList(SysUser sysUser) {
+		List<SysStructureInfo> selectList =null;
+		  if(sysUser!=null){
+		   selectList = 
+				sysStructureInfoMapper.selectList(sysUser);
+		  }
+		return selectList;
+	}
+
+	
+
+
 	@Override
 	public List<SysStructureInfo> selectList() {
-		
-		return sysStructureInfoMapper.selectList();
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	
+
+
 	
 }

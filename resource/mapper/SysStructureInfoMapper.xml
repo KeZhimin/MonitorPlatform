@@ -14,10 +14,12 @@
   <sql id="Base_Column_List" >
     STRUCTURE_ID, STRUCTURE_NAME, PARENT_ID, ORDER_NUM, URL, IS_DELETED, IS_LEAF, DESCRIPTION
   </sql>
-  <select id="selectList">
-   select 
-   <include refid="Base_Column_List" />
-   from SYS_STRUCTURE_INFO
+  <select id="selectList" parameterType="com.ffcs.sys.entity.SysUser" resultMap="BaseResultMap">
+  select DISTINCT s.* from SYS_STRUCTURE_INFO s where STRUCTURE_ID in(
+   select STRUCTURE_ID from SYS_GROUP_STRUCTURE_ACL where GROUP_ID in(
+  select GROUPID from SYS_USER_GROUP_ASSOC  where USERID =#{userId}
+  ))
+   
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

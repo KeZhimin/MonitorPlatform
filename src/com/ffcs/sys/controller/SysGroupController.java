@@ -30,9 +30,9 @@ public class SysGroupController {
 	@ResponseBody
 	@RequestMapping("ajax")
 	public List<SysGroup> selectList(){
-		   List<SysGroup> list = sysGroupService.selectList();
-		   System.out.println(list);
-		return list;
+		 //  List<SysGroup> list = sysGroupService.selectList();
+		   //System.out.println(list);
+		return null;
 	}
 	@RequestMapping("deleteGroup")
 	public String deleteById(Integer id){

@@ -1,6 +1,7 @@
 package com.ffcs.sys.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysUser {
     private Integer userId;
@@ -22,8 +23,8 @@ public class SysUser {
     private Long phoneNum;
 
     private String email;
-
-    public Integer getUserId() {
+   
+	public Integer getUserId() {
         return userId;
     }
 

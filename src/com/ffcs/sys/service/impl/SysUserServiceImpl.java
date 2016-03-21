@@ -27,8 +27,8 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public int insertSelective(SysUser entity) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sysUserMapper.insertSelective(entity);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class SysUserServiceImpl implements SysUserService {
 	@Override
 	public int updateByPrimaryKeySelective(SysUser entity) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sysUserMapper.updateByPrimaryKeySelective(entity);
 	}
 
 	@Override
