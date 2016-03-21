@@ -15,25 +15,23 @@ public class SysUserServiceImpl implements SysUserService {
 	  private SysUserMapper sysUserMapper;
 	@Override
 	public int deleteByPrimaryKey(Integer primaryKey) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sysUserMapper.deleteByPrimaryKey(primaryKey);
 	}
 
 	@Override
 	public int insert(SysUser entity) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int insertSelective(SysUser entity) {
-		
+	
 		return sysUserMapper.insertSelective(entity);
 	}
 
 	@Override
 	public SysUser selectByPrimaryKey(Integer primaryKey) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -51,8 +49,12 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public SysUser getSysUserByName(String userName) {
-		
+		if(userName!=null && !"".endsWith(userName) ){
 		return sysUserMapper.getSysUserByName(userName);
+		}else{
+			return null;
+		}
+		
 	}
 
 	@Override

@@ -19,12 +19,11 @@ public class SysStructureInfoController {
 	private SysStructureInfoService sysStructureInfoService;
 	@RequestMapping("listTo")
 	@ResponseBody
-	public Set<SysStructureInfo> selectList(){
-		  System.out.println("ssssssss");
-		  SysUser sysUser = new SysUser();
-		  sysUser.setUserId(1);
+	public List<SysStructureInfo> selectList(SysUser sysUser){
+		 // SysUser sysUser = new SysUser();
+		 // sysUser.setUserId(1);
 		//List<SysStructureInfo> selectList = sysStructureInfoService.selectList();
 		List<SysStructureInfo> selectList = sysStructureInfoService.selectList(sysUser);
-		return null;
+		return selectList;
 	}
 }
