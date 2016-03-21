@@ -1,10 +1,11 @@
 package com.ffcs.sys.controller;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,14 +18,18 @@ public class SysStructureInfoController {
 
 	@Autowired
 	private SysStructureInfoService sysStructureInfoService;
-	@RequestMapping("listTo")
-	@ResponseBody
-	public Set<SysStructureInfo> selectList(){
-		  System.out.println("ssssssss");
-		  SysUser sysUser = new SysUser();
-		  sysUser.setUserId(1);
-		//List<SysStructureInfo> selectList = sysStructureInfoService.selectList();
+
+	@RequestMapping("listTo/{id}")
+	public String selectList(@PathVariable("id") Integer id, Map<String, Object> map) {
+		System.out.println("xxxxxxxxxxxxxxxxxxxxx");
+		SysUser sysUser = new SysUser();
+		sysUser.setUserId(id);
 		List<SysStructureInfo> selectList = sysStructureInfoService.selectList(sysUser);
-		return null;
+		map.put("structureList", selectList);
+		for (int i = 0, len = selectList.size(); i < len; i++) {
+			System.out.println(selectList.get(i).toString());
+		}
+		System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+		return "sys/index";
 	}
 }

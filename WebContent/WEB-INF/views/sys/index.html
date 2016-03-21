@@ -1,29 +1,90 @@
-
+<!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-<script type="text/javascript">
- $(function(){
-    $("#btn1").click(
-      function(){
-      alert("ddddddd");
-      $.ajax({
-         url:"<@full_path path='ajax.json'/>",
-		type: 'get',
-		success: function(data){
-			console.log(data);
-		}
-
-      }
-      );
-      }
-    );
- });
-</script>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <#include "/views/sys/meta.html">
 </head>
 <body>
- <button id="btn1" >test</button>
+<!--  
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">上网助手服务监控平台</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a href="">监控信息</a></li>
+        <li><a href="">接口测试</a></li>
+        <li><a href="">参数配置</a></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">系统管理<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="">用户管理</a></li>
+                <li><a href="">角色管理</a></li>
+                <li><a href="">菜单管理</a></li>
+            </ul>
+        </li>
+        <li style="position: absolute;right: 0;" class="dropdown"><a href="" data-toggle="dropdown">账户管理<span class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="#">修改密码</a></li>
+            <li><a href="#">退出</a></li>
+        </ul>
+        </li>
+    </ul>
+</nav>
+-->
+
+
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">上网助手服务监控平台</a>
+    </div>
+    
+    <ul class="nav navbar-nav">
+    <#if structureList?? && structureList?size gt 0>
+      <#list structureList as item>
+      <#assign flag=true>
+        <#if item.parentId == '0'>
+          <#list structureList as temp>
+            <#if temp.parentId == item.structureId>
+            <#assign flag=false>
+            <#break>
+            </#if>
+          </#list>
+        <#if flag>
+        <li><a href="${item.url}">${item.structureName}</a></li>
+        <#else>
+        <li class="dropdown">
+           <a class="dropdown-toggle" data-toggle="dropdown" href="${item.url}">${item.structureName}<span class="caret"></span></a>
+           <ul class="dropdown-menu">
+          <#list structureList as temp>
+            <#if temp.parentId == item.structureId>
+            <li><a href="${temp.url}">${temp.structureName}</a></li>
+            </#if>
+          </#list>
+          </ul>
+          </li>
+          </#if>
+        </#if>
+      </#list>
+      </#if>
+       <li style="position: absolute;right: 0;" class="dropdown"><a href="" data-toggle="dropdown">账户管理<span class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="#">修改密码</a></li>
+            <li><a href="#">退出</a></li>
+        </ul>
+        </li>
+    </ul>
+</nav>
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="text-align: center;">这里有一张图</h1>
+        </div>
+    </div>
+</div>
 </body>
 </html>
