@@ -23,7 +23,9 @@ public class SysUser {
     private Long phoneNum;
 
     private String email;
-   
+    
+	
+
 	public Integer getUserId() {
         return userId;
     }

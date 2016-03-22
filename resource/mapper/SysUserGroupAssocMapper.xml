@@ -5,16 +5,18 @@
     <result column="GROUPID" property="groupid" jdbcType="DECIMAL" />
     <result column="USERID" property="userid" jdbcType="DECIMAL" />
   </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc">
+    delete from  SYS_USER_GROUP_ASSOC
+    where USERID = #{userid,jdbcType=DECIMAL}    
+  </delete>
   <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc">
     update SYS_USER_GROUP_ASSOC
     <set>
        <if test="groupid != null" >
         GROUPID = #{groupid,jdbcType=DECIMAL},
       </if>
-      <if test="userid != null" >
-        USERID = #{userid,jdbcType=DECIMAL},
-      </if>
     </set>
+    where USERID = #{userid,jdbcType=DECIMAL}
   </update>
   <insert id="insert" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc" >
     insert into SYS_USER_GROUP_ASSOC (GROUPID, USERID)

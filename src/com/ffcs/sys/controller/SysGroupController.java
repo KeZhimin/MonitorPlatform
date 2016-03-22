@@ -1,6 +1,7 @@
 package com.ffcs.sys.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,33 +12,23 @@ import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.service.SysGroupService;
 
 @Controller
-@RequestMapping("sys/group")
+@RequestMapping("/sys/group")
 public class SysGroupController {
 
 	@Autowired
 	public SysGroupService sysGroupService;
 	
-	@RequestMapping("list1")
-	public String getById(){
-		
-		SysGroup sysGroup = sysGroupService.selectByPrimaryKey(1);
-		System.out.println(sysGroup);
+	@RequestMapping("/group")
+	public String selectGroupList(Map<String ,Object> groupMap){
+		  List<SysGroup> selectList = sysGroupService.selectList();
+		      groupMap.put("groupList", selectList);
 		return "sys/list";
 	}
-	@RequestMapping("index")
-	public String index(){
-		return "sys/index";
-	}
-	@ResponseBody
-	@RequestMapping("ajax")
-	public List<SysGroup> selectList(){
-		 //  List<SysGroup> list = sysGroupService.selectList();
-		   //System.out.println(list);
-		return null;
-	}
-	@RequestMapping("deleteGroup")
-	public String deleteById(Integer id){
-		sysGroupService.deleteByPrimaryKey(id);
+
+	
+	@RequestMapping("delete")
+	public String deleteById(Integer groupId){
+		sysGroupService.deleteByPrimaryKey(groupId);
 		return "";
 	}
 	public String insertGroup(SysGroup group){

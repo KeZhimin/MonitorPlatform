@@ -1,20 +1,16 @@
 package com.ffcs.test;
 
-import com.ffcs.sys.controller.SysUserController;
-import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.entity.SysUser;
+import com.ffcs.sys.service.impl.SysUserServiceImpl;
 
 public class Test {
 
 	public static void main(String[] args) {
 		SysUser sys = new SysUser();
-		 sys.setUserId(10002);
-		 sys.setLonginName("bbbbbb");
-         sys.setIsEnabled((short) 1);
-         SysGroup sysGroup = new SysGroup();
-         sysGroup.setGroupId(1);
-         SysUserController sysu = new SysUserController();
-         sysu.updateUser(sys, sysGroup);
+		SysUserServiceImpl sysu = new SysUserServiceImpl();
+		sys.setUserId(10004);
+		sysu.deleteByPrimaryKey(sys.getUserId());
+		System.out.println("ddd");
 	}
 
 }

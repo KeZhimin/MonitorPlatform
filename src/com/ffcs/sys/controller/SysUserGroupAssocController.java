@@ -17,9 +17,4 @@ public class SysUserGroupAssocController {
 	@Autowired
 	private SysUserGroupAssocService sysUserGroupAssocService;
 	
-	public String getGroupById(HttpSession session){
-		//SysUser sysUser = (SysUser) session.getAttribute("loginUser");
-		//List<SysUserGroupAssoc> groupByUserId = sysUserGroupAssocService.getGroupByUserId(sysUser);
-		return "";
-	}
 }

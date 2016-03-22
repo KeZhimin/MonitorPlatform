@@ -1,12 +1,16 @@
 package com.ffcs.sys.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.entity.SysUser;
-import com.ffcs.sys.entity.SysUserGroupAssoc;
 import com.ffcs.sys.service.SysUserGroupAssocService;
 import com.ffcs.sys.service.SysUserService;
 
@@ -18,42 +22,50 @@ public class SysUserController {
 	private SysUserService sysUserService;
 	@Autowired
 	private SysUserGroupAssocService sysUserGroupAssocService;
-     private SysUserGroupAssoc sysUserGroupAssoc;
 	@RequestMapping("/login")
-	public String getLoginSysUser(SysUser sysUser){
-		SysUser user = sysUserService.getSysUserByName("admin");
-	
+	public String getLoginSysUser(SysUser sysUser,HttpSession session){
+		SysUser user = sysUserService.getSysUserByName(sysUser.getLonginName());
+	     session.setAttribute("loginUser", user);
 		return "sys/add";
 		
 	}
-	@RequestMapping("/addUser")
-	public String addUser(SysUser sysUser,SysGroup sysGroup){
-		sysUserService.insertSelective(sysUser);
-		sysUserGroupAssoc =setSysUserGroupAssocValue(sysUser,sysGroup);
-		sysUserGroupAssocService.insertSelective(sysUserGroupAssoc);
+	@RequestMapping("/add")
+	public String addUser(SysUser sysUser,Integer[] groupid){
+		int success = sysUserService.insertSelective(sysUser);
+		if(success>0){
+		  sysUserGroupAssocService.insertSelective(sysUser,groupid);
+		}
 		return "sys/index";
 	}
 	
-	@RequestMapping("updateUser")
-	public String updateUser(SysUser sysUser,SysGroup sysGroup){
+	@RequestMapping("/update")
+	public String updateUser(SysUser sysUser,Integer[] groupid){
 		
-		sysUserService.updateByPrimaryKeySelective(sysUser);
-		sysUserGroupAssoc =setSysUserGroupAssocValue(sysUser,sysGroup);
-		sysUserGroupAssocService.updateByPrimaryKeySelective(sysUserGroupAssoc);
-	    return "sys/index";
+		int success = sysUserService.updateByPrimaryKeySelective(sysUser);
+		if(success>0){
+			   sysUserGroupAssocService.updateByPrimaryKeySelective(sysUser,groupid);
+			}
+		
+		return "sys/index";
 	}
 	
-	private SysUserGroupAssoc setSysUserGroupAssocValue(SysUser sysUser,SysGroup sysGroup){
-		sysUserGroupAssoc = new SysUserGroupAssoc();
-		sysUserGroupAssoc.setGroupid(sysGroup.getGroupId());
-		sysUserGroupAssoc.setUserid(sysUser.getUserId());
-		return sysUserGroupAssoc;
+	@RequestMapping("/delete/{id}")
+	public String deleteUser(@PathVariable("id") Integer id){
+		if(id!=null){
+		 int success = sysUserService.deleteByPrimaryKey(id);
+		   if(success>0){
+			  sysUserGroupAssocService.deleteByPrimaryKey(id);
+		 }
+		}
+		return "sys/index";
 	}
-	
-	@RequestMapping("user")
-	public String user(){
-		System.out.println("this is sys/user/user.htm");
+
+	@RequestMapping("/user")
+	public String selectUserList(Map<String ,Object> userMap){
+		 List<SysUser> selectList = sysUserService.selectList();
+		 userMap.put("userList",selectList );
 		return "sys/user/user";
 	}
+
 	
 }
