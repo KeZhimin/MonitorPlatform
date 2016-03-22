@@ -35,13 +35,13 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 
 	@Override
 	public int insertSelective(SysStructureInfo entity) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sysStructureInfoMapper.insertSelective(entity);
 	}
 
 	@Override
 	public SysStructureInfo selectByPrimaryKey(Integer primaryKey) {
-		// TODO Auto-generated method stub
+		
 		return sysStructureInfoMapper.selectByPrimaryKey(primaryKey);
 	}
 
@@ -72,8 +72,8 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 
 	@Override
 	public List<SysStructureInfo> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return sysStructureInfoMapper.selectList();
 	}
 
 	

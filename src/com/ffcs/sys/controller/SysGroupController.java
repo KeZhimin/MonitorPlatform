@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.service.SysGroupService;
@@ -23,7 +22,7 @@ public class SysGroupController {
 	public String selectGroupList(Map<String ,Object> groupMap){
 		  List<SysGroup> selectList = sysGroupService.selectList();
 		      groupMap.put("groupList", selectList);
-		return "sys/list";
+		return "sys/group/group";
 	}
 
 	
@@ -41,8 +40,4 @@ public class SysGroupController {
 		return "";
 	}
 	
-	@RequestMapping("group")
-	public String group(){
-		return "sys/group/group";
-	}
 }

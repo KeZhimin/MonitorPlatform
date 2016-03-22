@@ -17,18 +17,21 @@
   <select id="selectList" parameterType="com.ffcs.sys.entity.SysUser" resultMap="BaseResultMap">
   select DISTINCT s.* from SYS_STRUCTURE_INFO s where STRUCTURE_ID in(
    select STRUCTURE_ID from SYS_GROUP_STRUCTURE_ACL where GROUP_ID in(
-  select GROUPID from SYS_USER_GROUP_ASSOC  where USERID =#{userId}
-  ))
+  select GROUPID from SYS_USER_GROUP_ASSOC where USERID =#{userId}))
    
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from SYS_STRUCTURE_INFO
-    where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
+    <where>
+     <if test="structureId!=null">
+     STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
+     </if>
+    </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from SYS_STRUCTURE_INFO
+    update from SYS_STRUCTURE_INFO
     where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
@@ -40,11 +43,14 @@
       #{isLeaf,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
+    <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="structureId">  
+       SELECT SYS_STRUCTURE_INFO_STRUCTUREID.NEXTVAL from DUAL  
+   </selectKey>  
     insert into SYS_STRUCTURE_INFO
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="structureId != null" >
+     
         STRUCTURE_ID,
-      </if>
+   
       <if test="structureName != null" >
         STRUCTURE_NAME,
       </if>
@@ -68,9 +74,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="structureId != null" >
+      
         #{structureId,jdbcType=DECIMAL},
-      </if>
+    
       <if test="structureName != null" >
         #{structureName,jdbcType=VARCHAR},
       </if>

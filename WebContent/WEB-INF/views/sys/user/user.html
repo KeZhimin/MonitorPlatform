@@ -42,28 +42,22 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>鬼头桃菜</td>
-						<td>鬼头桃菜</td>
-						<td>是</td>
-						<td>2016-03-11 15:55:55</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>鬼头桃菜</td>
-						<td>柏木由纪</td>
-						<td>是</td>
-						<td>2016-03-11 15:55:55</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>小嶋阳菜</td>
-						<td>小嶋阳菜</td>
-						<td>是</td>
-						<td>2016-03-11 15:55:55</td>
-					</tr>
-				</tbody>
+
+          <#if userList?? && userList?size gt 0>
+            <#list userList as item>
+                     <tr>
+                        <td><input type="checkbox"></td>
+						<td>${item.longinName}</td>
+						<td>${item.fullName}</td>
+						<td>${item.isEnabled}</td>
+						<#if item.ctime??>
+						<td>${item.ctime?string("yyyy-MM-dd HH:mm:ss")}</td>
+						<#else><td>空</td>
+						</#if>
+                     </tr>
+                   </#list>
+                  </#if>
+                </tbody>
 			</table>
 		</div>
 		<div class="col-md-12">

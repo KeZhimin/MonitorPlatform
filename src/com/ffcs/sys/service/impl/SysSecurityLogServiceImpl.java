@@ -52,8 +52,8 @@ public class SysSecurityLogServiceImpl implements SysSecurityLogService {
 
 	@Override
 	public List<SysSecurityLog> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return sysSecurityLogMapper.selectList();
 	}
 	
 

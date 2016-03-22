@@ -54,4 +54,10 @@ public class SysGroupServiceImpl implements SysGroupService{
 		return sysGroupMapper.selectList();
 	}
 
+	@Override
+	public List<SysGroup> selectByUserId(Integer userId) {
+		
+		return sysGroupMapper.selectByUserId(userId);
+	}
+
 }

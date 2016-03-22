@@ -11,6 +11,11 @@
   <sql id="Base_Column_List" >
     LOGID, LOGIN_NAME, IPADDRESS, OPERATION, CTIME
   </sql>
+  <select id="selectList" resultMap="BaseResultMap"> 
+   select 
+   <include refid="Base_Column_List" />
+   from SYS_SECURITY_LOG
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
     select 
     <include refid="Base_Column_List" />

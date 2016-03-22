@@ -27,7 +27,8 @@
   <select id="getSysUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
     select
     <include refid="Base_Column_List" />
-    from SYS_USER where LONGIN_NAME = #{longinName,jdbcType=VARCHAR}
+    from SYS_USER where LONGIN_NAME = #{longinName,jdbcType=VARCHAR} 
+    and IS_DELETED=0 and IS_ENABLED=0
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

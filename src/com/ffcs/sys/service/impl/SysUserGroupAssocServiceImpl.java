@@ -58,12 +58,12 @@ public class SysUserGroupAssocServiceImpl implements SysUserGroupAssocService {
 		return null;
 	}
 
-	@Override
+	/*@Override
 	public List<SysUserGroupAssoc> getGroupByUserId(SysUser sysUser) {
 
 		return sysUserGroupAssocMapper.getGroupByUserId(sysUser);
 
-	}
+	}*/
 
 	@Override
 	public int insertSelective(SysUser sysUser, Integer[] groupid) {
@@ -100,5 +100,8 @@ public class SysUserGroupAssocServiceImpl implements SysUserGroupAssocService {
 
 		return result;
 	}
+
+	
+
 
 }

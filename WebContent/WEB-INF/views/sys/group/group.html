@@ -28,6 +28,7 @@
 		<div class="col-md-6">
 			<table class="table table-bordered">
 				<thead>
+				
 					<tr>
 						<th><input type="checkbox"></th>
 						<th>用户组</th>
@@ -36,24 +37,16 @@
 					</tr>
 				</thead>
 				<tbody>
+				<#if groupList?? && groupList?size gt 0>
+				<#list groupList as item>
 					<tr>
 						<td><input type="checkbox"></td>
-						<td>SKE组</td>
-						<td>是</td>
+						<td>${item.groupName}</td>
+						<td>${item.isEnabled}</td>
 						<td>2016-03-11 15:55:55</td>
 					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>AKB组</td>
-						<td>是</td>
-						<td>2016-03-11 15:55:55</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"></td>
-						<td>SHN组</td>
-						<td>是</td>
-						<td>2016-03-11 15:55:55</td>
-					</tr>
+					</#list>
+					</#if>
 				</tbody>
 			</table>
 		</div>

@@ -3,14 +3,19 @@ package com.ffcs.sys.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.entity.SysUser;
+import com.ffcs.sys.entity.SysUserGroupAssoc;
+import com.ffcs.sys.entity.SysUserRole;
+import com.ffcs.sys.service.SysGroupService;
 import com.ffcs.sys.service.SysUserGroupAssocService;
 import com.ffcs.sys.service.SysUserService;
 
@@ -22,13 +27,33 @@ public class SysUserController {
 	private SysUserService sysUserService;
 	@Autowired
 	private SysUserGroupAssocService sysUserGroupAssocService;
+	@Autowired
+	private SysGroupService sysGroupService;
 	@RequestMapping("/login")
-	public String getLoginSysUser(SysUser sysUser,HttpSession session){
+	public String getLoginSysUser(SysUser sysUser,HttpServletRequest request){
 		SysUser user = sysUserService.getSysUserByName(sysUser.getLonginName());
-	     session.setAttribute("loginUser", user);
+		request.getSession().setAttribute("loginUser", user);
 		return "sys/add";
 		
 	}
+	/**
+	 * 添加用户之前调用此方法查询所有用户组
+	 * @param groupMap
+	 * @return
+	 */
+	@RequestMapping("/addPre")
+	@ResponseBody
+	public List<SysGroup> addUserPre(Map<String ,Object> groupMap){
+		List<SysGroup> selectList = sysGroupService.selectList();
+		
+		return selectList;
+	}
+	/**
+	 * 添加用户
+	 * @param sysUser
+	 * @param groupid
+	 * @return
+	 */
 	@RequestMapping("/add")
 	public String addUser(SysUser sysUser,Integer[] groupid){
 		int success = sysUserService.insertSelective(sysUser);
@@ -38,6 +63,23 @@ public class SysUserController {
 		return "sys/index";
 	}
 	
+	@RequestMapping("/updatePre/{id}")
+	public Object updateUserPre(@PathVariable("id") Integer userId,Map<String, Object> map){
+		SysUserRole sysUserRole = new SysUserRole();
+		SysUser sysUser = sysUserService.selectByPrimaryKey(userId);
+		
+		  List<SysGroup> selectGroup= sysGroupService.selectByUserId(userId);
+		  sysUserRole.setSysUser(sysUser);
+		  sysUserRole.setSysGroup(selectGroup);
+		  map.put("sysUserRole", sysUserRole);
+		return "sys/user/user";
+	}
+	/**
+	 * 修改用户
+	 * @param sysUser
+	 * @param groupid
+	 * @return
+	 */
 	@RequestMapping("/update")
 	public String updateUser(SysUser sysUser,Integer[] groupid){
 		
@@ -48,22 +90,29 @@ public class SysUserController {
 		
 		return "sys/index";
 	}
-	
+	/**
+	 * 删除用户
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/delete/{id}")
 	public String deleteUser(@PathVariable("id") Integer id){
-		if(id!=null){
-		 int success = sysUserService.deleteByPrimaryKey(id);
-		   if(success>0){
-			  sysUserGroupAssocService.deleteByPrimaryKey(id);
-		 }
-		}
+		
+		sysUserService.deleteByPrimaryKey(id);
+		
 		return "sys/index";
 	}
 
+	/**
+	 * 获取所有用户
+	 * @param userMap
+	 * @return
+	 */
 	@RequestMapping("/user")
 	public String selectUserList(Map<String ,Object> userMap){
 		 List<SysUser> selectList = sysUserService.selectList();
 		 userMap.put("userList",selectList );
+		 
 		return "sys/user/user";
 	}
 

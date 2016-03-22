@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ffcs.sys.entity.SysStructureInfo;
@@ -22,7 +21,7 @@ public class SysStructureInfoController {
 	@Autowired
 	private SysStructureInfoService sysStructureInfoService;
 
-	@RequestMapping("index")
+	@RequestMapping("/index")
 	public String selectList(HttpServletRequest request, Map<String, Object> map) {
 
 		SysUser sysUser = new SysUser();
@@ -44,13 +43,18 @@ public class SysStructureInfoController {
 		return "";
 	}
 	@RequestMapping("/delete")
-	public String deleteStructure(){
-		//sysStructureInfoService.deleteByPrimaryKey(primaryKey);
+	public String deleteStructure(Integer structureId){
+		sysStructureInfoService.deleteByPrimaryKey(structureId);
 		return "";
 	}
-
-	@RequestMapping("structure")
+	@RequestMapping("/add")
+    public String addStructure(SysStructureInfo structureInfo){
+    	sysStructureInfoService.insertSelective(structureInfo);
+    	return "sys/index";
+    }
+	@RequestMapping("/structure")
 	public String structure(){
+		sysStructureInfoService.selectByPrimaryKey(null);
 		return "sys/structure/structure";
 	}
 	
