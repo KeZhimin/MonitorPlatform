@@ -59,8 +59,11 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public List<SysUser> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<SysUser> selectList = sysUserMapper.selectList();
+		if(selectList==null || selectList.size()<=0){
+			return null;
+		}
+		return selectList;
 	}
 
 	

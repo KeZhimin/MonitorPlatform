@@ -18,7 +18,9 @@ public class SysGroupServiceImpl implements SysGroupService{
 
 	@Override
 	public int deleteByPrimaryKey(Integer groupId) {
-		return 0;
+		
+		
+		return sysGroupMapper.deleteByPrimaryKey(groupId);
 	}
 
 	@Override
