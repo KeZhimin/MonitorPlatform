@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>首页</title>
     <#include "/views/sys/meta.html">
+    <script type="text/javascript" src="<@full_path path='js/index.js'/>"></script>
 </head>
 <body>
 <!--  
@@ -51,14 +52,14 @@
             </#if>
           </#list>
         <#if flag>
-        <li><a href="${item.url}">${item.structureName}</a></li>
+        <li><a class="nav-href" href="javascript:void(0);" target="${item.url}">${item.structureName}</a></li>
         <#else>
         <li class="dropdown">
-           <a class="dropdown-toggle" data-toggle="dropdown" href="${item.url}">${item.structureName}<span class="caret"></span></a>
+           <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">${item.structureName}<span class="caret"></span></a>
            <ul class="dropdown-menu">
           <#list structureList as temp>
             <#if temp.parentId == item.structureId>
-            <li><a href="${temp.url}">${temp.structureName}</a></li>
+            <li><a class="nav-href" href="javascript:void(0);" target="${temp.url}">${temp.structureName}</a></li>
             </#if>
           </#list>
           </ul>
@@ -69,8 +70,8 @@
       </#if>
        <li style="position: absolute;right: 0;" class="dropdown"><a href="" data-toggle="dropdown">账户管理<span class="caret"></span></a>
         <ul class="dropdown-menu dropdown-menu-right">
-            <li><a href="#">修改密码</a></li>
-            <li><a href="#">退出</a></li>
+            <li><a class="nav-href" target="/changepsw" href="#">修改密码</a></li>
+            <li><a class="nav-href" target="/logout" href="#">退出</a></li>
         </ul>
         </li>
     </ul>
@@ -79,12 +80,8 @@
 
 
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 style="text-align: center;">这里有一张图</h1>
-        </div>
-    </div>
+<div id="content">
+
 </div>
 </body>
 </html>

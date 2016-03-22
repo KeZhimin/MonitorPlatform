@@ -59,12 +59,12 @@ public class SysUserController {
 		}
 		return "sys/index";
 	}
-	
+
 	@RequestMapping("/user")
 	public String selectUserList(Map<String ,Object> userMap){
 		 List<SysUser> selectList = sysUserService.selectList();
 		 userMap.put("userList",selectList );
-		return "";
+		return "sys/user/user";
 	}
 
 	

@@ -40,4 +40,9 @@ public class SysGroupController {
 		sysGroupService.updateByPrimaryKeySelective(group);
 		return "";
 	}
+	
+	@RequestMapping("group")
+	public String group(){
+		return "sys/group/group";
+	}
 }
