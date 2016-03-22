@@ -47,8 +47,8 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 
 	@Override
 	public int updateByPrimaryKeySelective(SysStructureInfo entity) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+		return sysStructureInfoMapper.updateByPrimaryKeySelective(entity);
 	}
 
 	@Override

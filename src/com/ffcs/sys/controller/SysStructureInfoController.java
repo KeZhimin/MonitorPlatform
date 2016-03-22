@@ -13,11 +13,12 @@ import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.service.SysStructureInfoService;
 
 @Controller
+@RequestMapping("/sys/structure")
 public class SysStructureInfoController {
 
 	@Autowired
 	private SysStructureInfoService sysStructureInfoService;
-	@RequestMapping("listTo/{id}")
+	@RequestMapping("/listTo/{id}")
 	public String selectList(@PathVariable("id") Integer id, Map<String, Object> map) {
 		SysUser sysUser = new SysUser();
 		sysUser.setUserId(id);
@@ -27,5 +28,18 @@ public class SysStructureInfoController {
 			System.out.println(selectList.get(i).toString());
 		}
 		return "sys/index";
+	}
+	
+	@RequestMapping("/update")
+	public String updateStructure(SysStructureInfo structureInfo){
+		
+		sysStructureInfoService.updateByPrimaryKeySelective(structureInfo);
+		
+		return "";
+	}
+	@RequestMapping("/delete")
+	public String deleteStructure(){
+		//sysStructureInfoService.deleteByPrimaryKey(primaryKey);
+		return "";
 	}
 }

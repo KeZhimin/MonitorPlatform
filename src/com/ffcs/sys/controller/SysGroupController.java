@@ -16,7 +16,8 @@ import com.ffcs.sys.service.SysGroupService;
 public class SysGroupController {
 
 	@Autowired
-	public SysGroupService sysGroupService;
+	private SysGroupService sysGroupService;
+	
 	
 	@RequestMapping("/group")
 	public String selectGroupList(Map<String ,Object> groupMap){
