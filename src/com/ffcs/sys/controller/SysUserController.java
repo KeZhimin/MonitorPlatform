@@ -11,7 +11,7 @@ import com.ffcs.sys.service.SysUserGroupAssocService;
 import com.ffcs.sys.service.SysUserService;
 
 @Controller
-@RequestMapping("/sysUser")
+@RequestMapping("/sys/user")
 public class SysUserController {
 
 	@Autowired
@@ -48,6 +48,12 @@ public class SysUserController {
 		sysUserGroupAssoc.setGroupid(sysGroup.getGroupId());
 		sysUserGroupAssoc.setUserid(sysUser.getUserId());
 		return sysUserGroupAssoc;
+	}
+	
+	@RequestMapping("user")
+	public String user(){
+		System.out.println("this is sys/user/user.htm");
+		return "sys/user/user";
 	}
 	
 }

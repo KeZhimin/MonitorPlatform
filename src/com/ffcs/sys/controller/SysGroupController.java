@@ -11,6 +11,7 @@ import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.service.SysGroupService;
 
 @Controller
+@RequestMapping("sys/group")
 public class SysGroupController {
 
 	@Autowired
@@ -46,5 +47,10 @@ public class SysGroupController {
 	public String updateByIdSelective(SysGroup group){
 		sysGroupService.updateByPrimaryKeySelective(group);
 		return "";
+	}
+	
+	@RequestMapping("group")
+	public String group(){
+		return "sys/group/group";
 	}
 }
