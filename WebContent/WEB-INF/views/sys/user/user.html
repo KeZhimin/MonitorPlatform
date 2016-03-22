@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-
+<script type="text/javascript" src="<@full_path path='js/sys/user.js' />"></script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8">
@@ -22,10 +22,9 @@
 			</form>
 		</div>
 		<div class="col-md-12" style="margin: 15px 0;">
-			<button class="button button-small" data-toggle="modal"
-				data-target="#MyModal">新增用户</button>
-			<button class="button button-small">编辑用户</button>
-			<button class="button button-small">激活用户</button>
+			<button class="button button-small" onclick="AddUser();">新增用户</button>
+            <button class="button button-small" onclick="EditUser();">编辑用户</button>
+            <button class="button button-small" onclick="SetEnabled();">激活用户</button>
 			<button class="button button-small">注销用户</button>
 			<button class="button button-small">删除用户</button>
 		</div>
@@ -81,7 +80,7 @@
 </div>
 
 
-<div class="modal fade" id="MyModal">
+<div class="modal fade" id="user_modal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body">

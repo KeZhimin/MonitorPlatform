@@ -23,7 +23,7 @@ public class SysGroupController {
 	public String selectGroupList(Map<String ,Object> groupMap){
 		  List<SysGroup> selectList = sysGroupService.selectList();
 		      groupMap.put("groupList", selectList);
-		return "sys/list";
+		      return "sys/group/group";
 	}
 
 	
@@ -41,8 +41,4 @@ public class SysGroupController {
 		return "";
 	}
 	
-	@RequestMapping("group")
-	public String group(){
-		return "sys/group/group";
-	}
 }
