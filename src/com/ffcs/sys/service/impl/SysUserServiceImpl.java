@@ -90,7 +90,7 @@ public class SysUserServiceImpl implements SysUserService {
 		  if(isEnable!=null && isEnable.length>0){
 			  for(int i=0,len=isEnable.length;i<len ; i++){
 				  result=sysUserMapper.updateUserIsEnable(isEnable[i]);
-				  
+				 
 			  }
 		  }
 		return result;
@@ -103,6 +103,18 @@ public class SysUserServiceImpl implements SysUserService {
 			for(int i=0,len=deleteId.length;i<len;i++){
 				
 				result = sysUserMapper.deleteByPks(deleteId[i]);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public int updateIsEnable(Integer[] isId) {
+		int result =0;
+		if(isId!=null){
+			for(int i=0,len=isId.length;i<len;i++){
+				
+				result = sysUserMapper.updateIsEnable(isId[i]);
 			}
 		}
 		return result;

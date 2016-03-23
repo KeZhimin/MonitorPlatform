@@ -103,10 +103,25 @@ public class SysUserController {
 	 * 激活用户
 	 */
 	   @RequestMapping("/enable")
-      public String enableUser(Integer[] id){
-    	  sysUserService.updateUserIsEnable(id);
-    	  return "";
+      public String enableUser(Integer[] enableId){
+		
+    	  sysUserService.updateUserIsEnable(enableId);
+    	 
+    	  return "sys/index";
       }
+	   /**
+		 * 根据用户ID
+		 * 注销用户
+		 */
+		   @RequestMapping("/isEnable")
+	      public String isEnableUser(Integer[] isId){
+			   for(int i=0;i<isId.length;i++){
+			    	  System.out.println(isId[i]);
+			    	  }
+	    	  sysUserService.updateIsEnable(isId);
+	    	 
+	    	  return "sys/index";
+	      }
 	/**
 	 * 获取所有用户
 	 * @param userMap

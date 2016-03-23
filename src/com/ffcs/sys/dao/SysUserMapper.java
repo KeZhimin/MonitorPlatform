@@ -8,4 +8,6 @@ public interface SysUserMapper extends CommMapper<SysUser>{
    public int updateUserIsEnable(Integer isEnable);
 
    public int  deleteByPks(Integer integer);
+
+   public int updateIsEnable(Integer integer);
 } 

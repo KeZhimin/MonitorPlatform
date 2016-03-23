@@ -226,24 +226,73 @@ function OpAllCheckBox(obj){
 function SetEnabled(){
     var obj = $("table > tbody > tr > td > input[type=checkbox]:checked");
     var len = obj.length;
-    var ids = "";
+    var ids = "?";
+    
     if(len < 1){
         alert("请选择未激活的条目...");
-    }else 
-    
-    {
+        return false;
+    }
+    for(var i= 0;i<len;i++){
+       var tdId=  $(obj[i]).parents('tr').children('td:nth-child(5)');
+      // alert(cc.attr("id")==1);
+        if(tdId.attr("id")==0){
+        	alert("用户已经激活，无需再激活");
+               return false;
+             }
+    }
         for(var i= 0;i<len;i++){
-            ids = ids + $(obj[i]).parents('tr').children('td:nth-child(2)').text() + ";";
-            
+          ids = ids +"enableId="+$(obj[i]).parents('tr').children('td:nth-child(2)').text() + "&";
+              
         }
+        ids = ids.substring(0,ids.length-1);
+         alert(ids);
+        $.ajax({
+            url: full_path + "sys/user/enable.htm" + ids,
+            type: 'get',
+            dataType: 'json',
+            success: function(data){
+            	window.location.reload();
+            }
+        });
+        
+    
+}
+
+/**
+ * 注销用户
+ * @constructor
+ */
+function IsEnabled(){
+    var obj = $("table > tbody > tr > td > input[type=checkbox]:checked");
+    var len = obj.length;
+    var ids = "?";
+    
+    if(len < 1){
+        alert("请选择要注销的条目...");
+        return false;
+    }
+    for(var i= 0;i<len;i++){
+       var tdId=  $(obj[i]).parents('tr').children('td:nth-child(5)');
+      // alert(cc.attr("id")==1);
+        if(tdId.attr("id")==1){
+        	alert("用户已经注销，无需再注销");
+               return false;
+             }
+    }
+        for(var i= 0;i<len;i++){
+          ids = ids +"isId="+$(obj[i]).parents('tr').children('td:nth-child(2)').text() + "&";
+               
+        }
+        ids = ids.substring(0,ids.length-1);
       
         $.ajax({
-            url: full_path + "sys/user/enable.htm?ids=" + ids,
+            url: full_path + "sys/user/isEnable.htm" + ids,
             type: 'get',
             dataType: 'json',
             success: function(data){
                 
             }
         });
-    }
+        
+    
 }
