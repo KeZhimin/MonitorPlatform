@@ -36,18 +36,7 @@ public class SysUserController {
 		return "sys/add";
 		
 	}
-	/**
-	 * 添加用户之前调用此方法查询所有用户组
-	 * @param groupMap
-	 * @return
-	 */
-	@RequestMapping("/addPre")
-	@ResponseBody
-	public List<SysGroup> addUserPre(Map<String ,Object> groupMap){
-		List<SysGroup> selectList = sysGroupService.selectList();
-		
-		return selectList;
-	}
+	
 	/**
 	 * 添加用户
 	 * @param sysUser
@@ -57,22 +46,29 @@ public class SysUserController {
 	@RequestMapping("/add")
 	public String addUser(SysUser sysUser,Integer[] groupid){
 		int success = sysUserService.insertSelective(sysUser);
+		
 		if(success>0){
 		  sysUserGroupAssocService.insertSelective(sysUser,groupid);
 		}
 		return "sys/index";
 	}
-	
+	/**
+	 * 修改之前，回显数据
+	 * @param userId
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping("/updatePre/{id}")
-	public Object updateUserPre(@PathVariable("id") Integer userId,Map<String, Object> map){
+	@ResponseBody
+	public Object updateUserPre(@PathVariable("id") Integer userId){
 		SysUserRole sysUserRole = new SysUserRole();
 		SysUser sysUser = sysUserService.selectByPrimaryKey(userId);
 		
 		  List<SysGroup> selectGroup= sysGroupService.selectByUserId(userId);
 		  sysUserRole.setSysUser(sysUser);
 		  sysUserRole.setSysGroup(selectGroup);
-		  map.put("sysUserRole", sysUserRole);
-		return "sys/user/user";
+		 System.out.println("用户："+sysUser.toString());
+		return sysUserRole;
 	}
 	/**
 	 * 修改用户
@@ -95,14 +91,22 @@ public class SysUserController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("/delete/{id}")
-	public String deleteUser(@PathVariable("id") Integer id){
-		
-		sysUserService.deleteByPrimaryKey(id);
+	@RequestMapping("/delete")
+	public String deleteUser(Integer[] deleteId){
+     
+		sysUserService.deleteByPks(deleteId);
 		
 		return "sys/index";
 	}
-
+	/**
+	 * 根据用户ID
+	 * 激活用户
+	 */
+	   @RequestMapping("/enable")
+      public String enableUser(Integer[] id){
+    	  sysUserService.updateUserIsEnable(id);
+    	  return "";
+      }
 	/**
 	 * 获取所有用户
 	 * @param userMap

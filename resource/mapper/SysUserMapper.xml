@@ -17,11 +17,16 @@
     USER_ID, LONGIN_NAME, PASSWORD, FULL_NAME, CTIME, IS_ENABLED, IS_DELETED, POV_CODE, 
     PHONE_NUM, EMAIL
   </sql>
+  <!--激活用户  -->
+   <update id="updateUserIsEnable" parameterType="java.lang.Integer" >
+     update SYS_USER set IS_ENABLED=0
+      where USER_ID=#{userId,jdbcType=DECIMAL}
+   </update>
   <!-- 查询所有用户 -->
   <select id="selectList" resultMap="BaseResultMap">
   select
   <include refid="Base_Column_List" />
-  from SYS_USER
+  from SYS_USER  where IS_DELETED=0
   </select>
   <!-- 根据用户名查询用户 -->
   <select id="getSysUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -36,9 +41,9 @@
     from SYS_USER
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </select>
-  <!--  -->
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    update from SYS_USER set IS_DELETED=1
+  <!-- 删除用户 -->
+  <delete id="deleteByPks" parameterType="java.lang.Integer" >
+    update SYS_USER set IS_DELETED=1
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ffcs.sys.entity.SysUser" >

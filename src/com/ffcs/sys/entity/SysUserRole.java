@@ -19,6 +19,11 @@ public class SysUserRole {
 	public void setSysUser(SysUser sysUser) {
 		this.sysUser = sysUser;
 	}
+	@Override
+	public String toString() {
+		return "SysUserRole [sysUser=" + sysUser + ", sysGroup=" + sysGroup
+				+ "]";
+	}
 	   
 	
 }

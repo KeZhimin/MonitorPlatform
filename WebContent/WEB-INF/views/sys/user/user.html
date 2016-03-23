@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-
+<script type="text/javascript" src="<@full_path path='js/sys/user.js' />"></script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8">
@@ -22,12 +22,11 @@
 			</form>
 		</div>
 		<div class="col-md-12" style="margin: 15px 0;">
-			<button class="button button-small" data-toggle="modal"
-				data-target="#MyModal">新增用户</button>
-			<button class="button button-small">编辑用户</button>
-			<button class="button button-small">激活用户</button>
-			<button class="button button-small">注销用户</button>
-			<button class="button button-small">删除用户</button>
+			<button class="button button-small" onclick="AddUser();">新增用户</button>
+            <button class="button button-small" onclick="EditUser();">编辑用户</button>
+            <button class="button button-small" onclick="SetEnabled();">激活用户</button>
+			<button class="button button-small" onclick="SetEnabled();">注销用户</button>
+			<button class="button button-small" onclick="DeleteUser();">删除用户</button>
 		</div>
 		<div class="col-md-6">
 			<table class="table table-bordered" style="text-align: center;">
@@ -35,6 +34,7 @@
 					<tr>
 						<th style="text-align: center;"><input type="checkbox"
 							onchange="OpAllCheckBox(this)"></th>
+						<th style="text-align: center;">用户编号</th>
 						<th style="text-align: center;">用户名</th>
 						<th style="text-align: center;">用户全称</th>
 						<th style="text-align: center;">是否激活</th>
@@ -47,9 +47,13 @@
             <#list userList as item>
                      <tr>
                         <td><input type="checkbox"></td>
+                        <td>${item.userId}</td>
 						<td>${item.longinName}</td>
 						<td>${item.fullName}</td>
-						<td>${item.isEnabled}</td>
+						  <#if item.isEnabled gt 0>
+						  <td> 是  </td>
+						  <#else><td>否</td>
+						  </#if>
 						<#if item.ctime??>
 						<td>${item.ctime?string("yyyy-MM-dd HH:mm:ss")}</td>
 						<#else><td>空</td>
@@ -75,7 +79,7 @@
 </div>
 
 
-<div class="modal fade" id="MyModal">
+<div class="modal fade" id="user_modal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-body">
@@ -85,12 +89,16 @@
 					<table class="table table-bordered mp-table"
 						style="text-align: center">
 						<tbody>
+						        <tr>
+								<td></td>
+								<td><input type="hidden" id="userId" name="userId" value="" class="form-control"></td>
+							<tr>
 							<tr>
 								<td>用户名</td>
-								<td><input type="text" class="form-control"></td>
+								<td><input type="text" id="longinName" name="longinName" value="" class="form-control"></td>
 							<tr>
 								<td>用户全名</td>
-								<td><input type="text" class="form-control"></td>
+								<td><input type="text" id="fullName" name="fullName" value="" class="form-control"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -107,24 +115,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td><select class="form-control">
-												<option>SKE48组</option>
-												<option>AKB48组</option>
-												<option>SNH48组</option>
-										</select></td>
-										<td><input type="button" class="button button-small"
-											onclick="RemoveGroupNode(this);" value="删除"></td>
-									</tr>
-									<tr>
-										<td><select class="form-control">
-												<option>AKB48组</option>
-												<option>SKE48组</option>
-												<option>SNH48组</option>
-										</select></td>
-										<td><input type="button" class="button button-small"
-											onclick="RemoveGroupNode(this);" value="删除"></td>
-									</tr>
+									
 								</tbody>
 							</table>
 						</div>

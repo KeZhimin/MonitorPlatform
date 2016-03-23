@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$(".nav-href").click(function(){
 		var target = $(this).attr('target');
 		$.ajax({
-			url: "/MonitorPlatform" + target,
+			url: full_path + target,
 			type: 'get',
 			dataType: 'html',
 			success: function(data){
