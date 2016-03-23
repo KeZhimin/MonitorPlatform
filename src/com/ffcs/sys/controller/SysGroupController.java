@@ -1,5 +1,6 @@
 package com.ffcs.sys.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.service.SysGroupService;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/sys/group")
@@ -20,9 +22,10 @@ public class SysGroupController {
 	
 	
 	@RequestMapping("/group")
-	public String selectGroupList(Map<String ,Object> groupMap){
-		  List<SysGroup> selectList = sysGroupService.selectList();
-		      groupMap.put("groupList", selectList);
+	public String selectGroupList(Map<String ,Object> groupMap,PageInfo<SysGroup> pageInfo){
+		Map<String,Object> params = new HashMap<String, Object>();
+		  pageInfo = sysGroupService.selectList(pageInfo,params);
+		      groupMap.put("page", pageInfo.getList());
             return "sys/group/group";
 	}
 
@@ -33,10 +36,11 @@ public class SysGroupController {
 	 */
 	@RequestMapping("/get")
 	@ResponseBody
-	public List<SysGroup> addUserPre(Map<String ,Object> groupMap){
-		List<SysGroup> selectList = sysGroupService.selectList();
+	public List<SysGroup> addUserPre(Map<String ,Object> groupMap,PageInfo<SysGroup> pageInfo){
+		Map<String,Object> params = new HashMap<String,Object>();
+		pageInfo = sysGroupService.selectList(pageInfo,params);
 		
-		return selectList;
+		return pageInfo.getList();
 	}
 	@RequestMapping("delete")
 	public String deleteById(Integer groupId){

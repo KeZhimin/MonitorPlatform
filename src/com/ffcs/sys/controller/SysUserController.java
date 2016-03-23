@@ -1,5 +1,6 @@
 package com.ffcs.sys.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,11 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.entity.SysUser;
-import com.ffcs.sys.entity.SysUserGroupAssoc;
 import com.ffcs.sys.entity.SysUserRole;
 import com.ffcs.sys.service.SysGroupService;
 import com.ffcs.sys.service.SysUserGroupAssocService;
 import com.ffcs.sys.service.SysUserService;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/sys/user")
@@ -38,7 +39,7 @@ public class SysUserController {
 	}
 	
 	/**
-	 * 添加用户
+	 * 娣诲姞鐢ㄦ埛
 	 * @param sysUser
 	 * @param groupid
 	 * @return
@@ -53,7 +54,7 @@ public class SysUserController {
 		return "sys/index";
 	}
 	/**
-	 * 修改之前，回显数据
+	 * 淇敼涔嬪墠锛屽洖鏄炬暟鎹�
 	 * @param userId
 	 * @param map
 	 * @return
@@ -67,11 +68,11 @@ public class SysUserController {
 		  List<SysGroup> selectGroup= sysGroupService.selectByUserId(userId);
 		  sysUserRole.setSysUser(sysUser);
 		  sysUserRole.setSysGroup(selectGroup);
-		 System.out.println("用户："+sysUser.toString());
+		 System.out.println("鐢ㄦ埛锛�"+sysUser.toString());
 		return sysUserRole;
 	}
 	/**
-	 * 修改用户
+	 * 淇敼鐢ㄦ埛
 	 * @param sysUser
 	 * @param groupid
 	 * @return
@@ -87,7 +88,7 @@ public class SysUserController {
 		return "sys/index";
 	}
 	/**
-	 * 删除用户
+	 * 鍒犻櫎鐢ㄦ埛
 	 * @param id
 	 * @return
 	 */
@@ -99,8 +100,8 @@ public class SysUserController {
 		return "sys/index";
 	}
 	/**
-	 * 根据用户ID
-	 * 激活用户
+	 * 鏍规嵁鐢ㄦ埛ID
+	 * 婵�娲荤敤鎴�
 	 */
 	   @RequestMapping("/enable")
       public String enableUser(Integer[] id){
@@ -108,15 +109,15 @@ public class SysUserController {
     	  return "";
       }
 	/**
-	 * 获取所有用户
+	 * 鑾峰彇鎵�鏈夌敤鎴�
 	 * @param userMap
 	 * @return
 	 */
 	@RequestMapping("/user")
-	public String selectUserList(Map<String ,Object> userMap){
-		 List<SysUser> selectList = sysUserService.selectList();
-		 userMap.put("userList",selectList );
-		 
+	public String selectUserList(Map<String ,Object> userMap,PageInfo<SysUser> pageInfo){
+		Map<String,Object> params = new HashMap<String,Object>();
+		 pageInfo = sysUserService.selectList(pageInfo,params);
+		 userMap.put("page",pageInfo);
 		return "sys/user/user";
 	}
 
