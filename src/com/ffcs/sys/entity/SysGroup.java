@@ -1,5 +1,6 @@
 package com.ffcs.sys.entity;
 
+import java.util.Date;
 import java.util.List;
 
 public class SysGroup {
@@ -12,17 +13,7 @@ public class SysGroup {
 	private Short isDeleted;
 
 	private Short grade;
-	private List<SysStructureInfo> sysStructureInfo;
-
-	
-	public List<SysStructureInfo> getSysStructureInfo() {
-		return sysStructureInfo;
-	}
-
-	public void setSysStructureInfo(List<SysStructureInfo> sysStructureInfo) {
-		this.sysStructureInfo = sysStructureInfo;
-	}
-
+	private Date ctime;
 	public Integer getGroupId() {
 		return groupId;
 	}
@@ -63,10 +54,20 @@ public class SysGroup {
 		this.grade = grade;
 	}
 
-	@Override
-	public String toString() {
-		return "SysGroup [groupId=" + groupId + ", groupName=" + groupName + ", isEnabled=" + isEnabled + ", isDeleted="
-				+ isDeleted + ", grade=" + grade + "]";
+	public Date getCtime() {
+		return ctime;
 	}
 
+	public void setCtime(Date ctime) {
+		this.ctime = ctime;
+	}
+
+	@Override
+	public String toString() {
+		return "SysGroup [groupId=" + groupId + ", groupName=" + groupName
+				+ ", isEnabled=" + isEnabled + ", isDeleted=" + isDeleted
+				+ ", grade=" + grade + ", ctime=" + ctime + "]";
+	}
+
+	
 }

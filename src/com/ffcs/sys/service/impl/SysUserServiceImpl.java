@@ -1,7 +1,6 @@
 package com.ffcs.sys.service.impl;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import com.ffcs.sys.dao.SysUserMapper;
 import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.service.SysUserService;
 import com.ffcs.utils.MD5;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 @Service
 public class SysUserServiceImpl implements SysUserService {
@@ -115,8 +115,12 @@ public class SysUserServiceImpl implements SysUserService {
 
 	@Override
 	public PageInfo<SysUser> selectList(PageInfo<SysUser> pageInfo, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return null;
+		   if(pageInfo.getPageNum()<0){
+			   pageInfo.setPageNum(0);
+		   }
+		  PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
+		   pageInfo = new PageInfo<>(sysUserMapper.selectList(),5);
+		return pageInfo;
 	}
 
 	

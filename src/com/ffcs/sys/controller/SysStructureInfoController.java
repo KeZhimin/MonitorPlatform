@@ -54,7 +54,6 @@ public class SysStructureInfoController {
     	return "sys/index";
     }
 	@RequestMapping("/structure")
-	@ResponseBody
 	public String structure( Map<String, Object> map){
 		List<SysStructureInfo> selectList = null;
 		if(sysUser!=null){

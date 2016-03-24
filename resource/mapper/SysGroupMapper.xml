@@ -7,9 +7,10 @@
     <result column="IS_ENABLED" property="isEnabled" jdbcType="DECIMAL" />
     <result column="IS_DELETED" property="isDeleted" jdbcType="DECIMAL" />
     <result column="GRADE" property="grade" jdbcType="DECIMAL" />
+     <result column="CTIME" property="ctime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    GROUP_ID, GROUP_NAME, IS_ENABLED, IS_DELETED, GRADE
+    GROUP_ID, GROUP_NAME, IS_ENABLED, IS_DELETED, GRADE,CTIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -34,9 +35,9 @@
   </delete>
   <insert id="insert" parameterType="com.ffcs.sys.entity.SysGroup" >
     insert into SYS_GROUP (GROUP_ID, GROUP_NAME, IS_ENABLED, 
-      IS_DELETED, GRADE)
+      IS_DELETED, GRADE,CTIME)
     values (#{groupId,jdbcType=DECIMAL}, #{groupName,jdbcType=VARCHAR}, #{isEnabled,jdbcType=DECIMAL}, 
-      #{isDeleted,jdbcType=DECIMAL}, #{grade,jdbcType=DECIMAL})
+      #{isDeleted,jdbcType=DECIMAL}, #{grade,jdbcType=DECIMAL},#{ctime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysGroup" >
     insert into SYS_GROUP
@@ -56,6 +57,9 @@
       <if test="grade != null" >
         GRADE,
       </if>
+      <if test="ctime != null" >
+        CTIME,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="groupId != null" >
@@ -72,6 +76,9 @@
       </if>
       <if test="grade != null" >
         #{grade,jdbcType=DECIMAL},
+      </if>
+       <if test="ctime != null" >
+        #{ctime,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -90,6 +97,9 @@
       <if test="grade != null" >
         GRADE = #{grade,jdbcType=DECIMAL},
       </if>
+	   <if test="ctime != null" >
+        CTIME = #{ctime,jdbcType=DECIMAL},
+      </if>
     </set>
     where GROUP_ID = #{groupId,jdbcType=DECIMAL}
   </update>
@@ -98,7 +108,8 @@
     set GROUP_NAME = #{groupName,jdbcType=VARCHAR},
       IS_ENABLED = #{isEnabled,jdbcType=DECIMAL},
       IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
-      GRADE = #{grade,jdbcType=DECIMAL}
+      GRADE = #{grade,jdbcType=DECIMAL},
+      CTIME = #{ctime,jdbcType=DECIMAL}
     where GROUP_ID = #{groupId,jdbcType=DECIMAL}
   </update>
 </mapper>

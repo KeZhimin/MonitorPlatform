@@ -124,7 +124,7 @@ public class SysUserController {
 	    	  return "sys/index";
 	      }
 	/**
-	 * 鑾峰彇鎵�鏈夌敤鎴�
+	 * 分页查询所有的用户
 	 * @param userMap
 	 * @return
 	 */

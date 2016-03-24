@@ -59,7 +59,7 @@ public class SysGroupServiceImpl implements SysGroupService{
 
 	@Override
 	public PageInfo<SysGroup> selectList(PageInfo<SysGroup> pageInfo, Map<String, Object> params) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

@@ -29,7 +29,7 @@
 			<button class="button button-small" onclick="DeleteUser();">删除用户</button>
 		</div>
 		<div class="col-md-6">
-			<table class="table table-bordered" style="text-align: center;">
+			<table id="usertable" class="table table-bordered" style="text-align: center;">
 				<thead>
 					<tr>
 						<th style="text-align: center;"><input type="checkbox"
@@ -43,15 +43,15 @@
 				</thead>
 				<tbody>
 
-          <#if userList?? && userList?size gt 0>
-            <#list userList as item>
+          <#if page.list?? && page.list?size gt 0>
+            <#list page.list as item>
                      <tr>
                         <td><input type="checkbox"></td>
                         <td>${item.userId}</td>
 						<td>${item.longinName}</td>
 						<td>${item.fullName}</td>
 						  <#if item.isEnabled == 0>
-						  <td id="0">是 </td>
+						  <td id="0">是</td>
 						  <#else><td id="1">否</td>
 						  </#if>
 						<#if item.ctime??>
@@ -67,7 +67,7 @@
 		<div class="col-md-12">
 			<div class="button-group">
 				<button class="button button-square">&laquo;</button>
-				<button class="button button-square">1</button>
+				<button class="button button-square">${page.firstPage}</button>
 				<button class="button button-square">2</button>
 				<button class="button button-square">3</button>
 				<button class="button button-square">4</button>
@@ -114,7 +114,7 @@
 										<td>操作</td>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody >
 									
 								</tbody>
 							</table>

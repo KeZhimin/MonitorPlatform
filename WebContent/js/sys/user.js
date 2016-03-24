@@ -29,7 +29,7 @@ function AddUser(){
     $("#user_modal").modal('show');
     //移除#group_table > tbody 所有节点
     $("#group_table > tbody").remove();
-
+    ShowUser("");
     //添加一个节点，即至少要一个节点
     AddGroupNode();
 }
@@ -59,7 +59,8 @@ function DeleteUser(){
             success: function(data){
             	 //移除#group_table > tbody 所有节点
                 $("#group_table > tbody").remove();
-            	
+                //window.location.href="user.htm";
+                fulshAjax();
                
             }
         });
@@ -83,7 +84,7 @@ function EditUser(){
     }else{
         //获取选择的条目信息,id在第二列
         var id = $(obj[0]).parents('tr').children('td:nth-child(2)').text();
-
+        
         //获取json数据
         $.ajax({
             url: full_path + "/sys/user/updatePre/" + id+".json",
@@ -91,7 +92,7 @@ function EditUser(){
             dataType: 'json',
             success: function(data){
             	 //移除#group_table > tbody 所有节点
-                $("#group_table > tbody").remove();
+              // $("#group_table > tbody").remove();
             	//回显
             	 josn_group_selected = data['sysGroup'];
             	 ShowUser(data['sysUser']);
@@ -109,7 +110,9 @@ function EditUser(){
  */
 function ShowUser(json_user){
 	if(json_user==""){
-		
+		 $("#userId").val("");
+		 $("#longinName").val("");
+		 $("#fullName").val("");
 	}else{
 	 $("#userId").val(json_user['userId']);
 	 $("#longinName").val(json_user['longinName']);
@@ -126,11 +129,13 @@ function EditGroupNode(group_selected){
 		 
 	   }else{
 		   //移除选项
-		   for(var k = 0; k<group_selected.length;k++){
+		 /*  for(var k = 0; k<group_selected.length;k++){
               $("#"+group_selected[k]['groupId']+"").remove();
-		   }
+		   }*/
+		 //移除选项
+		   $("#group_table > tbody").remove();
     for(var j = 0; j<group_selected.length;j++){
-    	var node = "<tr id='"+group_selected[j]['groupId']+"'><td><select name='groupid' class='form-control'>";
+    	var node = "<tr><td><select name='groupid' class='form-control'>";
          for(var i= 0,len=json_of_group.length;i<len;i++){
         	//判断是否选中用户组
     		if(group_selected[j]['groupId']==json_of_group[i]['groupId']){
@@ -193,7 +198,7 @@ function SaveUser(obj){
                 trigger: 'focus'
             }).tooltip('show');
             setTimeout(function(){$("#user_modal").modal('hide');}, 2000);
-
+            
         }
     });
 }
@@ -245,13 +250,13 @@ function SetEnabled(){
               
         }
         ids = ids.substring(0,ids.length-1);
-         alert(ids);
+         
         $.ajax({
             url: full_path + "sys/user/enable.htm" + ids,
             type: 'get',
-            dataType: 'json',
+            dataType: 'html',
             success: function(data){
-            	window.location.reload();
+            	fulshAjax();
             }
         });
         
@@ -288,11 +293,23 @@ function IsEnabled(){
         $.ajax({
             url: full_path + "sys/user/isEnable.htm" + ids,
             type: 'get',
-            dataType: 'json',
+            dataType: 'html',
             success: function(data){
-                
+            	fulshAjax();
             }
-        });
-        
-    
+        });  
+}
+/**
+ * 刷新数据
+ */
+function fulshAjax(){
+	$.ajax({
+		url: full_path +"sys/user/user.htm",
+		type: 'get',
+		dataType: 'html',
+		success: function(data){
+			$("#content").empty();
+			$("#content").append(data);
+		}
+	});
 }
