@@ -22,6 +22,11 @@
      update SYS_USER set IS_ENABLED=0
       where USER_ID=#{userId,jdbcType=DECIMAL}
    </update>
+   <!--注销用户  -->
+   <update id="updateIsEnable" parameterType="java.lang.Integer" >
+     update SYS_USER set IS_ENABLED=1
+      where USER_ID=#{userId,jdbcType=DECIMAL}
+   </update>
   <!-- 查询所有用户 -->
   <select id="selectList" resultMap="BaseResultMap">
   select
