@@ -1,6 +1,7 @@
 package com.ffcs.sys.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ffcs.sys.dao.SysGroupStructureAclMapper;
 import com.ffcs.sys.entity.SysGroupStructureAcl;
 import com.ffcs.sys.service.SysGroupStructureAclService;
+import com.github.pagehelper.PageInfo;
 @Service
 public class SysGroupStructureAclServiceImpl implements
 		SysGroupStructureAclService {
@@ -52,10 +54,13 @@ public class SysGroupStructureAclServiceImpl implements
 	}
 
 	@Override
-	public List<SysGroupStructureAcl> selectList() {
+	public PageInfo<SysGroupStructureAcl> selectList(PageInfo<SysGroupStructureAcl> pageInfo,
+			Map<String, Object> params) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 	
 
 }

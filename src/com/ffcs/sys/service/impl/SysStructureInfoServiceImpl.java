@@ -2,6 +2,7 @@ package com.ffcs.sys.service.impl;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.ffcs.sys.entity.SysStructureInfo;
 import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.entity.SysUserGroupAssoc;
 import com.ffcs.sys.service.SysStructureInfoService;
+import com.github.pagehelper.PageInfo;
 @Service
 public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 
@@ -67,13 +69,11 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 		return selectList;
 	}
 
-	
-
 
 	@Override
-	public List<SysStructureInfo> selectList() {
-	
-		return sysStructureInfoMapper.selectList();
+	public PageInfo<SysStructureInfo> selectList(PageInfo<SysStructureInfo> pageInfo, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -1,6 +1,7 @@
 package com.ffcs.sys.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.ffcs.sys.dao.SysUserGroupAssocMapper;
 import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.entity.SysUserGroupAssoc;
 import com.ffcs.sys.service.SysUserGroupAssocService;
+import com.github.pagehelper.PageInfo;
 
 @Service
 public class SysUserGroupAssocServiceImpl implements SysUserGroupAssocService {
@@ -52,12 +54,6 @@ public class SysUserGroupAssocServiceImpl implements SysUserGroupAssocService {
 		return 0;
 	}
 
-	@Override
-	public List<SysUserGroupAssoc> selectList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	/*@Override
 	public List<SysUserGroupAssoc> getGroupByUserId(SysUser sysUser) {
 
@@ -99,6 +95,12 @@ public class SysUserGroupAssocServiceImpl implements SysUserGroupAssocService {
 		}
 
 		return result;
+	}
+
+	@Override
+	public PageInfo<SysUserGroupAssoc> selectList(PageInfo<SysUserGroupAssoc> pageInfo, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

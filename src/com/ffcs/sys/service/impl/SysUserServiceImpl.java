@@ -2,6 +2,7 @@ package com.ffcs.sys.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.ffcs.sys.dao.SysUserMapper;
 import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.service.SysUserService;
 import com.ffcs.utils.MD5;
+import com.github.pagehelper.PageInfo;
 @Service
 public class SysUserServiceImpl implements SysUserService {
 
@@ -76,15 +78,6 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public List<SysUser> selectList() {
-		List<SysUser> selectList = sysUserMapper.selectList();
-		if(selectList==null || selectList.size()<=0){
-			return null;
-		}
-		return selectList;
-	}
-
-	@Override
 	public int updateUserIsEnable(Integer[] isEnable) {
 		  int result = 0;
 		  if(isEnable!=null && isEnable.length>0){
@@ -118,6 +111,12 @@ public class SysUserServiceImpl implements SysUserService {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public PageInfo<SysUser> selectList(PageInfo<SysUser> pageInfo, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

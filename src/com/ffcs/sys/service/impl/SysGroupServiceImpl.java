@@ -1,6 +1,7 @@
 package com.ffcs.sys.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ffcs.sys.dao.SysGroupMapper;
 import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.service.SysGroupService;
+import com.github.pagehelper.PageInfo;
 
 
 @Service
@@ -48,16 +50,17 @@ public class SysGroupServiceImpl implements SysGroupService{
 		return 0;
 	}
 
-	@Override
-	public List<SysGroup> selectList() {
-		
-		return sysGroupMapper.selectList();
-	}
 
 	@Override
 	public List<SysGroup> selectByUserId(Integer userId) {
 		
 		return sysGroupMapper.selectByUserId(userId);
+	}
+
+	@Override
+	public PageInfo<SysGroup> selectList(PageInfo<SysGroup> pageInfo, Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
