@@ -25,7 +25,7 @@ public class SysGroupController {
 	public String selectGroupList(Map<String ,Object> groupMap,PageInfo<SysGroup> pageInfo){
 		Map<String,Object> params = new HashMap<String, Object>();
 		  pageInfo = sysGroupService.selectList(pageInfo,params);
-		      groupMap.put("page", pageInfo.getList());
+		      groupMap.put("page", pageInfo);
             return "sys/group/group";
 	}
 

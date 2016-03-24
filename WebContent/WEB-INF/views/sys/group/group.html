@@ -1,5 +1,20 @@
 <meta charset="UTF-8">
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".button-group > button").click(function(){
+		var target = $(this).attr('target');
+		$.ajax({
+			url: full_path + target,
+			type: 'get',
+			dataType: 'html',
+			success: function(data){
+				$("#content").empty();
+				$("#content").append(data);
+			}
+		});
+	});
+});
+</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8">
@@ -28,8 +43,6 @@
 		<div class="col-md-6">
 			<table class="table table-bordered">
 				<thead>
-				
-					<tr>
 						<th><input type="checkbox"></th>
 						<th>用户组</th>
 						<th>是否激活</th>
@@ -37,8 +50,8 @@
 					</tr>
 				</thead>
 				<tbody>
-				<#if groupList?? && groupList?size gt 0>
-				<#list groupList as item>
+				<#if page?? && page.list?size gt 0>
+				<#list page.list as item>
 					<tr>
 						<td><input type="checkbox"></td>
 						<td>${item.groupName}</td>
@@ -51,15 +64,13 @@
 			</table>
 		</div>
 		<div class="col-md-12">
-			<ul class="pagination">
-				<li><a href="#"> &laquo; </a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#"> &raquo; </a></li>
-			</ul>
+			<div class="button-group">
+				<button class="button button-square" target="sys/group/group.htm?pageSize=2&pageNum=${page.firstPage}">&laquo;</button>
+				<#list page.navigatepageNums as item>
+				<button class="button button-square" target="sys/group/group.htm?pageSize=2&pageNum=${item}">${item}</button>
+				</#list>
+				<button class="button button-square" target="sys/group/group.htm?pageSize=2&pageNum=${page.lastPage}">&raquo;</button>
+			</div>
 		</div>
 	</div>
 </div>

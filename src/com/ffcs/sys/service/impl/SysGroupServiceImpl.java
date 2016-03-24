@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ffcs.sys.dao.SysGroupMapper;
 import com.ffcs.sys.entity.SysGroup;
 import com.ffcs.sys.service.SysGroupService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 
@@ -59,8 +60,11 @@ public class SysGroupServiceImpl implements SysGroupService{
 
 	@Override
 	public PageInfo<SysGroup> selectList(PageInfo<SysGroup> pageInfo, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return null;
+		PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
+		
+		pageInfo = new PageInfo<>(sysGroupMapper.selectList(), 3);
+		System.out.println(pageInfo.toString());
+		return pageInfo;
 	}
 
 }
