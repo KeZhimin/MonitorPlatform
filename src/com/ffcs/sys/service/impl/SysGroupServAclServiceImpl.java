@@ -18,7 +18,6 @@ public class SysGroupServAclServiceImpl implements SysGroupServAclService {
 
 	@Override
 	public int deleteByPrimaryKey(Integer primaryKey) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

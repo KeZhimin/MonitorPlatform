@@ -1,0 +1,158 @@
+<meta charset="UTF-8">
+<script type="text/javascript" src="<@full_path path='js/sys/user.js' />"></script>
+<div class="container-fluid">
+    <div class="row" style="margin-bottom: 100px;">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="btn-toolbar">
+                <div class="btn-group" role="group" style="margin-bottom: 15px;">
+                    <button type="button" class="btn btn-default" onclick="AddUser();">新增</button>
+                    <button type="button" class="btn btn-default" onclick="EditUser();">编辑</button>
+                    <button type="button" class="btn btn-default">激活</button>
+                    <button type="button" class="btn btn-default">删除</button>
+                </div>
+            </div>
+
+            <form class="form-inline" style="position: absolute;top: 0;right: 15px;">
+                <div class="form-group" style="margin-right: 10px;">
+                    <label>编号</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-group" style="margin-right: 10px;">
+                    <label>是否删除</label>
+                    <select class="form-control">
+                        <option>是</option>
+                        <option>否</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="button" class="btn btn-default" value="查找">
+                </div>
+            </form>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <td><input type="checkbox" onchange="OpAllCheckBox(this)"></td>
+                    <td>编号</td>
+                    <td>用户名</td>
+                    <td>用户全称</td>
+                    <td>是否激活</td>
+                    <td>最后修改时间</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>10001</td>
+                    <td>小嶋阳菜</td>
+                    <td>小嶋阳菜</td>
+                    <td>是</td>
+                    <td>2016-03-28 11:11:11</td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>10001</td>
+                    <td>小嶋阳菜</td>
+                    <td>小嶋阳菜</td>
+                    <td>是</td>
+                    <td>2016-03-28 11:11:11</td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>10001</td>
+                    <td>小嶋阳菜</td>
+                    <td>小嶋阳菜</td>
+                    <td>是</td>
+                    <td>2016-03-28 11:11:11</td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>10001</td>
+                    <td>小嶋阳菜</td>
+                    <td>小嶋阳菜</td>
+                    <td>是</td>
+                    <td>2016-03-28 11:11:11</td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>10001</td>
+                    <td>小嶋阳菜</td>
+                    <td>小嶋阳菜</td>
+                    <td>是</td>
+                    <td>2016-03-28 11:11:11</td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>10001</td>
+                    <td>小嶋阳菜</td>
+                    <td>小嶋阳菜</td>
+                    <td>是</td>
+                    <td>2016-03-28 11:11:11</td>
+                </tr>
+
+                </tbody>
+            </table>
+            <div style="position: absolute;right: 15px;">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default">&laquo;</button>
+                    <button type="button" class="btn btn-default">1</button>
+                    <button type="button" class="btn btn-default">2</button>
+                    <button type="button" class="btn btn-default">3</button>
+                    <button type="button" class="btn btn-default">4</button>
+                    <button type="button" class="btn btn-default">5</button>
+                    <button type="button" class="btn btn-default">&raquo;;</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div style="position: fixed;height: 50px;width:100%;background-color: whitesmoke;bottom: 0;padding-top: 5px;">
+        <h4 style="text-align: center;">福富软件&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@copyright 2016&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;&nbsp;</h4>
+    </div>
+</div>
+
+<div class="modal fade" id="user_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button class="btn btn-default" onclick="SaveUser(this);">保存</button>
+                <form style="margin-top: 10px;" id="user_form">
+                    <table class="table table-bordered mp-table" style="text-align: center">
+                        <tbody>
+                        <tr>
+                            <td>用户名</td>
+                            <td><input type="text" class="form-control"></td>
+                        <tr>
+                            <td>用户全名</td>
+                            <td><input type="text" class="form-control"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <fieldset>
+                        <legend>关联群组</legend>
+                        <input type="button" class="btn btn-default" style="margin-bottom: 5px;" onclick="AddGroupNode();" value="增加">
+                        <div style="height: 300px;overflow: scroll;">
+                            <table class="table" cellspacing="0" id="group_table">
+                                <thead>
+                                <tr>
+                                    <td>群组名称</td>
+                                    <td>操作</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

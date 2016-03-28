@@ -13,8 +13,6 @@ public interface CommService<T> {
     int insertSelective(T entity);
     PageInfo<T> selectList(PageInfo<T> pageInfo,Map<String,Object> params);
     T selectByPrimaryKey(Integer primaryKey);
-
     int updateByPrimaryKeySelective(T entity);
-
     int updateByPrimaryKey(T entity);
 }

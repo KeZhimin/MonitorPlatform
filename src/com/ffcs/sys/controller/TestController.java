@@ -12,7 +12,7 @@ public class TestController {
 	@RequestMapping("test")
 	public String test() {
 		System.out.println("hahahhah");
-		return "test/index";
+		return "test";
 	}
 
 	@ResponseBody
@@ -28,7 +28,7 @@ public class TestController {
 		System.out.println("this is getUser...");
 		User user = new User();
 		user.setId("1");
-		user.setName("¿ÂÖÇÃô");
+		user.setName("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		return user;
 	}
 	
