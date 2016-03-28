@@ -18,6 +18,7 @@ import com.ffcs.sys.entity.SysUserRole;
 import com.ffcs.sys.service.SysGroupService;
 import com.ffcs.sys.service.SysUserGroupAssocService;
 import com.ffcs.sys.service.SysUserService;
+import com.ffcs.utils.SystemControllerLog;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -32,14 +33,16 @@ public class SysUserController {
 	private SysGroupService sysGroupService;
 	@RequestMapping("/login")
 	public String getLoginSysUser(SysUser sysUser,HttpServletRequest request){
+		       sysUser.setLonginName("admin");
 		SysUser user = sysUserService.getSysUserByName(sysUser.getLonginName());
+		   
 		request.getSession().setAttribute("loginUser", user);
 		return "sys/add";
 		
 	}
 	
 	/**
-	 * 娣诲姞鐢ㄦ埛
+	 * 新增用户
 	 * @param sysUser
 	 * @param groupid
 	 * @return
@@ -54,7 +57,7 @@ public class SysUserController {
 		return "sys/index";
 	}
 	/**
-	 * 淇敼涔嬪墠锛屽洖鏄炬暟鎹�
+	 * 修改之前调用的函数
 	 * @param userId
 	 * @param map
 	 * @return
@@ -63,16 +66,16 @@ public class SysUserController {
 	@ResponseBody
 	public Object updateUserPre(@PathVariable("id") Integer userId){
 		SysUserRole sysUserRole = new SysUserRole();
-		SysUser sysUser = sysUserService.selectByPrimaryKey(userId);
+		SysUser sysUser = sysUserService.selectByUserId(userId);
 		
 		  List<SysGroup> selectGroup= sysGroupService.selectByUserId(userId);
 		  sysUserRole.setSysUser(sysUser);
 		  sysUserRole.setSysGroup(selectGroup);
-		 System.out.println("鐢ㄦ埛锛�"+sysUser.toString());
+		
 		return sysUserRole;
 	}
 	/**
-	 * 淇敼鐢ㄦ埛
+	 * 修改用户
 	 * @param sysUser
 	 * @param groupid
 	 * @return
@@ -88,7 +91,7 @@ public class SysUserController {
 		return "sys/index";
 	}
 	/**
-	 * 鍒犻櫎鐢ㄦ埛
+	 * 根据ID批量删除
 	 * @param id
 	 * @return
 	 */
@@ -100,8 +103,8 @@ public class SysUserController {
 		return "sys/index";
 	}
 	/**
-	 * 鏍规嵁鐢ㄦ埛ID
-	 * 婵�娲荤敤鎴�
+	 * 根据用户ID
+	 * 激活用户
 	 */
 	   @RequestMapping("/enable")
       public String enableUser(Integer[] enableId){
@@ -113,9 +116,12 @@ public class SysUserController {
 	   /**
 		 * 根据用户ID
 		 * 注销用户
+	     * @throws Exception 
 		 */
 		   @RequestMapping("/isEnable")
-	      public String isEnableUser(Integer[] isId){
+		 //此处为记录AOP拦截Controller记录用户操作  
+		   @SystemControllerLog(description = "注销用户")  
+	      public String isEnableUser(Integer[] isId) throws Exception{
 			   for(int i=0;i<isId.length;i++){
 			    	  System.out.println(isId[i]);
 			    	  }
@@ -131,7 +137,7 @@ public class SysUserController {
 	@RequestMapping("/user")
 	public String selectUserList(Map<String ,Object> userMap,PageInfo<SysUser> pageInfo){
 		Map<String,Object> params = new HashMap<String,Object>();
-		 pageInfo = sysUserService.selectList(pageInfo,params);
+		 pageInfo = sysUserService.getUserList(pageInfo,params);
 		 userMap.put("page",pageInfo);
 		return "sys/user/user";
 	}

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ffcs.sys.entity.SysStructureInfo;
 import com.ffcs.sys.entity.SysUser;
@@ -23,9 +22,8 @@ public class SysStructureInfoController {
 	private SysStructureInfoService sysStructureInfoService;
     private SysUser sysUser;
 	@RequestMapping("/index")
-	public String selectList(HttpServletRequest request, Map<String, Object> map) {
-
-		 sysUser = new SysUser();
+	public String getStructure(HttpServletRequest request, Map<String, Object> map) {
+		sysUser = new SysUser();
 		sysUser.setUserId(10001);
 		List<SysStructureInfo> selectList = sysStructureInfoService.selectList(sysUser);
 		map.put("structureList", selectList);
@@ -55,10 +53,8 @@ public class SysStructureInfoController {
     }
 	@RequestMapping("/structure")
 	public String structure( Map<String, Object> map){
-		List<SysStructureInfo> selectList = null;
-		if(sysUser!=null){
-			 selectList = sysStructureInfoService.selectList(sysUser);
-		}
+		List<SysStructureInfo> selectList = sysStructureInfoService.selectList(sysUser);
+
 		map.put("structureList", selectList);
 		return "sys/structure/structure";
 	}

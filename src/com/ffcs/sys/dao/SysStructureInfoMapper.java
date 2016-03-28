@@ -6,6 +6,20 @@ import java.util.Set;
 import com.ffcs.sys.entity.SysStructureInfo;
 import com.ffcs.sys.entity.SysUser;
 
-public interface SysStructureInfoMapper extends CommMapper<SysStructureInfo>{
+public interface SysStructureInfoMapper {
+	int deleteByPrimaryKey(Integer primaryKey);
+
+    int insert(SysStructureInfo entity);
+
+    int insertSelective(SysStructureInfo entity);
+
+    SysStructureInfo selectByPrimaryKey(Integer primaryKey);
+    
+    List<SysStructureInfo> selectList();
+
+    int updateByPrimaryKeySelective(SysStructureInfo entity);
+
+    int updateByPrimaryKey(SysStructureInfo entity);
+	
 	List<SysStructureInfo> selectList(SysUser sysUser);
 }

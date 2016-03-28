@@ -25,7 +25,7 @@ public class SysGroupController {
 	public String selectGroupList(Map<String ,Object> groupMap,PageInfo<SysGroup> pageInfo){
 		Map<String,Object> params = new HashMap<String, Object>();
 		  pageInfo = sysGroupService.selectList(pageInfo,params);
-		      groupMap.put("page", pageInfo.getList());
+		      groupMap.put("page", pageInfo);
             return "sys/group/group";
 	}
 
@@ -36,7 +36,7 @@ public class SysGroupController {
 	 */
 	@RequestMapping("/get")
 	@ResponseBody
-	public List<SysGroup> addUserPre(Map<String ,Object> groupMap,PageInfo<SysGroup> pageInfo){
+	public List<SysGroup> getGroup(Map<String ,Object> groupMap,PageInfo<SysGroup> pageInfo){
 		Map<String,Object> params = new HashMap<String,Object>();
 		pageInfo = sysGroupService.selectList(pageInfo,params);
 		
@@ -47,8 +47,17 @@ public class SysGroupController {
 		sysGroupService.deleteByPrimaryKey(groupId);
 		return "";
 	}
-	public String insertGroup(SysGroup group){
-		sysGroupService.insert(group);
+	/**
+	 * 新增用户组
+	 * @param group 用户组
+	 * @param sttId 菜单id
+	 * @param userId 用户id
+	 * @param orgId 业务组id
+	 * @return
+	 */
+	@RequestMapping("/add")
+	public String  addGroup(SysGroup group,Integer[] sttId ,Integer userId,Integer[] orgId){
+		sysGroupService.insertSelective(group,sttId ,userId,orgId);
 		return "";
 	}
 	public String updateByIdSelective(SysGroup group){

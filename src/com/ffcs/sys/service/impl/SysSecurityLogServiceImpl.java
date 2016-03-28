@@ -1,5 +1,6 @@
 package com.ffcs.sys.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.ffcs.sys.dao.SysSecurityLogMapper;
 import com.ffcs.sys.entity.SysSecurityLog;
 import com.ffcs.sys.service.SysSecurityLogService;
+import com.ffcs.utils.SystemServiceLog;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 @Service
 public class SysSecurityLogServiceImpl implements SysSecurityLogService {
@@ -29,9 +32,13 @@ public class SysSecurityLogServiceImpl implements SysSecurityLogService {
 	}
 
 	@Override
+	 //此处为AOP拦截Service记录异常信息。方法不需要加try-catch  
+	 @SystemServiceLog(description = "日志入库")
 	public int insertSelective(SysSecurityLog entity) {
-		// TODO Auto-generated method stub
-		return 0;
+		   
+		 int result = sysSecurityLogMapper.insertSelective(entity);
+		
+		 return result;
 	}
 
 	@Override
@@ -54,9 +61,18 @@ public class SysSecurityLogServiceImpl implements SysSecurityLogService {
 
 	@Override
 	public PageInfo<SysSecurityLog> selectList(PageInfo<SysSecurityLog> pageInfo, Map<String, Object> params) {
-		// TODO Auto-generated method stub
-		return null;
+		PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());
+		    if(params==null && params.size()==0){
+		         pageInfo = new PageInfo<>(sysSecurityLogMapper.selectList(),3);
+		     }else{
+		    	 pageInfo = new PageInfo<>(sysSecurityLogMapper.selectByDate(params),3);
+		     }
+		return pageInfo;
 	}
-	
+	public List<SysSecurityLog> selectByDate( Map<String, Object> params){
+		   
+			return sysSecurityLogMapper.selectByDate(params);
+	}
+
 
 }

@@ -16,18 +16,18 @@
     select 
     <include refid="Base_Column_List" />
     from SYS_GROUP
-    where GROUP_ID = #{groupId,jdbcType=DECIMAL}
+    where GROUP_ID = #{groupId,jdbcType=DECIMAL} order by GROUP_ID
   </select>
   <select id="selectList" resultMap="BaseResultMap" >
   select 
    <include refid="Base_Column_List" />
-   from SYS_GROUP
+   from SYS_GROUP order by GROUP_ID
   </select>
   <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
   select 
   <include refid="Base_Column_List" />
   from SYS_GROUP where GROUP_ID in(select GROUPID from 
-  SYS_USER_GROUP_ASSOC  where USERID=#{userId})
+  SYS_USER_GROUP_ASSOC  where USERID=#{userId}) order by GROUP_ID
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     update from SYS_GROUP set isDeleted=1

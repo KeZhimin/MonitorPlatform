@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class SysSecurityLog {
-    private BigDecimal logid;
+    private Integer logid;
 
     private String loginName;
 
@@ -14,15 +14,16 @@ public class SysSecurityLog {
 
     private Date ctime;
 
-    public BigDecimal getLogid() {
-        return logid;
-    }
 
-    public void setLogid(BigDecimal logid) {
-        this.logid = logid;
-    }
+    public Integer getLogid() {
+		return logid;
+	}
 
-    public String getLoginName() {
+	public void setLogid(Integer logid) {
+		this.logid = logid;
+	}
+
+	public String getLoginName() {
         return loginName;
     }
 
@@ -53,4 +54,14 @@ public class SysSecurityLog {
     public void setCtime(Date ctime) {
         this.ctime = ctime;
     }
+
+	@Override
+	public String toString() {
+		return "SysSecurityLog [logid=" + logid + ", loginName=" + loginName
+				+ ", ipaddress=" + ipaddress + ", operation=" + operation
+				+ ", ctime=" + ctime + "]";
+	}
+
+	
+    
 }

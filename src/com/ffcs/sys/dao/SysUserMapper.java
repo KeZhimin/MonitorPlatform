@@ -1,13 +1,33 @@
 package com.ffcs.sys.dao;
 
+import java.util.List;
+
 import com.ffcs.sys.entity.SysUser;
 
-public interface SysUserMapper extends CommMapper<SysUser>{
-   public SysUser getSysUserByName(String userName);
+public interface SysUserMapper {
+	
+	int deleteByPrimaryKey(Integer primaryKey);
 
-   public int updateUserIsEnable(Integer isEnable);
+   
 
-   public int  deleteByPks(Integer integer);
+    int insertSelective(SysUser user);
 
-   public int updateIsEnable(Integer integer);
+    int updateByUserIdSelective(SysUser user);
+
+    int updateUserIsEnable(Integer isEnable);
+
+    int  deleteByPks(Integer integer);
+
+    int updateIsEnable(Integer integer);
+    
+    SysUser selectByUserId(Integer userId);
+    
+    SysUser getSysUserByName(String userName);
+    
+    List<SysUser> selectList();
+
+	
+	
+ 
+   
 } 

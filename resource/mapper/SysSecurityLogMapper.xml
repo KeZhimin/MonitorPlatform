@@ -14,12 +14,19 @@
   <select id="selectList" resultMap="BaseResultMap"> 
    select 
    <include refid="Base_Column_List" />
-   from SYS_SECURITY_LOG
+   from SYS_SECURITY_LOG 
+  </select>
+   <select id="selectByDate" resultMap="BaseResultMap"> 
+   select 
+   <include refid="Base_Column_List" />
+     from SYS_SECURITY_LOG 
+     where CTIME between  to_date(#{startDate},'yyyy-mm-dd')
+                 and to_date(#{endDate},'yyyy-mm-dd')
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
     select 
     <include refid="Base_Column_List" />
-    from SYS_SECURITY_LOG
+    from SYS_SECURITY_LOG   
     where LOGID = #{logid,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
@@ -33,11 +40,13 @@
       #{operation,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysSecurityLog" >
+  <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="logid">  
+       SELECT SYS_SECURITY_LOG_LOGID.NEXTVAL from DUAL  
+   </selectKey>  
     insert into SYS_SECURITY_LOG
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="logid != null" >
+     
         LOGID,
-      </if>
       <if test="loginName != null" >
         LOGIN_NAME,
       </if>
@@ -52,9 +61,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="logid != null" >
+    
         #{logid,jdbcType=DECIMAL},
-      </if>
       <if test="loginName != null" >
         #{loginName,jdbcType=VARCHAR},
       </if>

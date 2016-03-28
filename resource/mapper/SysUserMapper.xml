@@ -31,7 +31,7 @@
   <select id="selectList" resultMap="BaseResultMap">
   select
   <include refid="Base_Column_List" />
-  from SYS_USER  where IS_DELETED=0
+  from SYS_USER  where IS_DELETED=0 order by USER_ID
   </select>
   <!-- 根据用户名查询用户 -->
   <select id="getSysUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
@@ -40,11 +40,11 @@
     from SYS_USER where LONGIN_NAME = #{longinName,jdbcType=VARCHAR} 
     and IS_DELETED=0 and IS_ENABLED=0
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from SYS_USER
-    where USER_ID = #{userId,jdbcType=DECIMAL}
+    where USER_ID = #{userId,jdbcType=DECIMAL} order by USER_ID
   </select>
   <!-- 删除用户 -->
   <delete id="deleteByPks" parameterType="java.lang.Integer" >
@@ -130,7 +130,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysUser" >
+  <update id="updateByUserIdSelective" parameterType="com.ffcs.sys.entity.SysUser" >
     update SYS_USER
     <set >
       <if test="longinName != null" >
@@ -163,7 +163,7 @@
     </set>
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysUser" >
+ <!--  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysUser" >
     update SYS_USER
     set LONGIN_NAME = #{longinName,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},
@@ -175,5 +175,5 @@
       PHONE_NUM = #{phoneNum,jdbcType=DECIMAL},
       EMAIL = #{email,jdbcType=VARCHAR}
     where USER_ID = #{userId,jdbcType=DECIMAL}
-  </update>
+  </update> -->
 </mapper>

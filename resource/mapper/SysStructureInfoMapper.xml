@@ -18,7 +18,6 @@
   select DISTINCT s.* from SYS_STRUCTURE_INFO s where STRUCTURE_ID in(
    select STRUCTURE_ID from SYS_GROUP_STRUCTURE_ACL where GROUP_ID in(
   select GROUPID from SYS_USER_GROUP_ASSOC where USERID =#{userId}))
-   
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -31,7 +30,7 @@
     </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    update from SYS_STRUCTURE_INFO
+    update from SYS_STRUCTURE_INFO set IS_DELETED=1
     where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ffcs.sys.entity.SysStructureInfo" >

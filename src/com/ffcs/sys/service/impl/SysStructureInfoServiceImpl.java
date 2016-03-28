@@ -1,20 +1,14 @@
 package com.ffcs.sys.service.impl;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ffcs.sys.dao.SysGroupStructureAclMapper;
 import com.ffcs.sys.dao.SysStructureInfoMapper;
-import com.ffcs.sys.dao.SysUserGroupAssocMapper;
-import com.ffcs.sys.entity.SysGroupStructureAcl;
 import com.ffcs.sys.entity.SysStructureInfo;
 import com.ffcs.sys.entity.SysUser;
-import com.ffcs.sys.entity.SysUserGroupAssoc;
 import com.ffcs.sys.service.SysStructureInfoService;
 import com.github.pagehelper.PageInfo;
 @Service

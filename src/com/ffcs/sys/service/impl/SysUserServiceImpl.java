@@ -10,6 +10,7 @@ import com.ffcs.sys.dao.SysUserMapper;
 import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.service.SysUserService;
 import com.ffcs.utils.MD5;
+import com.ffcs.utils.SystemServiceLog;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 @Service
@@ -23,13 +24,16 @@ public class SysUserServiceImpl implements SysUserService {
 		return sysUserMapper.deleteByPrimaryKey(primaryKey);
 	}
 
-	@Override
-	public int insert(SysUser entity) {
-		return 0;
-	}
+	
 
 	@Override
 	public int insertSelective(SysUser entity) {
+		if(entity.getLonginName()!=null) {
+			SysUser sysUserByName = sysUserMapper.getSysUserByName(entity.getLonginName());
+			if(sysUserByName!=null){
+				return 0;
+			  }
+		    }
 	        if(entity!=null && entity.getPassword()==null){
 	        	String pass = "123456";
 	        	pass= MD5.Encryption(pass);
@@ -44,13 +48,13 @@ public class SysUserServiceImpl implements SysUserService {
 	        if(entity.getIsEnabled()==null){
 	        	entity.setIsDeleted((short) 0);
 	        }
-	        System.out.println(entity.toString());
+	       
 		return sysUserMapper.insertSelective(entity);
 	}
 
 	@Override
-	public SysUser selectByPrimaryKey(Integer primaryKey) {
-		return sysUserMapper.selectByPrimaryKey(primaryKey);
+	public SysUser selectByUserId(Integer primaryKey) {
+		return sysUserMapper.selectByUserId(primaryKey);
 	}
 
 	@Override
@@ -58,14 +62,10 @@ public class SysUserServiceImpl implements SysUserService {
 		   if(entity!=null && entity.getCtime()==null){
 			     entity.setCtime(new Date());
 		   }
-		return sysUserMapper.updateByPrimaryKeySelective(entity);
+		return sysUserMapper.updateByUserIdSelective(entity);
 	}
 
-	@Override
-	public int updateByPrimaryKey(SysUser entity) {
 	
-		return 0;
-	}
 
 	@Override
 	public SysUser getSysUserByName(String userName) {
@@ -102,7 +102,9 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public int updateIsEnable(Integer[] isId) {
+	 //此处为AOP拦截Service记录异常信息。方法不需要加try-catch  
+	 @SystemServiceLog(description = "注销用户")
+	public int updateIsEnable(Integer[] isId){
 		int result =0;
 		if(isId!=null){
 			for(int i=0,len=isId.length;i<len;i++){
@@ -114,7 +116,7 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public PageInfo<SysUser> selectList(PageInfo<SysUser> pageInfo, Map<String, Object> params) {
+	public PageInfo<SysUser> getUserList(PageInfo<SysUser> pageInfo, Map<String, Object> params) {
 		   if(pageInfo.getPageNum()<0){
 			   pageInfo.setPageNum(0);
 		   }
