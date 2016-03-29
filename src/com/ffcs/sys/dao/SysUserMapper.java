@@ -24,7 +24,7 @@ public interface SysUserMapper {
     
     SysUser getSysUserByName(String userName);
     
-    List<SysUser> selectList();
+    List<SysUser> selectList(SysUser user);
 
 	
 	

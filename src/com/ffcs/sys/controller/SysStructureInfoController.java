@@ -54,7 +54,7 @@ public class SysStructureInfoController {
 	@RequestMapping("/structure")
 	public String structure( Map<String, Object> map){
 		List<SysStructureInfo> selectList = sysStructureInfoService.selectList(sysUser);
-
+           
 		map.put("structureList", selectList);
 		return "sys/structure/structure";
 	}

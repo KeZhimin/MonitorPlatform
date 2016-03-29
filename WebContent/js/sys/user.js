@@ -67,7 +67,7 @@ function DeleteUser(){
     }
 }
 /**
- *
+ *编辑用户
  * @constructor
  */
 function EditUser(){
@@ -145,7 +145,7 @@ function EditGroupNode(group_selected){
            	 node = node+"<option value='"+json_of_group[i]['groupId']+"'>"+ json_of_group[i]['groupName']+ "</option>" ;
     		}
     	}
-         node = node + "</select></td><td><input type='button' class='button button-small' value='删除' onclick='RemoveGroupNode(this);'></td></tr>";
+         node = node + "</select></td><td><input type='button' class='btn btn-default' value='删除' onclick='RemoveGroupNode(this);'></td></tr>";
          $("#group_table").append(node);
     }
    
@@ -161,7 +161,7 @@ function AddGroupNode(){
     for(var i= 0,len=json_of_group.length;i<len;i++){
         node = node + "<option value='"+ json_of_group[i]['groupId'] +"'>" + json_of_group[i]['groupName'] + "</option>";
     }
-    node = node + "</select></td><td><input type='button' class='button button-small' value='删除' onclick='RemoveGroupNode(this);'></td></tr>";
+    node = node + "</select></td><td><input type='button' class='btn btn-default' value='删除' onclick='RemoveGroupNode(this);'></td></tr>";
     $("#group_table").append(node);
 }
 
@@ -304,7 +304,7 @@ function IsEnabled(){
  */
 function fulshAjax(){
 	$.ajax({
-		url: full_path +"sys/user/user.htm",
+		url: full_path +"sys/user/user.htm?pageSize=2&pageNum=1",
 		type: 'get',
 		dataType: 'html',
 		success: function(data){
@@ -312,4 +312,25 @@ function fulshAjax(){
 			$("#content").append(data);
 		}
 	});
+}
+
+/**
+ * 根据条件查询用户
+ */
+function selectUser(){
+	//var target = $("#formUser").attr('target');
+	 var userId = $("#formUser input[name='userId']").val();
+	 var isEnabled = $("#formUser select[name='isEnabled']").val();
+    $.ajax({
+        url: full_path+"sys/user/user.htm?pageSize=2&pageNum=1",
+        type:'post',
+        data: $("#formUser").serialize(),
+        success: function(data){
+        	console.log(data);
+        	$("#content").empty();
+            $("#content").append(data);
+            $("#formUser input[name='userId']").val(userId);
+            $("#formUser select[name='isEnabled']").val(isEnabled);
+        }
+    });
 }

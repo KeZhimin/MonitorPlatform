@@ -1,7 +1,6 @@
 package com.ffcs.sys.service.impl;
 
 import java.util.Date;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +44,7 @@ public class SysUserServiceImpl implements SysUserService {
 	        if(entity.getCtime()==null){
 	        	entity.setCtime(new Date());
 	        }
-	        if(entity.getIsEnabled()==null){
+	        if(entity.getIsDeleted()==null){
 	        	entity.setIsDeleted((short) 0);
 	        }
 	       
@@ -116,12 +115,18 @@ public class SysUserServiceImpl implements SysUserService {
 	}
 
 	@Override
-	public PageInfo<SysUser> getUserList(PageInfo<SysUser> pageInfo, Map<String, Object> params) {
+	public PageInfo<SysUser> getUserList(PageInfo<SysUser> pageInfo, SysUser user) {
 		   if(pageInfo.getPageNum()<0){
 			   pageInfo.setPageNum(0);
 		   }
-		  PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
-		   pageInfo = new PageInfo<>(sysUserMapper.selectList(),5);
+		   PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
+		    if(user == null){
+		      
+				pageInfo = new PageInfo<>(sysUserMapper.selectList(null));
+		    }else{
+		    	pageInfo = new PageInfo<>(sysUserMapper.selectList(user));
+		    }
+		  
 		return pageInfo;
 	}
 

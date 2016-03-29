@@ -80,7 +80,7 @@ public class SysGroupServiceImpl implements SysGroupService{
 			  pageInfo.setPageNum(0);
 		 }
 		PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
-		pageInfo = new PageInfo<>(sysGroupMapper.selectList(), 3);
+		pageInfo = new PageInfo<>(sysGroupMapper.selectList());
 		
 		return pageInfo;
 	}

@@ -22,4 +22,8 @@ public interface SysStructureInfoMapper {
     int updateByPrimaryKey(SysStructureInfo entity);
 	
 	List<SysStructureInfo> selectList(SysUser sysUser);
+
+	List<SysStructureInfo> select();
+
+	List<SysStructureInfo> selectByParentId(Integer parentId);
 }

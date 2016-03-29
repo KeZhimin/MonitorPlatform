@@ -1,50 +1,75 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="<@full_path path='js/sys/user.js' />"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".btn-group > button").click(function(){
+		var target = $(this).attr('target');
+		if(target==undefined){
+		return false;
+		}
+		var userId = $("#formUser input[name='userId']").val();
+	    var isEnabled = $("#formUser select[name='isEnabled']").val();
+	    target =target+"&userId="+userId+"&isEnabled="+isEnabled;
+		$.ajax({
+			url: full_path + target,
+			type: 'get',
+			dataType: 'html',
+			success: function(data){
+				$("#content").empty();
+				$("#content").append(data);
+		    $("#formUser input[name='userId']").val(userId);
+            $("#formUser select[name='isEnabled']").val(isEnabled);
+			}
+		});
+	});
+});
+</script>
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8">
-			<form class="form-inline">
-				<fieldset>
-					<legend>查询条件</legend>
-					<div class="form-group" style="margin: 5px 20px 5px 5px;">
-						<label>归属业务组&nbsp;</label><input type="text" class="form-control">
-					</div>
-					<div class="form-group" style="margin: 5px 20px 5px 5px;">
-						<label>用户名&nbsp;</label> <input type="text" class="form-control">
-					</div>
-					<div class="form-group" style="margin: 5px 0 5px 0;">
-						<label>是否激活&nbsp;</label> <select class="form-control">
-							<option>是</option>
-							<option>否</option>
-						</select>
-					</div>
-				</fieldset>
-			</form>
-		</div>
-		<div class="col-md-12" style="margin: 15px 0;">
-			<button class="button button-small" onclick="AddUser();">新增用户</button>
-            <button class="button button-small" onclick="EditUser();">编辑用户</button>
-            <button class="button button-small" onclick="SetEnabled();">激活用户</button>
-			<button class="button button-small" onclick="IsEnabled();">注销用户</button>
-			<button class="button button-small" onclick="DeleteUser();">删除用户</button>
-		</div>
-		<div class="col-md-6">
-			<table id="usertable" class="table table-bordered" style="text-align: center;">
-				<thead>
-					<tr>
-						<th style="text-align: center;"><input type="checkbox"
-							onchange="OpAllCheckBox(this)"></th>
-						<th style="text-align: center;">用户编号</th>
-						<th style="text-align: center;">用户名</th>
-						<th style="text-align: center;">用户全称</th>
-						<th style="text-align: center;">是否激活</th>
-						<th style="text-align: center;">最后修改时间</th>
-					</tr>
-				</thead>
-				<tbody>
+    <div class="row" style="margin-bottom: 100px;">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="btn-toolbar">
+                <div class="btn-group" role="group" style="margin-bottom: 15px;">
+                    <button type="button" class="btn btn-default" onclick="AddUser();">新增</button>
+                    <button type="button" class="btn btn-default" onclick="EditUser();">编辑</button>
+                    <button type="button" class="btn btn-default" onclick="SetEnabled();">激活</button>
+                    <button type="button" class="btn btn-default" onclick="IsEnabled();">注销</button>
+                    <button type="button" class="btn btn-default" onclick="DeleteUser();">删除</button>
+                </div>
+            </div>
 
-          <#if page.list?? && page.list?size gt 0>
-            <#list page.list as item>
+            <form id="formUser" class="form-inline" style="position: absolute;top: 0;right: 15px;">
+                <div class="form-group" style="margin-right: 10px;">
+                    <label>编号</label>
+                    <input type="text" class="form-control" name="userId" value="">
+                </div>
+                <div class="form-group" style="margin-right: 10px;">
+                    <label>是否激活</label>
+                    <select class="form-control" name="isEnabled">
+                        <option  value="">--</option>
+                        <option id="0" value="0">是</option>
+                        <option id="1" value="1">否</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="button" class="btn btn-default" onclick="selectUser();" value="查找">
+                </div>
+            </form>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <td><input type="checkbox" onchange="OpAllCheckBox(this)"></td>
+                    <td>编号</td>
+                    <td>用户名</td>
+                    <td>用户全称</td>
+                    <td>是否激活</td>
+                    <td>最后修改时间</td>
+                </tr>
+                </thead>
+                <tbody>
+               
+              <#if page.list?? && page.list?size gt 0>
+                <#list page.list as item>
                      <tr>
                         <td><input type="checkbox"></td>
                         <td>${item.userId}</td>
@@ -61,35 +86,36 @@
                      </tr>
                    </#list>
                   </#if>
+
                 </tbody>
-			</table>
-		</div>
-		<div class="col-md-12">
-			<div class="button-group">
-				<button class="button button-square">&laquo;</button>
-				<button class="button button-square">${page.firstPage}</button>
-				<button class="button button-square">2</button>
-				<button class="button button-square">3</button>
-				<button class="button button-square">4</button>
-				<button class="button button-square">5</button>
-				<button class="button button-square">&raquo;</button>
-			</div>
-		</div>
-	</div>
+            </table>
+            <div style="position: absolute;right: 15px;">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" target="sys/user/user.htm?&pageSize=2&pageNum=${page.firstPage}">&laquo;</button>
+                    <#list page.navigatepageNums as item>
+                     <button type="button" class="btn btn-default" target="sys/user/user.htm?pageSize=2&pageNum=${item}">${item}</button>
+				</#list>
+                    <button type="button" class="btn btn-default" target="sys/user/user.htm?pageSize=2&pageNum=${page.lastPage}">&raquo;</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div style="position: fixed;height: 50px;width:100%;background-color: whitesmoke;bottom: 0;padding-top: 5px;">
+        <h4 style="text-align: center;">福富软件&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@copyright 2016&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;&nbsp;</h4>
+    </div>
 </div>
 
-
 <div class="modal fade" id="user_modal">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-body">
-				<button class="button button-small" data-dismiss="modal">关闭</button>
-				<button class="button button-small" onclick="SaveUser(this);">保存</button>
-				<form style="margin-top: 10px;" id="user_form">
-					<table class="table table-bordered mp-table"
-						style="text-align: center">
-						<tbody>
-						        <tr>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button class="btn btn-default" onclick="SaveUser(this);">保存</button>
+                <form style="margin-top: 10px;" id="user_form">
+                    <table class="table table-bordered mp-table" style="text-align: center">
+                        <tbody>
+                          <tr>
 								<td></td>
 								<td><input type="hidden" id="userId" name="userId" value="" class="form-control"></td>
 							<tr>
@@ -100,28 +126,27 @@
 								<td>用户全名</td>
 								<td><input type="text" id="fullName" name="fullName" value="" class="form-control"></td>
 							</tr>
-						</tbody>
-					</table>
-					<fieldset>
-						<legend>关联群组</legend>
-						<input type="button" class="button button-small"
-							style="margin-bottom: 5px;" onclick="AddGroupNode();" value="增加">
-						<div style="height: 300px; overflow: scroll;">
-							<table class="table" cellspacing="0" id="group_table">
-								<thead>
-									<tr>
-										<td>群组名称</td>
-										<td>操作</td>
-									</tr>
-								</thead>
-								<tbody >
-									
-								</tbody>
-							</table>
-						</div>
-					</fieldset>
-				</form>
-			</div>
-		</div>
-	</div>
+                        </tbody>
+                    </table>
+                    <fieldset>
+                        <legend>关联群组</legend>
+                        <input type="button" class="btn btn-default" style="margin-bottom: 5px;" onclick="AddGroupNode();" value="增加">
+                        <div style="height: 300px;overflow: scroll;">
+                            <table class="table" cellspacing="0" id="group_table">
+                                <thead>
+                                <tr>
+                                    <td>群组名称</td>
+                                    <td>操作</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

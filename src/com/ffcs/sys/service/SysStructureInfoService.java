@@ -3,6 +3,7 @@ package com.ffcs.sys.service;
 import java.util.List;
 import java.util.Map;
 
+import com.ffcs.sys.entity.JsonNode;
 import com.ffcs.sys.entity.SysStructureInfo;
 import com.ffcs.sys.entity.SysUser;
 import com.github.pagehelper.PageInfo;
@@ -21,4 +22,6 @@ public interface SysStructureInfoService {
     int updateByPrimaryKeySelective(SysStructureInfo entity);
 
     int updateByPrimaryKey(SysStructureInfo entity);
+
+    List<JsonNode> select();
 }

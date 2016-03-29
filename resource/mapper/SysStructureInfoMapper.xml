@@ -30,7 +30,7 @@
     </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    update from SYS_STRUCTURE_INFO set IS_DELETED=1
+    update  SYS_STRUCTURE_INFO set IS_DELETED=1
     where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
@@ -137,4 +137,12 @@
       DESCRIPTION = #{description,jdbcType=VARCHAR}
     where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
   </update>
+  
+  
+  <select id="select" resultMap="BaseResultMap">
+    select * from SYS_STRUCTURE_INFO 
+  </select>
+  <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+   select * from SYS_STRUCTURE_INFO where PARENT_ID = #{parentId}
+  </select>
 </mapper>

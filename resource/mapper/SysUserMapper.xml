@@ -27,11 +27,21 @@
      update SYS_USER set IS_ENABLED=1
       where USER_ID=#{userId,jdbcType=DECIMAL}
    </update>
-  <!-- 查询所有用户 -->
+  <!-- 查询所有用户or 根据条件查询用户 -->
   <select id="selectList" resultMap="BaseResultMap">
   select
   <include refid="Base_Column_List" />
-  from SYS_USER  where IS_DELETED=0 order by USER_ID
+  from SYS_USER  <!-- where IS_DELETED=0  -->
+  <where>
+  <if test="userId!=null">
+     USER_ID LIKE '%${userId}%'
+  </if>
+     <if test="isEnabled!=null">
+      and IS_ENABLED =#{isEnabled}
+     </if>
+       and IS_DELETED =0
+  </where>
+  order by USER_ID
   </select>
   <!-- 根据用户名查询用户 -->
   <select id="getSysUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">

@@ -1,5 +1,6 @@
 package com.ffcs.sys.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ffcs.sys.dao.SysStructureInfoMapper;
+import com.ffcs.sys.entity.JsonNode;
 import com.ffcs.sys.entity.SysStructureInfo;
 import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.service.SysStructureInfoService;
+import com.ffcs.utils.JsonUtil;
 import com.github.pagehelper.PageInfo;
 @Service
 public class SysStructureInfoServiceImpl implements SysStructureInfoService {
@@ -70,8 +73,15 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 		return null;
 	}
 
-	
+	@Override
+	public  List<JsonNode> select() {
+		
+		   List<SysStructureInfo> list = sysStructureInfoMapper.select();
+		  List<JsonNode> listJson = JsonUtil.conversionJson(list);
+		return listJson;
+	}
 
+	
 
 	
 }

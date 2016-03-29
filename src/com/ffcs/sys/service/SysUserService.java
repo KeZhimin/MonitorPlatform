@@ -1,7 +1,5 @@
 package com.ffcs.sys.service;
 
-import java.util.Map;
-
 import com.ffcs.sys.entity.SysUser;
 import com.github.pagehelper.PageInfo;
 
@@ -24,7 +22,7 @@ public interface SysUserService {
 	
 	SysUser selectByUserId(Integer primaryKey);
 	
-    PageInfo<SysUser> getUserList(PageInfo<SysUser> pageInfo,Map<String,Object> params);
+    PageInfo<SysUser> getUserList(PageInfo<SysUser> pageInfo,SysUser user);
     
 
    

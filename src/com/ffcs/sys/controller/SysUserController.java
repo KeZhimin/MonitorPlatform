@@ -135,12 +135,23 @@ public class SysUserController {
 	 * @return
 	 */
 	@RequestMapping("/user")
-	public String selectUserList(Map<String ,Object> userMap,PageInfo<SysUser> pageInfo){
-		Map<String,Object> params = new HashMap<String,Object>();
-		 pageInfo = sysUserService.getUserList(pageInfo,params);
+	public String selectUserList(Map<String ,Object> userMap,PageInfo<SysUser> pageInfo,SysUser user){
+		//Map<String,Object> params = new HashMap<String,Object>();
+		System.out.println("user:::"+user.getUserId()+"::"+user.getIsDeleted());
+		 pageInfo = sysUserService.getUserList(pageInfo,user);
 		 userMap.put("page",pageInfo);
+		
 		return "sys/user/user";
 	}
+	/*@RequestMapping("getUser")
+	@ResponseBody
+	public PageInfo<SysUser> getUser(PageInfo<SysUser> pageInfo,SysUser user){
+		Map<String,Object> params = new HashMap<String,Object>();
+		 pageInfo = sysUserService.getUserList(pageInfo,user);
+		
+		 
+		return  pageInfo;
+	}*/
 
 	
 }
