@@ -1,0 +1,76 @@
+<meta charset="UTF-8">
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".button-group > button").click(function(){
+		var target = $(this).attr('target');
+		$.ajax({
+			url: full_path + target,
+			type: 'get',
+			dataType: 'html',
+			success: function(data){
+				$("#content").empty();
+				$("#content").append(data);
+			}
+		});
+	});
+});
+</script>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8">
+			<form class="form-inline">
+				<fieldset>
+					<legend>查询条件</legend>
+					<div class="form-group" style="margin: 5px 20px 5px 5px;">
+						<label>群组名&nbsp;</label><input type="text" class="form-control">
+					</div>
+					<div class="form-group" style="margin: 5px 0 5px 0;">
+						<label>是否激活&nbsp;</label> <select class="form-control">
+							<option>是</option>
+							<option>否</option>
+						</select>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="col-md-12" style="margin: 15px 0;">
+			<button class="button button-small">新增群组</button>
+			<button class="button button-small">编辑群组</button>
+			<button class="button button-small">激活群组</button>
+			<button class="button button-small">注销群组</button>
+			<button class="button button-small">删除群组</button>
+		</div>
+		<div class="col-md-6">
+			<table class="table table-bordered">
+				<thead>
+						<th><input type="checkbox"></th>
+						<th>用户组</th>
+						<th>是否激活</th>
+						<th>最后修改时间</th>
+					</tr>
+				</thead>
+				<tbody>
+				<#if page?? && page.list?size gt 0>
+				<#list page.list as item>
+					<tr>
+						<td><input type="checkbox"></td>
+						<td>${item.groupName}</td>
+						<td>${item.isEnabled}</td>
+						<td>2016-03-11 15:55:55</td>
+					</tr>
+					</#list>
+					</#if>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-md-12">
+			<div class="button-group">
+				<button class="button button-square" target="sys/group/group.htm?pageSize=2&pageNum=${page.firstPage}">&laquo;</button>
+				<#list page.navigatepageNums as item>
+				<button class="button button-square" target="sys/group/group.htm?pageSize=2&pageNum=${item}">${item}</button>
+				</#list>
+				<button class="button button-square" target="sys/group/group.htm?pageSize=2&pageNum=${page.lastPage}">&raquo;</button>
+			</div>
+		</div>
+	</div>
+</div>
