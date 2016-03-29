@@ -24,4 +24,5 @@ public interface SysStructureInfoService {
     int updateByPrimaryKey(SysStructureInfo entity);
 
     List<JsonNode> select();
+    List<JsonNode> selectByGroupId(Integer groupId);
 }

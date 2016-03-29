@@ -25,5 +25,5 @@ public interface SysStructureInfoMapper {
 
 	List<SysStructureInfo> select();
 
-	List<SysStructureInfo> selectByParentId(Integer parentId);
+	List<SysStructureInfo> selectByGroupId(Integer groupId);
 }

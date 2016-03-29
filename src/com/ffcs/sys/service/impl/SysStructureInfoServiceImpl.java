@@ -1,6 +1,5 @@
 package com.ffcs.sys.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -69,15 +68,26 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 
 	@Override
 	public PageInfo<SysStructureInfo> selectList(PageInfo<SysStructureInfo> pageInfo, Map<String, Object> params) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * 查询出所有的菜单
+	 */
 	@Override
 	public  List<JsonNode> select() {
 		
 		   List<SysStructureInfo> list = sysStructureInfoMapper.select();
 		  List<JsonNode> listJson = JsonUtil.conversionJson(list);
+		return listJson;
+	}
+    /**
+     * 根据groupId 查询出菜单
+     */
+	@Override
+	public List<JsonNode> selectByGroupId(Integer groupId) {
+		   List<SysStructureInfo> list = sysStructureInfoMapper.selectByGroupId(groupId);
+			  List<JsonNode> listJson = JsonUtil.conversionJson(list);
 		return listJson;
 	}
 

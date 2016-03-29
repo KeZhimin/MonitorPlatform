@@ -143,6 +143,8 @@
     select * from SYS_STRUCTURE_INFO 
   </select>
   <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-   select * from SYS_STRUCTURE_INFO where PARENT_ID = #{parentId}
+   select * from  SYS_STRUCTURE_INFO st,SYS_GROUP_STRUCTURE_ACL gst 
+   where st.STRUCTURE_ID=gst.STRUCTURE_ID and
+   GST."GROUP_ID" =#{value};
   </select>
 </mapper>
