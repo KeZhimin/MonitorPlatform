@@ -78,7 +78,8 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 	public  List<JsonNode> select() {
 		
 		   List<SysStructureInfo> list = sysStructureInfoMapper.select();
-		  List<JsonNode> listJson = JsonUtil.conversionJson(list);
+		 List<JsonNode> listJson = JsonUtil.conversionJson(list);
+		  // List<JsonNode> listJson = JsonUtil.conversionJson2(list);
 		return listJson;
 	}
     /**

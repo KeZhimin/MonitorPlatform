@@ -15,7 +15,7 @@ public interface SysGroupService  {
     int insert(SysGroup entity);
 
     int insertSelective(SysGroup group, Integer[] sttId, Integer userId, Integer[] orgId);
-    PageInfo<SysGroup> selectList(PageInfo<SysGroup> pageInfo,Map<String,Object> params);
+    PageInfo<SysGroup> selectList(PageInfo<SysGroup> pageInfo,SysGroup group);
     SysGroup selectByPrimaryKey(Integer primaryKey);
 
     int updateByPrimaryKeySelective(SysGroup entity);

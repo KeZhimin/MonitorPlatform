@@ -1,7 +1,31 @@
 
 <meta charset="UTF-8">
+<script type="text/javascript" src="<@full_path path='js/bootstrap-treeview.js' />"></script>
 <script type="text/javascript" src="<@full_path path='js/sys/group.js' />"></script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".btn-group > button").click(function(){
+		var target = $(this).attr('target');
+		if(target==undefined){
+		return false;
+		}
+		var groupName = $("#formGroup input[name='groupName']").val();
+	    var isEnabled = $("#formGroup select[name='isEnabled']").val();
+	    target =target+"&groupName="+groupName+"&isEnabled="+isEnabled;
+		$.ajax({
+			url: full_path + target,
+			type: 'get',
+			dataType: 'html',
+			success: function(data){
+				$("#content").empty();
+				$("#content").append(data);
+		    $("#formGroup input[name='groupName']").val(groupName);
+            $("#formGroup select[name='isEnabled']").val(isEnabled);
+			}
+		});
+	});
+});
+</script>
 <div class="container-fluid">
     <div class="row" style="margin-bottom: 100px;">
         <div class="col-lg-10 col-lg-offset-1">
@@ -15,20 +39,21 @@
                 </div>
             </div>
 
-            <form class="form-inline" style="position: absolute;top: 0;right: 15px;">
+            <form id="formGroup" class="form-inline" style="position: absolute;top: 0;right: 15px;">
                 <div class="form-group" style="margin-right: 10px;">
-                    <label>编号</label>
-                    <input type="text" class="form-control">
+                    <label>群组名</label>
+                    <input type="text" name="groupName" class="form-control" value="">
                 </div>
                 <div class="form-group" style="margin-right: 10px;">
-                    <label>是否删除</label>
-                    <select class="form-control">
-                        <option>是</option>
-                        <option>否</option>
+                    <label>是否激活</label>
+                    <select class="form-control" name="isEnabled">
+                         <option  value="">--</option>
+                        <option id="0" value="0">是</option>
+                        <option id="1" value="1">否</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="button" class="btn btn-default" value="查找">
+                    <input type="button" onclick="selectGroup();" class="btn btn-default" value="查找">
                 </div>
             </form>
 
@@ -44,49 +69,33 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <#if page.list?? && page.list?size gt 0>
+                 <#list page.list as item>
+                 <tr>
                     <td><input type="checkbox"></td>
-                    <td>10001</td>
-                    <td>福建管理员</td>
-                    <td>3</td>
-                    <td>2016-03-15 13:13:12</td>
-                    <td>否</td>
+                    <td>${item.groupId}</td>
+                    <td>${item.groupName}</td>
+                    <td>${item.grade}</td>
+                    <#if item.ctime??>
+						<td>${item.ctime?string("yyyy-MM-dd HH:mm:ss")}</td>
+						<#else><td>空</td>
+						</#if>
+                     <#if item.isEnabled == 0>
+						  <td id="0">是</td>
+						  <#else><td id="1">否</td>
+						  </#if>
                 </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>10001</td>
-                    <td>福建管理员</td>
-                    <td>3</td>
-                    <td>2016-03-15 13:13:12</td>
-                    <td>否</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>10001</td>
-                    <td>福建管理员</td>
-                    <td>3</td>
-                    <td>2016-03-15 13:13:12</td>
-                    <td>否</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>10001</td>
-                    <td>福建管理员</td>
-                    <td>3</td>
-                    <td>2016-03-15 13:13:12</td>
-                    <td>否</td>
-                </tr>
+                </#list>
+                </#if>
                 </tbody>
             </table>
             <div style="position: absolute;right: 15px;">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">&laquo;</button>
-                    <button type="button" class="btn btn-default">1</button>
-                    <button type="button" class="btn btn-default">2</button>
-                    <button type="button" class="btn btn-default">3</button>
-                    <button type="button" class="btn btn-default">4</button>
-                    <button type="button" class="btn btn-default">5</button>
-                    <button type="button" class="btn btn-default">&raquo;;</button>
+                    <button type="button" class="btn btn-default" target="sys/group/group.htm?pageSize=2&pageNum=${page.firstPage}">&laquo;</button>
+                   <#list page.navigatepageNums as item>
+				<button ype="button" class="btn btn-default" target="sys/group/group.htm?pageSize=2&pageNum=${item}">${item}</button>
+				</#list>
+                    <button type="button" class="btn btn-default" target="sys/group/group.htm?pageSize=2&pageNum=${page.lastPage}">&raquo;</button>
                 </div>
             </div>
         </div>

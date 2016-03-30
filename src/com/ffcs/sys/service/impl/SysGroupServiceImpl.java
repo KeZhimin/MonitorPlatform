@@ -74,13 +74,15 @@ public class SysGroupServiceImpl implements SysGroupService{
 	}
 
 	@Override
-	public PageInfo<SysGroup> selectList(PageInfo<SysGroup> pageInfo, Map<String, Object> params) {
+	public PageInfo<SysGroup> selectList(PageInfo<SysGroup> pageInfo,SysGroup group) {
 		 
-		if( pageInfo.getPageNum()<0){
-			  pageInfo.setPageNum(0);
-		 }
 		PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
-		pageInfo = new PageInfo<>(sysGroupMapper.selectList());
+		if(group==null){
+			pageInfo = new PageInfo<>(sysGroupMapper.selectList(null));
+		}else{
+			pageInfo = new PageInfo<>(sysGroupMapper.selectList(group));
+		}
+		
 		
 		return pageInfo;
 	}

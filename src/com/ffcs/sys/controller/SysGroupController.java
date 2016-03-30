@@ -19,11 +19,17 @@ public class SysGroupController {
 
 	@Autowired
 	private SysGroupService sysGroupService;
-	
+	/**
+	 * 
+	 * @param groupMap
+	 * @param pageInfo
+	 * @param group 条件查询
+	 * @return
+	 */
 	@RequestMapping("/group")
-	public String selectGroupList(Map<String ,Object> groupMap,PageInfo<SysGroup> pageInfo){
-		Map<String,Object> params = new HashMap<String, Object>();
-			pageInfo = sysGroupService.selectList(pageInfo,params);
+	public String selectGroupList(Map<String ,Object> groupMap,PageInfo<SysGroup> pageInfo,SysGroup group){
+		
+			pageInfo = sysGroupService.selectList(pageInfo,group);
 		     groupMap.put("page", pageInfo);
             return "sys/group/group";
 	}
@@ -36,8 +42,7 @@ public class SysGroupController {
 	@RequestMapping("/get")
 	@ResponseBody
 	public List<SysGroup> getGroup(Map<String ,Object> groupMap,PageInfo<SysGroup> pageInfo){
-		Map<String,Object> params = new HashMap<String,Object>();
-		pageInfo = sysGroupService.selectList(pageInfo,params);
+		pageInfo = sysGroupService.selectList(pageInfo,null);
 		
 		return pageInfo.getList();
 	}

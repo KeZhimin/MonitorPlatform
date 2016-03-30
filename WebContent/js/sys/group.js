@@ -1,7 +1,7 @@
 /**
  * Created by 智敏 on 2016/3/23.
  */
-
+var allData=[];
 var json_of_structure = [{structureId: 1001,structureName:'用户管理'},{structureId: 1002,structureName:'菜单管理'},{structureId: 1003,structureName:'角色管理'}];
 var json_of_user = [{userId:10001,userName:'小嶋阳菜'},{userId: 10002,userName: '柏木由纪'},{userId:10003,userName:'渡边麻友'}];
 var json_of_service = [{serviceId:101,serviceName:'马尾机房'},{serviceId:102,serviceName:'永泰机房'},{serviceId:103,serviceName:'新店机房'}];
@@ -102,41 +102,7 @@ var checkData = [{
 
 
 
-var defaultData = [
-    {
-        text: 'Parent 1',
-        nodes: [
-            {
-                text: 'Child 1-1'
-            },
-            {
-                text: 'Child 1-2'
-            }
-        ]
-    },
-    {
-        text: 'Parent 2',
-        nodes: [
-            {text: 'Child 2-1'},
-            {text: 'Child 2-2'}
-        ]
-    },
-    {
-        text: 'Parent 3',
-        nodes: [
-            {text: 'Child 3-1'},
-            {text: 'Child 3-2'},
-            {text: 'Child 3-3'}
-        ]
-    },
-    {
-        text: 'Parent 4',
-        nodes: [
-            {text: 'Child 4-1'},
-            {text: 'Child 4-2'}
-        ]
-    }
-];
+
 
 /**
  * 节点检测，字节点选中，父节点也要选中
@@ -157,16 +123,20 @@ function VerifyTreeNode(){
 $(function () {
     //获取所有菜单
     $.ajax({
-        url: full_path + "group/group.json",
+        url: full_path + "sys/structure/getStructure.json",
         type: 'get',
         dataType: 'json',
+        async:false,
         success: function(data){
-            defaultData = data;
+        	
+        	allData = data;
+        	 
         }
     });
-
+    console.log(allData);
+   
     $('#structure_tree').treeview({
-        data: defaultData,
+        data: allData,
         showIcon: false,
         showCheckbox: true,
         onNodeChecked: function(event, node) {//监听节点被check
@@ -251,4 +221,24 @@ function EditGroup(){
             }
         });
     }
+}
+
+/**
+ * 根据条件查询用户组
+ */
+function selectGroup(){
+	var groupName = $("#formGroup input[name='groupName']").val();
+	var isEnabled = $("#formGroup select[name='isEnabled']").val();
+	  $.ajax({
+	        url: full_path+"sys/group/group.htm?pageSize=2&pageNum=1",
+	        type:'post',
+	        data: $("#formGroup").serialize(),
+	        success: function(data){
+	        	console.log(data);
+	        	$("#content").empty();
+	            $("#content").append(data);
+	            $("#formGroup input[name='groupName']").val(groupName);
+	            $("#formGroup select[name='isEnabled']").val(isEnabled);
+	        }
+	    });
 }

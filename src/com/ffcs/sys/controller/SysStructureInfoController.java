@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ffcs.sys.entity.JsonNode;
 import com.ffcs.sys.entity.SysStructureInfo;
 import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.service.SysStructureInfoService;
@@ -51,6 +53,17 @@ public class SysStructureInfoController {
     	sysStructureInfoService.insertSelective(structureInfo);
     	return "sys/index";
     }
+	
+	@RequestMapping("/getStructure")
+	@ResponseBody
+	public List<JsonNode> getStructure( Map<String, Object> map){
+		List<JsonNode> selectList = sysStructureInfoService.select();
+           
+	
+		return selectList;
+	}
+	
+	
 	@RequestMapping("/structure")
 	public String structure( Map<String, Object> map){
 		List<SysStructureInfo> selectList = sysStructureInfoService.selectList(sysUser);

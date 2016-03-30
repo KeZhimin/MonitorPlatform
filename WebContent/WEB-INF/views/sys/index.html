@@ -11,34 +11,6 @@
     </script>
 </head>
 <body>
-<!--  
-<nav class="navbar navbar-default">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="#">上网助手服务监控平台</a>
-    </div>
-    <ul class="nav navbar-nav">
-        <li><a href="">监控信息</a></li>
-        <li><a href="">接口测试</a></li>
-        <li><a href="">参数配置</a></li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">系统管理<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="">用户管理</a></li>
-                <li><a href="">角色管理</a></li>
-                <li><a href="">菜单管理</a></li>
-            </ul>
-        </li>
-        <li style="position: absolute;right: 0;" class="dropdown"><a href="" data-toggle="dropdown">账户管理<span class="caret"></span></a>
-        <ul class="dropdown-menu dropdown-menu-right">
-            <li><a href="#">修改密码</a></li>
-            <li><a href="#">退出</a></li>
-        </ul>
-        </li>
-    </ul>
-</nav>
--->
-
-
 <nav class="navbar navbar-default">
     <div class="navbar-header">
         <a class="navbar-brand" href="#">上网助手服务监控平台</a>
@@ -56,14 +28,14 @@
             </#if>
           </#list>
         <#if flag>
-        <li><a class="nav-href" href="javascript:void(0);" target="${item.url}">${item.structureName}</a></li>
+        <li><a class="nav-href" href="javascript:void(0);" onclick="return false;" target="${item.url}">${item.structureName}</a></li>
         <#else>
         <li class="dropdown">
            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">${item.structureName}<span class="caret"></span></a>
            <ul class="dropdown-menu">
           <#list structureList as temp>
             <#if temp.parentId == item.structureId>
-            <li><a class="nav-href" href="javascript:void(0);" target="${temp.url}">${temp.structureName}</a></li>
+            <li><a class="nav-href" href="javascript:void(0);" onclick="return false;" target="${temp.url}">${temp.structureName}</a></li>
             </#if>
           </#list>
           </ul>

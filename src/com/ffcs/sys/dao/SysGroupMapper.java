@@ -19,7 +19,7 @@ public interface SysGroupMapper {
 	   //
 	   List<SysGroup> selectByUserId(Integer userId);
 	   //
-	   List<SysGroup> selectList();
+	   List<SysGroup> selectList(SysGroup group);
 	   //
 	   SysGroup selectByPrimaryKey(Integer primaryKey);
 	
