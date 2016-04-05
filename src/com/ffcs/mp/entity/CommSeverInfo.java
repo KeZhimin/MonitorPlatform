@@ -15,12 +15,6 @@ public class CommSeverInfo {
 
     private String innerIp;
 
-    private Long memSize;
-
-    private Long diskSize;
-
-    private Long netCardFlux;
-
     private Integer monitDelay;
 
     private Short povCode;
@@ -79,30 +73,6 @@ public class CommSeverInfo {
 
     public void setInnerIp(String innerIp) {
         this.innerIp = innerIp;
-    }
-
-    public Long getMemSize() {
-        return memSize;
-    }
-
-    public void setMemSize(Long memSize) {
-        this.memSize = memSize;
-    }
-
-    public Long getDiskSize() {
-        return diskSize;
-    }
-
-    public void setDiskSize(Long diskSize) {
-        this.diskSize = diskSize;
-    }
-
-    public Long getNetCardFlux() {
-        return netCardFlux;
-    }
-
-    public void setNetCardFlux(Long netCardFlux) {
-        this.netCardFlux = netCardFlux;
     }
 
     public Integer getMonitDelay() {

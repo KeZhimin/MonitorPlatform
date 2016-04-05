@@ -1,6 +1,6 @@
 package com.ffcs.mp.entity;
 
-public class CommSeverOrgInfo {
+public class CommOrgInfo {
     private Integer orgId;
 
     private Integer comOrgId;
