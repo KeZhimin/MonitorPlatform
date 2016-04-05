@@ -8,9 +8,6 @@
     <result column="SERV_TITLE" property="servTitle" jdbcType="VARCHAR" />
     <result column="OUTER_IP" property="outerIp" jdbcType="VARCHAR" />
     <result column="INNER_IP" property="innerIp" jdbcType="VARCHAR" />
-    <result column="MEM_SIZE" property="memSize" jdbcType="DECIMAL" />
-    <result column="DISK_SIZE" property="diskSize" jdbcType="DECIMAL" />
-    <result column="NET_CARD_FLUX" property="netCardFlux" jdbcType="DECIMAL" />
     <result column="MONIT_DELAY" property="monitDelay" jdbcType="DECIMAL" />
     <result column="POV_CODE" property="povCode" jdbcType="DECIMAL" />
     <result column="CITY_CODE" property="cityCode" jdbcType="DECIMAL" />
@@ -19,8 +16,8 @@
     <result column="UPDATE_AUTOR" property="updateAutor" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    SERV_ID, ORG_ID, IS_ENABLE, SERV_TITLE, OUTER_IP, INNER_IP, MEM_SIZE, DISK_SIZE, 
-    NET_CARD_FLUX, MONIT_DELAY, POV_CODE, CITY_CODE, CTIME, UTIME, UPDATE_AUTOR
+    SERV_ID, ORG_ID, IS_ENABLE, SERV_TITLE, OUTER_IP, INNER_IP, MONIT_DELAY, POV_CODE, 
+    CITY_CODE, CTIME, UTIME, UPDATE_AUTOR
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -35,13 +32,11 @@
   <insert id="insert" parameterType="com.ffcs.mp.entity.CommSeverInfo" >
     insert into COMM_SEVER_INFO (SERV_ID, ORG_ID, IS_ENABLE, 
       SERV_TITLE, OUTER_IP, INNER_IP, 
-      MEM_SIZE, DISK_SIZE, NET_CARD_FLUX, 
       MONIT_DELAY, POV_CODE, CITY_CODE, 
       CTIME, UTIME, UPDATE_AUTOR
       )
     values (#{servId,jdbcType=DECIMAL}, #{orgId,jdbcType=DECIMAL}, #{isEnable,jdbcType=DECIMAL}, 
       #{servTitle,jdbcType=VARCHAR}, #{outerIp,jdbcType=VARCHAR}, #{innerIp,jdbcType=VARCHAR}, 
-      #{memSize,jdbcType=DECIMAL}, #{diskSize,jdbcType=DECIMAL}, #{netCardFlux,jdbcType=DECIMAL}, 
       #{monitDelay,jdbcType=DECIMAL}, #{povCode,jdbcType=DECIMAL}, #{cityCode,jdbcType=DECIMAL}, 
       #{ctime,jdbcType=TIMESTAMP}, #{utime,jdbcType=TIMESTAMP}, #{updateAutor,jdbcType=DECIMAL}
       )
@@ -66,15 +61,6 @@
       </if>
       <if test="innerIp != null" >
         INNER_IP,
-      </if>
-      <if test="memSize != null" >
-        MEM_SIZE,
-      </if>
-      <if test="diskSize != null" >
-        DISK_SIZE,
-      </if>
-      <if test="netCardFlux != null" >
-        NET_CARD_FLUX,
       </if>
       <if test="monitDelay != null" >
         MONIT_DELAY,
@@ -114,15 +100,6 @@
       <if test="innerIp != null" >
         #{innerIp,jdbcType=VARCHAR},
       </if>
-      <if test="memSize != null" >
-        #{memSize,jdbcType=DECIMAL},
-      </if>
-      <if test="diskSize != null" >
-        #{diskSize,jdbcType=DECIMAL},
-      </if>
-      <if test="netCardFlux != null" >
-        #{netCardFlux,jdbcType=DECIMAL},
-      </if>
       <if test="monitDelay != null" >
         #{monitDelay,jdbcType=DECIMAL},
       </if>
@@ -161,15 +138,6 @@
       <if test="innerIp != null" >
         INNER_IP = #{innerIp,jdbcType=VARCHAR},
       </if>
-      <if test="memSize != null" >
-        MEM_SIZE = #{memSize,jdbcType=DECIMAL},
-      </if>
-      <if test="diskSize != null" >
-        DISK_SIZE = #{diskSize,jdbcType=DECIMAL},
-      </if>
-      <if test="netCardFlux != null" >
-        NET_CARD_FLUX = #{netCardFlux,jdbcType=DECIMAL},
-      </if>
       <if test="monitDelay != null" >
         MONIT_DELAY = #{monitDelay,jdbcType=DECIMAL},
       </if>
@@ -198,9 +166,6 @@
       SERV_TITLE = #{servTitle,jdbcType=VARCHAR},
       OUTER_IP = #{outerIp,jdbcType=VARCHAR},
       INNER_IP = #{innerIp,jdbcType=VARCHAR},
-      MEM_SIZE = #{memSize,jdbcType=DECIMAL},
-      DISK_SIZE = #{diskSize,jdbcType=DECIMAL},
-      NET_CARD_FLUX = #{netCardFlux,jdbcType=DECIMAL},
       MONIT_DELAY = #{monitDelay,jdbcType=DECIMAL},
       POV_CODE = #{povCode,jdbcType=DECIMAL},
       CITY_CODE = #{cityCode,jdbcType=DECIMAL},
