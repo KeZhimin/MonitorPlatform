@@ -1,5 +1,7 @@
 package com.ffcs.sys.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +14,7 @@ import com.ffcs.sys.entity.SysStructureInfo;
 import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.service.SysStructureInfoService;
 import com.ffcs.utils.JsonUtil;
+import com.ffcs.utils.StrUtil;
 import com.github.pagehelper.PageInfo;
 @Service
 public class SysStructureInfoServiceImpl implements SysStructureInfoService {
@@ -33,7 +36,6 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 
 	@Override
 	public int insertSelective(SysStructureInfo entity) {
-		
 		return sysStructureInfoMapper.insertSelective(entity);
 	}
 
@@ -75,9 +77,9 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 	 * 查询出所有的菜单
 	 */
 	@Override
-	public  List<JsonNode> select() {
+	public  List<JsonNode> select(SysStructureInfo sysStructureInfo) {
 		
-		   List<SysStructureInfo> list = sysStructureInfoMapper.select();
+		   List<SysStructureInfo> list = sysStructureInfoMapper.select(sysStructureInfo);
 		 List<JsonNode> listJson = JsonUtil.conversionJson(list);
 		  // List<JsonNode> listJson = JsonUtil.conversionJson2(list);
 		return listJson;
@@ -90,6 +92,21 @@ public class SysStructureInfoServiceImpl implements SysStructureInfoService {
 		   List<SysStructureInfo> list = sysStructureInfoMapper.selectByGroupId(groupId);
 			  List<JsonNode> listJson = JsonUtil.conversionJson(list);
 		return listJson;
+	}
+
+	@Override
+	public List<SysStructureInfo> getStructureByInfo(SysStructureInfo structureInfo) {
+		List<SysStructureInfo> list = sysStructureInfoMapper.select(structureInfo);
+		System.out.println(list.get(0).toString());
+		return list;
+	}
+
+	@Override
+	public Boolean deleteBatch(String ids) {
+		String[] str = StrUtil.spilt(";", ids);
+		List<String> list = Arrays.asList(str);
+		sysStructureInfoMapper.deleteBatch(list);
+		return true;
 	}
 
 	

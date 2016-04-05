@@ -19,5 +19,9 @@ public interface SysUserGroupAssocMapper{
     int updateByPrimaryKeySelective(SysUserGroupAssoc entity);
 
     int updateByPrimaryKey(SysUserGroupAssoc entity);
+    
+    int add(List<SysUserGroupAssoc> list);
+    
+    void deleteByGroupId(Integer groupId);
 	
 }

@@ -1,5 +1,6 @@
 package com.ffcs.sys.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ import com.ffcs.sys.entity.SysStructureInfo;
 import com.ffcs.sys.entity.SysUser;
 import com.ffcs.sys.service.SysStructureInfoService;
 
+import net.sf.json.JSONObject;
+
 @Controller
 
 @RequestMapping("/sys/structure")
@@ -23,6 +26,7 @@ public class SysStructureInfoController {
 	@Autowired
 	private SysStructureInfoService sysStructureInfoService;
     private SysUser sysUser;
+    
 	@RequestMapping("/index")
 	public String getStructure(HttpServletRequest request, Map<String, Object> map) {
 		sysUser = new SysUser();
@@ -36,6 +40,7 @@ public class SysStructureInfoController {
 	}
 	
 
+	@ResponseBody
 	@RequestMapping("/update")
 	public String updateStructure(SysStructureInfo structureInfo){
 		
@@ -43,26 +48,49 @@ public class SysStructureInfoController {
 		
 		return "";
 	}
+	
 	@RequestMapping("/delete")
 	public String deleteStructure(Integer structureId){
 		sysStructureInfoService.deleteByPrimaryKey(structureId);
 		return "";
 	}
+	
+	@ResponseBody
 	@RequestMapping("/add")
     public String addStructure(SysStructureInfo structureInfo){
+		structureInfo.setIsDeleted(Long.valueOf(0l));
+		structureInfo.setIsLeaf(Long.valueOf(0l));
+		System.out.println(structureInfo.toString());
     	sysStructureInfoService.insertSelective(structureInfo);
-    	return "sys/index";
+    	JSONObject jsonObject = new JSONObject();
+    	jsonObject.put("retCode", '0');
+    	jsonObject.put("retMes", "成功");
+    	return jsonObject.toString();
     }
 	
+	/**
+	 * 
+	 * 获取树形菜单数据，返回格式为JSONNODE
+	 * @param sysStructureInfo
+	 * @return
+	 */
 	@RequestMapping("/getStructure")
 	@ResponseBody
-	public List<JsonNode> getStructure( Map<String, Object> map){
-		List<JsonNode> selectList = sysStructureInfoService.select();
-           
-	
+	public List<JsonNode> getStructure(SysStructureInfo sysStructureInfo){
+		List<JsonNode> selectList = sysStructureInfoService.select(sysStructureInfo);
 		return selectList;
 	}
 	
+	/**
+	 * 获取菜单
+	 * @param sysStructureInfo
+	 * @return
+	 */
+	@RequestMapping("/getStructureInfo")
+	@ResponseBody
+	public List<SysStructureInfo> getStructureByInfo(SysStructureInfo sysStructureInfo){
+		return sysStructureInfoService.getStructureByInfo(sysStructureInfo);
+	}
 	
 	@RequestMapping("/structure")
 	public String structure( Map<String, Object> map){
@@ -73,4 +101,15 @@ public class SysStructureInfoController {
 	}
 	
 
+	@RequestMapping("deletebatch")
+	@ResponseBody
+	public String deleteBatch(String ids){
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("retCode", '0');
+		jsonObject.put("retMes", "成功");
+		sysStructureInfoService.deleteBatch(ids);
+		return jsonObject.toString();
+	}
+	
+	
 }

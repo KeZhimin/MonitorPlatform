@@ -1,50 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ffcs.sys.dao.SysUserGroupAssocMapper" >
-  <resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysUserGroupAssoc" >
-    <result column="GROUPID" property="groupid" jdbcType="DECIMAL" />
-    <result column="USERID" property="userid" jdbcType="DECIMAL" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc">
-    delete from  SYS_USER_GROUP_ASSOC
-    where USERID = #{userid,jdbcType=DECIMAL}    
-  </delete>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc">
-    update SYS_USER_GROUP_ASSOC
-    <set>
-       <if test="groupid != null" >
-        GROUPID = #{groupid,jdbcType=DECIMAL},
-      </if>
-    </set>
-    where USERID = #{userid,jdbcType=DECIMAL}
-  </update>
-  <insert id="insert" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc" >
-    insert into SYS_USER_GROUP_ASSOC (GROUPID, USERID)
-    values (#{groupid,jdbcType=DECIMAL}, #{userid,jdbcType=DECIMAL})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc" >
-    insert into SYS_USER_GROUP_ASSOC
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="groupid != null" >
-        GROUPID,
-      </if>
-      <if test="userid != null" >
-        USERID,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="groupid != null" >
-        #{groupid,jdbcType=DECIMAL},
-      </if>
-      <if test="userid != null" >
-        #{userid,jdbcType=DECIMAL},
-      </if>
-    </trim>
-  </insert>
-  <select id="getGroupByUserId" parameterType="com.ffcs.sys.entity.SysUser" resultMap="BaseResultMap"> 
-   select GROUPID from SYS_USER_GROUP_ASSOC 
-   <where>
-    <if test="userId!=null"> and USERID = #{userId}</if>
-   </where>
-  </select>
+<mapper namespace="com.ffcs.sys.dao.SysUserGroupAssocMapper">
+	<resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysUserGroupAssoc">
+		<result column="GROUPID" property="groupid" jdbcType="DECIMAL" />
+		<result column="USERID" property="userid" jdbcType="DECIMAL" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc">
+		delete from SYS_USER_GROUP_ASSOC
+		where USERID = #{userid,jdbcType=DECIMAL}
+	</delete>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc">
+		update SYS_USER_GROUP_ASSOC
+		<set>
+			<if test="groupid != null">
+				GROUPID = #{groupid,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where USERID = #{userid,jdbcType=DECIMAL}
+	</update>
+	<insert id="insert" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc">
+		insert into SYS_USER_GROUP_ASSOC (GROUPID, USERID)
+		values (#{groupid,jdbcType=DECIMAL}, #{userid,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc">
+		insert into SYS_USER_GROUP_ASSOC
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="groupid != null">
+				GROUPID,
+			</if>
+			<if test="userid != null">
+				USERID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="groupid != null">
+				#{groupid,jdbcType=DECIMAL},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<select id="getGroupByUserId" parameterType="com.ffcs.sys.entity.SysUser"
+		resultMap="BaseResultMap">
+		select GROUPID from SYS_USER_GROUP_ASSOC
+		<where>
+			<if test="userId!=null"> and USERID = #{userId}</if>
+		</where>
+	</select>
+
+
+	<insert id="add" parameterType="java.util.List">
+		insert into SYS_USER_GROUP_ASSOC(GROUPID,USERID)
+		<foreach collection="list" item="item" index="index"
+			separator="union">
+			select #{item.groupid},#{item.userid} from dual
+		</foreach>
+	</insert>
+	
+	<delete id="deleteByGroupId" parameterType="java.lang.Integer">
+	delete SYS_USER_GROUP_ASSOC where GROUPID = #{groupId}
+	</delete>
+	
 </mapper>

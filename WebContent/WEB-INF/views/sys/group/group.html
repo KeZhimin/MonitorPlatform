@@ -6,12 +6,14 @@
 $(document).ready(function(){
 	$(".btn-group > button").click(function(){
 		var target = $(this).attr('target');
+		
 		if(target==undefined){
 		return false;
 		}
 		var groupName = $("#formGroup input[name='groupName']").val();
 	    var isEnabled = $("#formGroup select[name='isEnabled']").val();
 	    target =target+"&groupName="+groupName+"&isEnabled="+isEnabled;
+	    currentURL = target;
 		$.ajax({
 			url: full_path + target,
 			type: 'get',
@@ -34,20 +36,20 @@ $(document).ready(function(){
                     <button type="button" class="btn btn-default" onclick="AddGroup();">新增
                     </button>
                     <button type="button" class="btn btn-default" onclick="EditGroup();">编辑</button>
-                    <button type="button" class="btn btn-default">激活</button>
-                    <button type="button" class="btn btn-default">删除</button>
+                    <button type="button" class="btn btn-default" onclick="EnabledBatch();">激活</button>
+                    <button type="button" class="btn btn-default" onclick="DeletedBatch();">删除</button>
                 </div>
             </div>
 
             <form id="formGroup" class="form-inline" style="position: absolute;top: 0;right: 15px;">
                 <div class="form-group" style="margin-right: 10px;">
                     <label>群组名</label>
-                    <input type="text" name="groupName" class="form-control" value="">
+                    <input type="text" name="groupName" class="form-control" placeholder="名字/编号">
                 </div>
                 <div class="form-group" style="margin-right: 10px;">
                     <label>是否激活</label>
                     <select class="form-control" name="isEnabled">
-                         <option  value="">--</option>
+                    <option  value="">--</option>
                         <option id="0" value="0">是</option>
                         <option id="1" value="1">否</option>
                     </select>
@@ -111,18 +113,21 @@ $(document).ready(function(){
         <div class="modal-content">
             <div class="modal-body">
                 <button class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button class="btn btn-default">保存</button>
+                <button class="btn btn-default" onclick="SaveGroup()">保存</button>
                 <form style="margin-top: 10px;" id="group_form">
                     <table class="table table-bordered mp-table" style="text-align: center">
                         <tbody>
                         <tr>
                             <td>群组名</td>
-                            <td><input type="text" class="form-control"></td>
+                            <td>
+                            <input type="hidden" class="form-control" name="groupId" id="group_id">
+                            <input type="text" class="form-control" name="groupName" id="group_name">
+                            </td>
                         <tr>
                             <td>是否激活</td>
-                            <td><select class="form-control">
-                                <option>是</option>
-                                <option>否</option>
+                            <td><select class="form-control" name="isEnabled" id="is_enabled">
+                                <option value="0">是</option>
+                                <option value="1">否</option>
                             </select></td>
                         </tr>
                         </tbody>
@@ -137,6 +142,7 @@ $(document).ready(function(){
 
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="structures" style="padding-top: 10px;">
+                                <input type="hidden" name="strIds" id="str_ids">
                                 <div id="structure_tree">
 
                                 </div>

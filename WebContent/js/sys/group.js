@@ -1,10 +1,55 @@
 /**
  * Created by 智敏 on 2016/3/23.
  */
-var allData=[];
-var json_of_structure = [{structureId: 1001,structureName:'用户管理'},{structureId: 1002,structureName:'菜单管理'},{structureId: 1003,structureName:'角色管理'}];
-var json_of_user = [{userId:10001,userName:'小嶋阳菜'},{userId: 10002,userName: '柏木由纪'},{userId:10003,userName:'渡边麻友'}];
-var json_of_service = [{serviceId:101,serviceName:'马尾机房'},{serviceId:102,serviceName:'永泰机房'},{serviceId:103,serviceName:'新店机房'}];
+var allData=[];//所有菜单
+var allUser = [];//当前角色对应的所有的用户
+var allService = [];//当前角色对应所有的服务
+
+/**
+ * 获取所有用户
+ */
+function GetAllUser(){
+	$.ajax({
+		url: full_path + 'sys/user/getuser.json',
+		type: 'get',
+		dataType: 'json',
+		async: false,
+		success: function(data){
+			allUser = data;
+		}
+	});
+}
+/**
+ * 获取管理菜单组
+ */
+function GetAllStructure(){
+    //获取所有菜单
+    $.ajax({
+        url: full_path + "sys/structure/getStructure.json",
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function(data){
+        	allData = data;
+        }
+    });
+}
+
+/**
+ * 获取所有服务
+ */
+function GetService(){
+	$.ajax({
+		url: full_path,
+		type: 'get',
+		dataType: 'json',
+		async: false,
+		succcess: function(data){
+			allService = data;
+		}
+	});
+}
+
 
 /**
  * 全选或全不选
@@ -31,9 +76,16 @@ function OpAllCheckBox(obj){
  * @constructor
  */
 function AddGroup() {
+	//设置form提交路径
+	$("#group_form").attr('target','sys/group/add.json');
+	//清空原来所有已选择的
+	$('#structure_tree').treeview('uncheckAll',{ silent: true });
+	//移除用户关联下的所有选项
     $("#user_table > tbody").remove();
-    AddNode('user_table', json_of_user, 'userId', 'userName');
-    AddNode('service_table', json_of_service, 'serviceId', 'serviceName');
+    //添加一个默认用户
+//    AddNode('user_table', allUser, 'userId', 'fullName');
+    //添加一个服务
+    AddNode('service_table', allService, 'serviceId', 'serviceName');
     $('#group_modal').modal('show');
 }
 
@@ -48,7 +100,7 @@ function AddGroup() {
  * @constructor
  */
 function AddNode(obj,json,id,name){
-    var node = "<tr><td><select class='form-control' name='" + name + "'>";
+    var node = "<tr><td><select class='form-control' name='" + id + "'>";
     var len = json.length;
     for(var i = 0;i<len;i++){
         node = node + "<option value='" + json[i][id] + "'>" + json[i][name] + "</option>";
@@ -62,7 +114,7 @@ function AddNode(obj,json,id,name){
  * @constructor
  */
 function AddUserNode(){
-    AddNode('user_table', json_of_user, 'userId', 'userName');
+    AddNode('user_table', allUser, 'userId', 'fullName');
 }
 
 /**
@@ -70,7 +122,7 @@ function AddUserNode(){
  * @constructor
  */
 function AddServiceNode(){
-    AddNode('service_table', json_of_service, 'serviceId', 'serviceName');
+    AddNode('service_table', allService, 'serviceId', 'serviceName');
 }
 
 /**
@@ -86,21 +138,6 @@ function RemoveNode(obj){
         alert("不能移除唯一节点...");
     }
 }
-
-
-var checkData = [{
-    text: 'Parent 1',
-    nodes: [
-        {
-            text: 'Child 1-1'
-        },
-        {
-            text: 'Child 1-2'
-        }
-    ]
-},{text: 'Parent 2'}];
-
-
 
 
 
@@ -121,20 +158,12 @@ function VerifyTreeNode(){
 
 
 $(function () {
-    //获取所有菜单
-    $.ajax({
-        url: full_path + "sys/structure/getStructure.json",
-        type: 'get',
-        dataType: 'json',
-        async:false,
-        success: function(data){
-        	
-        	allData = data;
-        	 
-        }
-    });
-    console.log(allData);
-   
+	//获取所有菜单
+	GetAllStructure();
+	//获取所有用户
+    GetAllUser();
+    
+    
     $('#structure_tree').treeview({
         data: allData,
         showIcon: false,
@@ -146,36 +175,8 @@ $(function () {
             VerifyTreeNode();
         }
     });
-    Replay(checkData,$('#structure_tree').treeview('getUnselected'));
+    Replay([],$('#structure_tree').treeview('getUnselected'));
 });
-
-
-/**
- * 回显
- * @constructor
- */
-//function RePlay(){
-//    var node = $('#structure_tree').treeview('getUnselected');
-//    for(var o1 in checkData){
-//        if(!(typeof checkData[o1]['nodes'] == 'undefined')){//还有子节点
-//            for(var o2 in checkData[o1]['nodes']){
-//                for(var temp in node){
-//                    if(checkData[o1]['nodes'][o2]['text'] == node[temp]['text']){
-//                        $('#structure_tree').treeview('checkNode',node[temp]);
-//                        break;
-//                    }
-//                }
-//            }
-//        }else{//没有子节点
-//            for(var kk in node){
-//                if(checkData[o1]['text'] == node[kk]['text']){
-//                    $('#structure_tree').treeview('checkNode',node[kk]);
-//                    break;
-//                }
-//            }
-//        }
-//    }
-//}
 
 
 /**
@@ -203,6 +204,8 @@ function Replay(data,node){
  * @constructor
  */
 function EditGroup(){
+	//设置保存提交路径
+	$("#group_form").attr('target','sys/group/update.json');
     var obj = $("table > tbody > tr > td > input[type=checkbox]:checked");
     var len = obj.length;
     if(len < 1){
@@ -212,15 +215,49 @@ function EditGroup(){
     }else{
        var id =  $(obj).parents('tr').children('td:nth-child(2)').text();
         $.ajax({
-            url: full_path + 'sys/Group/Group.json',
+            url: full_path + 'sys/group/getgroup.json?id=' + id,
             type: 'get',
             dataType: 'json',
             success: function(data){
-                Replay(data,$('#structure_tree').treeview('getUnselected'));
+            	//清空原来所有已选择的
+            	$('#structure_tree').treeview('uncheckAll',{ silent: true });
+            	//回显树
+                Replay(data['structure'],$('#structure_tree').treeview('getUnselected'));
+                //回显用户管理
+                ReplaySelect('user_table', allUser, data['user'], 'userId', 'fullName');
+                //回显服务管理
+               // ReplaySelect('user_table', allUser, data['user'], 'userId', 'fullName');
+                
+                //回显基础信息
+                $("#group_id").val(data['group']['groupId']);
+                $("#group_name").val(data['group']['groupName']);
+                if(data['group']['isEnabled'] === 1){
+                	$("#is_enabled option:nth-child(2)").attr('selected',true);
+                }
+                
                 $('#group_modal').modal('show');
             }
         });
     }
+}
+
+//显示用户管理组
+function ReplaySelect(obj,data,selData,id,name){
+	//移除所有节点
+	$('#'+obj+' > tbody').remove();
+	var node = "";
+	for(var i in selData){
+		node += "<tr><td><select class='form-control' name='"+ id +"'>";
+		for(var o in data){
+			if(selData[i][id] === data[o][id]){
+				node += "<option value='" + data[o][id] + "' selected>" + data[o][name] + "</option>";
+			}else{
+				node += "<option value='" + data[o][id] + "'>" + data[o][name] + "</option>";
+			}
+		}
+		node += "</select></td><td><input type='button' class='btn btn-default' onclick='RemoveNode(this);' value='删除'></td></tr>";
+	}
+	$('#'+obj).append(node);
 }
 
 /**
@@ -241,4 +278,92 @@ function selectGroup(){
 	            $("#formGroup select[name='isEnabled']").val(isEnabled);
 	        }
 	    });
+}
+
+
+//保存
+function SaveGroup(){
+	var target = $('#group_form').attr('target');
+	var checkNode = $('#structure_tree').treeview('getChecked');
+	var str_ids = "";
+	for(var i in checkNode){
+		str_ids += checkNode[i]['href'] + ";"
+	}
+	$("#str_ids").val(str_ids);
+	$.ajax({
+		url: full_path + target,
+		type: 'post',
+		data: $("#group_form").serialize(),
+		dataType: 'json',
+		success:function(data){
+			reLoad();
+		}
+	});
+}
+
+
+//批量激活
+function EnabledBatch(){
+	var obj = $("table > tbody > tr > td > input[type=checkbox]:checked");
+	var len = obj.length;
+	if(len < 1){
+		alert("请选择激活条目...");
+	}else{
+		var ids = "";
+		for(var i=0;i<len;i++){
+			var id = $(obj[i]).parents('tr').children('td:nth-child(2)').text();
+			var sta =  $(obj[i]).parents('tr').children('td:nth-child(6)').text();
+			if('是'==sta){
+				alert('包含已激活条目，请重新选择...');
+				break;
+				return;
+			}
+			ids = ids + id + ";";
+		}
+		$.ajax({
+			url: full_path + "sys/group/enabled.htm?ids=" + ids,
+			type: 'get',
+			dataType: 'json',
+			success: function(data){
+				reLoad();
+			}
+		});
+	}
+}
+
+//批量激活
+function DeletedBatch(){
+	var obj = $("table > tbody > tr > td > input[type=checkbox]:checked");
+	var len = obj.length;
+	if(len < 1){
+		alert("请选择激活条目...");
+	}else{
+		var ids = "";
+		for(var i=0;i<len;i++){
+			var id = $(obj[i]).parents('tr').children('td:nth-child(2)').text();
+			ids = ids + id + ";";
+		}
+		$.ajax({
+			url: full_path + "sys/group/deleted.htm?ids=" + ids,
+			type: 'get',
+			dataType: 'json',
+			success: function(data){
+				reLoad();
+			}
+		});
+	}
+}
+
+
+//页面重新加载
+function reLoad(){
+	$.ajax({
+		url: full_path + currentURL,
+		type: 'get',
+		dataType: 'html',
+		success: function(data){
+			$("#content").empty();
+			$("#content").append(data);
+		}
+	});
 }

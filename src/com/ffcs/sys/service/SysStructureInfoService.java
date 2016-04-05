@@ -23,6 +23,10 @@ public interface SysStructureInfoService {
 
     int updateByPrimaryKey(SysStructureInfo entity);
 
-    List<JsonNode> select();
+    List<JsonNode> select(SysStructureInfo sysStructureInfo);
     List<JsonNode> selectByGroupId(Integer groupId);
+    
+    List<SysStructureInfo> getStructureByInfo(SysStructureInfo structureInfo);
+    
+    Boolean deleteBatch(String ids);
 }

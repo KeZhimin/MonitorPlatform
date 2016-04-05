@@ -3,34 +3,35 @@ package com.ffcs.sys.entity;
 import java.util.List;
 
 public class SysGroupStructureAcl {
-    private Integer aclId;
+	@Override
+	public String toString() {
+		return "SysGroupStructureAcl [aclId=" + aclId + ", groupId=" + groupId + ", structureId=" + structureId
+				+ ", privs=" + privs + "]";
+	}
 
-    private Integer groupId;
+	private Integer aclId;
 
-    private Integer structureId;
+	private Integer groupId;
 
-    private Short privs;
- 
+	private Integer structureId;
+
+	private Short privs;
 
 	public Integer getAclId() {
-        return aclId;
-    }
+		return aclId;
+	}
 
-    public void setAclId(Integer aclId) {
-        this.aclId = aclId;
-    }
+	public void setAclId(Integer aclId) {
+		this.aclId = aclId;
+	}
 
-    public Integer getGroupId() {
-        return groupId;
-    }
+	public Integer getGroupId() {
+		return groupId;
+	}
 
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
-    }
-
-   
-
-   
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
+	}
 
 	public Integer getStructureId() {
 		return structureId;
@@ -41,10 +42,10 @@ public class SysGroupStructureAcl {
 	}
 
 	public Short getPrivs() {
-        return privs;
-    }
+		return privs;
+	}
 
-    public void setPrivs(Short privs) {
-        this.privs = privs;
-    }
+	public void setPrivs(Short privs) {
+		this.privs = privs;
+	}
 }

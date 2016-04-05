@@ -20,4 +20,9 @@ public interface SysGroupStructureAclMapper {
 
     int updateByPrimaryKey(SysGroupStructureAcl entity);
 	List<SysGroupStructureAcl> selectByGroupId(SysUserGroupAssoc sysUserGroupAssoc);
+	
+	void add(List<SysGroupStructureAcl> list);
+	
+	
+	void deleteByGroupId(Integer groupId);
 }

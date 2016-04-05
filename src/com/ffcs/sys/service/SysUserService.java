@@ -1,5 +1,7 @@
 package com.ffcs.sys.service;
 
+import java.util.List;
+
 import com.ffcs.sys.entity.SysUser;
 import com.github.pagehelper.PageInfo;
 
@@ -25,6 +27,7 @@ public interface SysUserService {
     PageInfo<SysUser> getUserList(PageInfo<SysUser> pageInfo,SysUser user);
     
 
+    List<SysUser> getUser();
    
 
     

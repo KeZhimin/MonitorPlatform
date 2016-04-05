@@ -1,150 +1,193 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ffcs.sys.dao.SysStructureInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysStructureInfo" >
-    <id column="STRUCTURE_ID" property="structureId" jdbcType="DECIMAL" />
-    <result column="STRUCTURE_NAME" property="structureName" jdbcType="VARCHAR" />
-    <result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
-    <result column="ORDER_NUM" property="orderNum" jdbcType="DECIMAL" />
-    <result column="URL" property="url" jdbcType="VARCHAR" />
-    <result column="IS_DELETED" property="isDeleted" jdbcType="DECIMAL" />
-    <result column="IS_LEAF" property="isLeaf" jdbcType="DECIMAL" />
-    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    STRUCTURE_ID, STRUCTURE_NAME, PARENT_ID, ORDER_NUM, URL, IS_DELETED, IS_LEAF, DESCRIPTION
-  </sql>
-  <select id="selectList" parameterType="com.ffcs.sys.entity.SysUser" resultMap="BaseResultMap">
-  select DISTINCT s.* from SYS_STRUCTURE_INFO s where STRUCTURE_ID in(
-   select STRUCTURE_ID from SYS_GROUP_STRUCTURE_ACL where GROUP_ID in(
-  select GROUPID from SYS_USER_GROUP_ASSOC where USERID =#{userId}))
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from SYS_STRUCTURE_INFO
-    <where>
-     <if test="structureId!=null">
-     STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
-     </if>
-    </where>
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    update  SYS_STRUCTURE_INFO set IS_DELETED=1
-    where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
-  </delete>
-  <insert id="insert" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
-    insert into SYS_STRUCTURE_INFO (STRUCTURE_ID, STRUCTURE_NAME, PARENT_ID, 
-      ORDER_NUM, URL, IS_DELETED, 
-      IS_LEAF, DESCRIPTION)
-    values (#{structureId,jdbcType=DECIMAL}, #{structureName,jdbcType=VARCHAR}, #{parentId,jdbcType=DECIMAL}, 
-      #{orderNum,jdbcType=DECIMAL}, #{url,jdbcType=VARCHAR}, #{isDeleted,jdbcType=DECIMAL}, 
-      #{isLeaf,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
-    <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="structureId">  
-       SELECT SYS_STRUCTURE_INFO_STRUCTUREID.NEXTVAL from DUAL  
-   </selectKey>  
-    insert into SYS_STRUCTURE_INFO
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-     
-        STRUCTURE_ID,
-   
-      <if test="structureName != null" >
-        STRUCTURE_NAME,
-      </if>
-      <if test="parentId != null" >
-        PARENT_ID,
-      </if>
-      <if test="orderNum != null" >
-        ORDER_NUM,
-      </if>
-      <if test="url != null" >
-        URL,
-      </if>
-      <if test="isDeleted != null" >
-        IS_DELETED,
-      </if>
-      <if test="isLeaf != null" >
-        IS_LEAF,
-      </if>
-      <if test="description != null" >
-        DESCRIPTION,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      
-        #{structureId,jdbcType=DECIMAL},
-    
-      <if test="structureName != null" >
-        #{structureName,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null" >
-        #{parentId,jdbcType=DECIMAL},
-      </if>
-      <if test="orderNum != null" >
-        #{orderNum,jdbcType=DECIMAL},
-      </if>
-      <if test="url != null" >
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="isDeleted != null" >
-        #{isDeleted,jdbcType=DECIMAL},
-      </if>
-      <if test="isLeaf != null" >
-        #{isLeaf,jdbcType=DECIMAL},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
-    update SYS_STRUCTURE_INFO
-    <set >
-      <if test="structureName != null" >
-        STRUCTURE_NAME = #{structureName,jdbcType=VARCHAR},
-      </if>
-      <if test="parentId != null" >
-        PARENT_ID = #{parentId,jdbcType=DECIMAL},
-      </if>
-      <if test="orderNum != null" >
-        ORDER_NUM = #{orderNum,jdbcType=DECIMAL},
-      </if>
-      <if test="url != null" >
-        URL = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="isDeleted != null" >
-        IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
-      </if>
-      <if test="isLeaf != null" >
-        IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
-      </if>
-      <if test="description != null" >
-        DESCRIPTION = #{description,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysStructureInfo" >
-    update SYS_STRUCTURE_INFO
-    set STRUCTURE_NAME = #{structureName,jdbcType=VARCHAR},
-      PARENT_ID = #{parentId,jdbcType=DECIMAL},
-      ORDER_NUM = #{orderNum,jdbcType=DECIMAL},
-      URL = #{url,jdbcType=VARCHAR},
-      IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
-      IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
-      DESCRIPTION = #{description,jdbcType=VARCHAR}
-    where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
-  </update>
-  
-  
-  <select id="select" resultMap="BaseResultMap">
-    select * from SYS_STRUCTURE_INFO 
-  </select>
-  <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-   select * from  SYS_STRUCTURE_INFO st,SYS_GROUP_STRUCTURE_ACL gst 
-   where st.STRUCTURE_ID=gst.STRUCTURE_ID and
-   GST."GROUP_ID" =#{value};
-  </select>
+<mapper namespace="com.ffcs.sys.dao.SysStructureInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysStructureInfo">
+		<id column="STRUCTURE_ID" property="structureId" jdbcType="DECIMAL" />
+		<result column="STRUCTURE_NAME" property="structureName"
+			jdbcType="VARCHAR" />
+		<result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
+		<result column="ORDER_NUM" property="orderNum" jdbcType="DECIMAL" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="IS_DELETED" property="isDeleted" jdbcType="DECIMAL" />
+		<result column="IS_LEAF" property="isLeaf" jdbcType="DECIMAL" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		STRUCTURE_ID, STRUCTURE_NAME, PARENT_ID, ORDER_NUM, URL,
+		IS_DELETED, IS_LEAF,
+		DESCRIPTION
+	</sql>
+	<select id="selectList" parameterType="com.ffcs.sys.entity.SysUser"
+		resultMap="BaseResultMap">
+		select DISTINCT s.* from SYS_STRUCTURE_INFO s where
+		STRUCTURE_ID in(
+		select STRUCTURE_ID from SYS_GROUP_STRUCTURE_ACL where
+		GROUP_ID in(
+		select GROUPID from SYS_USER_GROUP_ASSOC where USERID
+		=#{userId})) and s.IS_DELETED = 0 order by s.STRUCTURE_ID
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_STRUCTURE_INFO
+		<where>
+			<if test="structureId!=null">
+				STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		update
+		SYS_STRUCTURE_INFO set IS_DELETED=1
+		where STRUCTURE_ID =
+		#{structureId,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ffcs.sys.entity.SysStructureInfo">
+		insert into SYS_STRUCTURE_INFO
+		(STRUCTURE_ID, STRUCTURE_NAME,
+		PARENT_ID,
+		ORDER_NUM, URL, IS_DELETED,
+		IS_LEAF, DESCRIPTION)
+		values (#{structureId,jdbcType=DECIMAL},
+		#{structureName,jdbcType=VARCHAR},
+		#{parentId,jdbcType=DECIMAL},
+		#{orderNum,jdbcType=DECIMAL}, #{url,jdbcType=VARCHAR},
+		#{isDeleted,jdbcType=DECIMAL},
+		#{isLeaf,jdbcType=DECIMAL},
+		#{description,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysStructureInfo">
+		<selectKey resultType="java.lang.Integer" order="BEFORE"
+			keyProperty="structureId">
+			SELECT SYS_STRUCTURE_INFO_STRUCTUREID.NEXTVAL from DUAL
+		</selectKey>
+		insert into SYS_STRUCTURE_INFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+
+			STRUCTURE_ID,
+
+			<if test="structureName != null">
+				STRUCTURE_NAME,
+			</if>
+			<if test="parentId != null">
+				PARENT_ID,
+			</if>
+			<if test="orderNum != null">
+				ORDER_NUM,
+			</if>
+			<if test="url != null">
+				URL,
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED,
+			</if>
+			<if test="isLeaf != null">
+				IS_LEAF,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+
+			#{structureId,jdbcType=DECIMAL},
+
+			<if test="structureName != null">
+				#{structureName,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="orderNum != null">
+				#{orderNum,jdbcType=DECIMAL},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=DECIMAL},
+			</if>
+			<if test="isLeaf != null">
+				#{isLeaf,jdbcType=DECIMAL},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysStructureInfo">
+		update SYS_STRUCTURE_INFO
+		<set>
+			<if test="structureName != null">
+				STRUCTURE_NAME = #{structureName,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="orderNum != null">
+				ORDER_NUM = #{orderNum,jdbcType=DECIMAL},
+			</if>
+			<if test="url != null">
+				URL = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
+			</if>
+			<if test="isLeaf != null">
+				IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
+			</if>
+			<if test="description != null">
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where STRUCTURE_ID = #{structureId,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysStructureInfo">
+		update
+		SYS_STRUCTURE_INFO
+		set STRUCTURE_NAME =
+		#{structureName,jdbcType=VARCHAR},
+		PARENT_ID =
+		#{parentId,jdbcType=DECIMAL},
+		ORDER_NUM = #{orderNum,jdbcType=DECIMAL},
+		URL = #{url,jdbcType=VARCHAR},
+		IS_DELETED =
+		#{isDeleted,jdbcType=DECIMAL},
+		IS_LEAF = #{isLeaf,jdbcType=DECIMAL},
+		DESCRIPTION = #{description,jdbcType=VARCHAR}
+		where STRUCTURE_ID =
+		#{structureId,jdbcType=DECIMAL}
+	</update>
+
+
+	<select id="select" resultMap="BaseResultMap">
+		select * from SYS_STRUCTURE_INFO
+		<where>
+			<if test="structureId != null">
+				STRUCTURE_ID = #{structureId}
+			</if>
+			<if test="parentId != null">
+				and PARENT_ID = #{parentId}
+			</if>
+			and IS_DELETED = 0
+		</where>
+	</select>
+
+
+	<select id="selectByGroupId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select A.* from SYS_STRUCTURE_INFO A,SYS_GROUP_STRUCTURE_ACL B where B.GROUP_ID =#{value} and
+		A.STRUCTURE_ID=B.STRUCTURE_ID
+	</select>
+
+
+	<update id="deleteBatch" parameterType="java.util.List">
+		update SYS_STRUCTURE_INFO set IS_DELETED = 1 where STRUCTURE_ID in
+		<foreach collection="list" item="item" index="index"
+			separator="," open="(" close=")">
+			#{item}
+		</foreach>
+	</update>
+
 </mapper>

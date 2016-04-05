@@ -22,6 +22,10 @@ public interface SysGroupMapper {
 	   List<SysGroup> selectList(SysGroup group);
 	   //
 	   SysGroup selectByPrimaryKey(Integer primaryKey);
+	   
+	   Integer enabledBatch(List<Integer> list);
+	   
+	   Integer deletedBatch(List<Integer> list);
 	
     
 }

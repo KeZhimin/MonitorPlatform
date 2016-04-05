@@ -1,189 +1,197 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ffcs.sys.dao.SysUserMapper" >
-  <resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysUser" >
-    <id column="USER_ID" property="userId" jdbcType="DECIMAL" />
-    <result column="LONGIN_NAME" property="longinName" jdbcType="VARCHAR" />
-    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
-    <result column="FULL_NAME" property="fullName" jdbcType="VARCHAR" />
-    <result column="CTIME" property="ctime" jdbcType="TIMESTAMP" />
-    <result column="IS_ENABLED" property="isEnabled" jdbcType="DECIMAL" />
-    <result column="IS_DELETED" property="isDeleted" jdbcType="DECIMAL" />
-    <result column="POV_CODE" property="povCode" jdbcType="DECIMAL" />
-    <result column="PHONE_NUM" property="phoneNum" jdbcType="DECIMAL" />
-    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    USER_ID, LONGIN_NAME, PASSWORD, FULL_NAME, CTIME, IS_ENABLED, IS_DELETED, POV_CODE, 
-    PHONE_NUM, EMAIL
-  </sql>
-  <!--激活用户  -->
-   <update id="updateUserIsEnable" parameterType="java.lang.Integer" >
-     update SYS_USER set IS_ENABLED=0
-      where USER_ID=#{userId,jdbcType=DECIMAL}
-   </update>
-   <!--注销用户  -->
-   <update id="updateIsEnable" parameterType="java.lang.Integer" >
-     update SYS_USER set IS_ENABLED=1
-      where USER_ID=#{userId,jdbcType=DECIMAL}
-   </update>
-  <!-- 查询所有用户or 根据条件查询用户 -->
-  <select id="selectList" resultMap="BaseResultMap">
-  select
-  <include refid="Base_Column_List" />
-  from SYS_USER  <!-- where IS_DELETED=0  -->
-  <where>
-  <if test="userId!=null">
-     USER_ID LIKE '%${userId}%'
-  </if>
-     <if test="isEnabled!=null">
-      and IS_ENABLED =#{isEnabled}
-     </if>
-       and IS_DELETED =0
-  </where>
-  order by USER_ID
-  </select>
-  <!-- 根据用户名查询用户 -->
-  <select id="getSysUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
-    select
-    <include refid="Base_Column_List" />
-    from SYS_USER where LONGIN_NAME = #{longinName,jdbcType=VARCHAR} 
-    and IS_DELETED=0 and IS_ENABLED=0
-  </select>
-  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from SYS_USER
-    where USER_ID = #{userId,jdbcType=DECIMAL} order by USER_ID
-  </select>
-  <!-- 删除用户 -->
-  <delete id="deleteByPks" parameterType="java.lang.Integer" >
-    update SYS_USER set IS_DELETED=1
-    where USER_ID = #{userId,jdbcType=DECIMAL}
-  </delete>
-  <insert id="insert" parameterType="com.ffcs.sys.entity.SysUser" >
-    insert into SYS_USER (USER_ID, LONGIN_NAME, PASSWORD, 
-      FULL_NAME, CTIME, IS_ENABLED, 
-      IS_DELETED, POV_CODE, PHONE_NUM, 
-      EMAIL)
-    values (#{userId,jdbcType=DECIMAL}, #{longinName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{fullName,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, #{isEnabled,jdbcType=DECIMAL}, 
-      #{isDeleted,jdbcType=DECIMAL}, #{povCode,jdbcType=DECIMAL}, #{phoneNum,jdbcType=DECIMAL}, 
-      #{email,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysUser">
- <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="userId">  
-       SELECT SYS_USER_USERID.NEXTVAL from DUAL  
-   </selectKey>  
-    insert into SYS_USER 
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-     
-        USER_ID,
-      <if test="longinName != null" >
-        LONGIN_NAME,
-      </if>
-      <if test="password != null" >
-        PASSWORD,
-      </if>
-      <if test="fullName != null" >
-        FULL_NAME,
-      </if>
-      <if test="ctime != null" >
-        CTIME,
-      </if>
-      <if test="isEnabled != null" >
-        IS_ENABLED,
-      </if>
-      <if test="isDeleted != null" >
-        IS_DELETED,
-      </if>
-      <if test="povCode != null" >
-        POV_CODE,
-      </if>
-      <if test="phoneNum != null" >
-        PHONE_NUM,
-      </if>
-      <if test="email != null" >
-        EMAIL,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      
-        #{userId,jdbcType=DECIMAL},
-     
-      <if test="longinName != null" >
-        #{longinName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="fullName != null" >
-        #{fullName,jdbcType=VARCHAR},
-      </if>
-      <if test="ctime != null" >
-        #{ctime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isEnabled != null" >
-        #{isEnabled,jdbcType=DECIMAL},
-      </if>
-      <if test="isDeleted != null" >
-        #{isDeleted,jdbcType=DECIMAL},
-      </if>
-      <if test="povCode != null" >
-        #{povCode,jdbcType=DECIMAL},
-      </if>
-      <if test="phoneNum != null" >
-        #{phoneNum,jdbcType=DECIMAL},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByUserIdSelective" parameterType="com.ffcs.sys.entity.SysUser" >
-    update SYS_USER
-    <set >
-      <if test="longinName != null" >
-        LONGIN_NAME = #{longinName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        PASSWORD = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="fullName != null" >
-        FULL_NAME = #{fullName,jdbcType=VARCHAR},
-      </if>
-      <if test="ctime != null" >
-        CTIME = #{ctime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="isEnabled != null" >
-        IS_ENABLED = #{isEnabled,jdbcType=DECIMAL},
-      </if>
-      <if test="isDeleted != null" >
-        IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
-      </if>
-      <if test="povCode != null" >
-        POV_CODE = #{povCode,jdbcType=DECIMAL},
-      </if>
-      <if test="phoneNum != null" >
-        PHONE_NUM = #{phoneNum,jdbcType=DECIMAL},
-      </if>
-      <if test="email != null" >
-        EMAIL = #{email,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where USER_ID = #{userId,jdbcType=DECIMAL}
-  </update>
- <!--  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysUser" >
-    update SYS_USER
-    set LONGIN_NAME = #{longinName,jdbcType=VARCHAR},
-      PASSWORD = #{password,jdbcType=VARCHAR},
-      FULL_NAME = #{fullName,jdbcType=VARCHAR},
-      CTIME = #{ctime,jdbcType=TIMESTAMP},
-      IS_ENABLED = #{isEnabled,jdbcType=DECIMAL},
-      IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
-      POV_CODE = #{povCode,jdbcType=DECIMAL},
-      PHONE_NUM = #{phoneNum,jdbcType=DECIMAL},
-      EMAIL = #{email,jdbcType=VARCHAR}
-    where USER_ID = #{userId,jdbcType=DECIMAL}
-  </update> -->
+<mapper namespace="com.ffcs.sys.dao.SysUserMapper">
+	<resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysUser">
+		<id column="USER_ID" property="userId" jdbcType="DECIMAL" />
+		<result column="LONGIN_NAME" property="longinName" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="FULL_NAME" property="fullName" jdbcType="VARCHAR" />
+		<result column="CTIME" property="ctime" jdbcType="TIMESTAMP" />
+		<result column="IS_ENABLED" property="isEnabled" jdbcType="DECIMAL" />
+		<result column="IS_DELETED" property="isDeleted" jdbcType="DECIMAL" />
+		<result column="POV_CODE" property="povCode" jdbcType="DECIMAL" />
+		<result column="PHONE_NUM" property="phoneNum" jdbcType="DECIMAL" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		USER_ID, LONGIN_NAME, PASSWORD, FULL_NAME, CTIME, IS_ENABLED, IS_DELETED,
+		POV_CODE,
+		PHONE_NUM, EMAIL
+	</sql>
+	<!--激活用户 -->
+	<update id="updateUserIsEnable" parameterType="java.lang.Integer">
+		update SYS_USER set IS_ENABLED=0
+		where USER_ID=#{userId,jdbcType=DECIMAL}
+	</update>
+	<!--注销用户 -->
+	<update id="updateIsEnable" parameterType="java.lang.Integer">
+		update SYS_USER set IS_ENABLED=1
+		where USER_ID=#{userId,jdbcType=DECIMAL}
+	</update>
+	<!-- 查询所有用户or 根据条件查询用户 -->
+	<select id="selectList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_USER  <!-- where IS_DELETED=0 -->
+		<where>
+			<if test="userId!=null">
+				USER_ID LIKE '%${userId}%'
+			</if>
+			<if test="isEnabled!=null">
+				and IS_ENABLED =#{isEnabled}
+			</if>
+			and IS_DELETED =0
+		</where>
+		order by USER_ID
+	</select>
+	<!-- 根据用户名查询用户 -->
+	<select id="getSysUserByName" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_USER where LONGIN_NAME = #{longinName,jdbcType=VARCHAR}
+		and IS_DELETED=0 and IS_ENABLED=0
+	</select>
+	<select id="selectByUserId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_USER
+		where USER_ID = #{userId,jdbcType=DECIMAL} order by USER_ID
+	</select>
+	<!-- 删除用户 -->
+	<delete id="deleteByPks" parameterType="java.lang.Integer">
+		update SYS_USER set IS_DELETED=1
+		where USER_ID = #{userId,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ffcs.sys.entity.SysUser">
+		insert into SYS_USER (USER_ID, LONGIN_NAME, PASSWORD,
+		FULL_NAME, CTIME, IS_ENABLED,
+		IS_DELETED, POV_CODE, PHONE_NUM,
+		EMAIL)
+		values (#{userId,jdbcType=DECIMAL}, #{longinName,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{fullName,jdbcType=VARCHAR}, #{ctime,jdbcType=TIMESTAMP}, #{isEnabled,jdbcType=DECIMAL},
+		#{isDeleted,jdbcType=DECIMAL}, #{povCode,jdbcType=DECIMAL},
+		#{phoneNum,jdbcType=DECIMAL},
+		#{email,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysUser">
+		<selectKey resultType="java.lang.Integer" order="BEFORE"
+			keyProperty="userId">
+			SELECT SYS_USER_USERID.NEXTVAL from DUAL
+		</selectKey>
+		insert into SYS_USER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+
+			USER_ID,
+			<if test="longinName != null">
+				LONGIN_NAME,
+			</if>
+			<if test="password != null">
+				PASSWORD,
+			</if>
+			<if test="fullName != null">
+				FULL_NAME,
+			</if>
+			<if test="ctime != null">
+				CTIME,
+			</if>
+			<if test="isEnabled != null">
+				IS_ENABLED,
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED,
+			</if>
+			<if test="povCode != null">
+				POV_CODE,
+			</if>
+			<if test="phoneNum != null">
+				PHONE_NUM,
+			</if>
+			<if test="email != null">
+				EMAIL,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+
+			#{userId,jdbcType=DECIMAL},
+
+			<if test="longinName != null">
+				#{longinName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="fullName != null">
+				#{fullName,jdbcType=VARCHAR},
+			</if>
+			<if test="ctime != null">
+				#{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isEnabled != null">
+				#{isEnabled,jdbcType=DECIMAL},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=DECIMAL},
+			</if>
+			<if test="povCode != null">
+				#{povCode,jdbcType=DECIMAL},
+			</if>
+			<if test="phoneNum != null">
+				#{phoneNum,jdbcType=DECIMAL},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByUserIdSelective" parameterType="com.ffcs.sys.entity.SysUser">
+		update SYS_USER
+		<set>
+			<if test="longinName != null">
+				LONGIN_NAME = #{longinName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				PASSWORD = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="fullName != null">
+				FULL_NAME = #{fullName,jdbcType=VARCHAR},
+			</if>
+			<if test="ctime != null">
+				CTIME = #{ctime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isEnabled != null">
+				IS_ENABLED = #{isEnabled,jdbcType=DECIMAL},
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED = #{isDeleted,jdbcType=DECIMAL},
+			</if>
+			<if test="povCode != null">
+				POV_CODE = #{povCode,jdbcType=DECIMAL},
+			</if>
+			<if test="phoneNum != null">
+				PHONE_NUM = #{phoneNum,jdbcType=DECIMAL},
+			</if>
+			<if test="email != null">
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where USER_ID = #{userId,jdbcType=DECIMAL}
+	</update>
+
+	<select id="getUser" resultMap="BaseResultMap">
+		select * from SYS_USER where IS_DELETED = 0 and IS_ENABLED = 0
+	</select>
+
+
+	<select id="getUserByGroupId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select A.USER_ID,A.FULL_NAME from SYS_USER A,SYS_USER_GROUP_ASSOC B where
+		B.GROUPID = #{id} and A.USER_ID = B.USERID and A.IS_DELETED = 0 and
+		A.IS_ENABLED = 0
+	</select>
+
+
+
 </mapper>

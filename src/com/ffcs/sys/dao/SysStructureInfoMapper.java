@@ -23,7 +23,9 @@ public interface SysStructureInfoMapper {
 	
 	List<SysStructureInfo> selectList(SysUser sysUser);
 
-	List<SysStructureInfo> select();
+	List<SysStructureInfo> select(SysStructureInfo sysStructureInfo);
 
 	List<SysStructureInfo> selectByGroupId(Integer groupId);
+	
+	void deleteBatch(List<String> list);
 }

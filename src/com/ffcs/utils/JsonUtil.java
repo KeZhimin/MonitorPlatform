@@ -39,37 +39,5 @@ public class JsonUtil {
 		   }
 		return listJson;
 	}
-	
-	public static  List<JsonNode> conversionJson2(List<SysStructureInfo> list){
-		 JsonNode jsonNode = null;
-		 SysStructureInfo parent = null ;
-		 JsonNode  child= null ;
-		 List<JsonNode> listJson = new ArrayList<JsonNode>();
-		 int len = list.size();
-		   for(int i=0;i<len;i++){
-			   jsonNode = new JsonNode();
-			    parent = new SysStructureInfo();
-			    List<JsonNode> childList = new ArrayList<JsonNode>();;
-			   for(int j=0;j<len;j++){				   
-				   if(list.get(i).getStructureId()==list.get(j).getParentId()){
-					   parent = list.get(i);
-					   System.out.println("父亲：："+parent);
-					   jsonNode.setText(parent.getStructureName());
-					   jsonNode.setHref(parent.getStructureId());
-					  
-					   SysStructureInfo childInfo =list.get(j);
-					   System.out.println("孩子：："+childInfo);
-					   child = new JsonNode();
-					   child.setHref(childInfo.getStructureId());
-					   child.setText(childInfo.getStructureName());
-					   childList.add(child);
-				   }
-			   }
-			   jsonNode.setNodes(childList);
-			    listJson.add(jsonNode);
-		   }
-		return listJson;
-	}
-
 }
 

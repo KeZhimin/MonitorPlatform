@@ -143,15 +143,12 @@ public class SysUserController {
 		
 		return "sys/user/user";
 	}
-	/*@RequestMapping("getUser")
+	
 	@ResponseBody
-	public PageInfo<SysUser> getUser(PageInfo<SysUser> pageInfo,SysUser user){
-		Map<String,Object> params = new HashMap<String,Object>();
-		 pageInfo = sysUserService.getUserList(pageInfo,user);
-		
-		 
-		return  pageInfo;
-	}*/
+	@RequestMapping("getuser")
+	public List<SysUser> getUser(){
+		return sysUserService.getUser();
+	}
 
 	
 }

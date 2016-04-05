@@ -1,88 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ffcs.sys.dao.SysGroupStructureAclMapper" >
-  <resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysGroupStructureAcl" >
-    <id column="ACL_ID" property="aclId" jdbcType="DECIMAL" />
-    <result column="GROUP_ID" property="groupId" jdbcType="DECIMAL" />
-    <result column="STRUCTURE_ID" property="structureId" jdbcType="DECIMAL" />
-    <result column="PRIVS" property="privs" jdbcType="DECIMAL" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ACL_ID, GROUP_ID, STRUCTURE_ID, PRIVS
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from SYS_GROUP_STRUCTURE_ACL
-    where ACL_ID = #{aclId,jdbcType=DECIMAL}
-  </select>
-   <select id="selectByGroupId" resultMap="BaseResultMap" parameterType="com.ffcs.sys.entity.SysUserGroupAssoc" >
-    select 
-     <include refid="Base_Column_List" />
-    from SYS_GROUP_STRUCTURE_ACL
-    where GROUP_ID = #{GroupId,jdbcType=DECIMAL}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from SYS_GROUP_STRUCTURE_ACL
-    where ACL_ID = #{aclId,jdbcType=DECIMAL}
-  </delete>
-  <insert id="insert" parameterType="com.ffcs.sys.entity.SysGroupStructureAcl" >
-    insert into SYS_GROUP_STRUCTURE_ACL (ACL_ID, GROUP_ID, STRUCTURE_ID, 
-      PRIVS)
-    values (#{aclId,jdbcType=DECIMAL}, #{groupId,jdbcType=DECIMAL}, #{structureId,jdbcType=DECIMAL}, 
-      #{privs,jdbcType=DECIMAL})
-  </insert>
-  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysGroupStructureAcl" >
-    insert into SYS_GROUP_STRUCTURE_ACL
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="aclId != null" >
-        ACL_ID,
-      </if>
-      <if test="groupId != null" >
-        GROUP_ID,
-      </if>
-      <if test="structureId != null" >
-        STRUCTURE_ID,
-      </if>
-      <if test="privs != null" >
-        PRIVS,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="aclId != null" >
-        #{aclId,jdbcType=DECIMAL},
-      </if>
-      <if test="groupId != null" >
-        #{groupId,jdbcType=DECIMAL},
-      </if>
-      <if test="structureId != null" >
-        #{structureId,jdbcType=DECIMAL},
-      </if>
-      <if test="privs != null" >
-        #{privs,jdbcType=DECIMAL},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysGroupStructureAcl" >
-    update SYS_GROUP_STRUCTURE_ACL
-    <set >
-      <if test="groupId != null" >
-        GROUP_ID = #{groupId,jdbcType=DECIMAL},
-      </if>
-      <if test="structureId != null" >
-        STRUCTURE_ID = #{structureId,jdbcType=DECIMAL},
-      </if>
-      <if test="privs != null" >
-        PRIVS = #{privs,jdbcType=DECIMAL},
-      </if>
-    </set>
-    where ACL_ID = #{aclId,jdbcType=DECIMAL}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysGroupStructureAcl" >
-    update SYS_GROUP_STRUCTURE_ACL
-    set GROUP_ID = #{groupId,jdbcType=DECIMAL},
-      STRUCTURE_ID = #{structureId,jdbcType=DECIMAL},
-      PRIVS = #{privs,jdbcType=DECIMAL}
-    where ACL_ID = #{aclId,jdbcType=DECIMAL}
-  </update>
+<mapper namespace="com.ffcs.sys.dao.SysGroupStructureAclMapper">
+	<resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysGroupStructureAcl">
+		<id column="ACL_ID" property="aclId" jdbcType="DECIMAL" />
+		<result column="GROUP_ID" property="groupId" jdbcType="DECIMAL" />
+		<result column="STRUCTURE_ID" property="structureId" jdbcType="DECIMAL" />
+		<result column="PRIVS" property="privs" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ACL_ID, GROUP_ID, STRUCTURE_ID, PRIVS
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_GROUP_STRUCTURE_ACL
+		where ACL_ID = #{aclId,jdbcType=DECIMAL}
+	</select>
+	<select id="selectByGroupId" resultMap="BaseResultMap"
+		parameterType="com.ffcs.sys.entity.SysUserGroupAssoc">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_GROUP_STRUCTURE_ACL
+		where GROUP_ID =
+		#{GroupId,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		SYS_GROUP_STRUCTURE_ACL
+		where ACL_ID = #{aclId,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ffcs.sys.entity.SysGroupStructureAcl">
+		insert into
+		SYS_GROUP_STRUCTURE_ACL (ACL_ID, GROUP_ID, STRUCTURE_ID,
+		PRIVS)
+		values
+		(#{aclId,jdbcType=DECIMAL}, #{groupId,jdbcType=DECIMAL},
+		#{structureId,jdbcType=DECIMAL},
+		#{privs,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysGroupStructureAcl">
+		insert into SYS_GROUP_STRUCTURE_ACL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="aclId != null">
+				ACL_ID,
+			</if>
+			<if test="groupId != null">
+				GROUP_ID,
+			</if>
+			<if test="structureId != null">
+				STRUCTURE_ID,
+			</if>
+			<if test="privs != null">
+				PRIVS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="aclId != null">
+				#{aclId,jdbcType=DECIMAL},
+			</if>
+			<if test="groupId != null">
+				#{groupId,jdbcType=DECIMAL},
+			</if>
+			<if test="structureId != null">
+				#{structureId,jdbcType=DECIMAL},
+			</if>
+			<if test="privs != null">
+				#{privs,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysGroupStructureAcl">
+		update SYS_GROUP_STRUCTURE_ACL
+		<set>
+			<if test="groupId != null">
+				GROUP_ID = #{groupId,jdbcType=DECIMAL},
+			</if>
+			<if test="structureId != null">
+				STRUCTURE_ID = #{structureId,jdbcType=DECIMAL},
+			</if>
+			<if test="privs != null">
+				PRIVS = #{privs,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ACL_ID = #{aclId,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysGroupStructureAcl">
+		update
+		SYS_GROUP_STRUCTURE_ACL
+		set GROUP_ID = #{groupId,jdbcType=DECIMAL},
+		STRUCTURE_ID = #{structureId,jdbcType=DECIMAL},
+		PRIVS =
+		#{privs,jdbcType=DECIMAL}
+		where ACL_ID = #{aclId,jdbcType=DECIMAL}
+	</update>
+
+
+	<insert id="add" parameterType="java.util.List">
+		INSERT INTO SYS_GROUP_STRUCTURE_ACL
+		(ACL_ID,GROUP_ID,STRUCTURE_ID,PRIVS)
+		select SYS_GROUP_STRUCTURE_ACL_ID.NEXTVAL,GROUP_ID,STRUCTURE_ID,PRIVS from
+		<foreach collection="list" open="(" close=")" index="index"
+			item="item" separator="union">
+			select #{item.groupId}
+			GROUP_ID,#{item.structureId} STRUCTURE_ID,#{item.privs} PRIVS from
+			dual
+		</foreach>
+	</insert>
+
+	<delete id="deleteByGroupId" parameterType="java.lang.Integer">
+		delete SYS_GROUP_STRUCTURE_ACL where GROUP_ID = #{groupId}
+	</delete>
+
 </mapper>

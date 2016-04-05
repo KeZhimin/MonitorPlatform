@@ -1,6 +1,7 @@
 package com.ffcs.sys.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -128,6 +129,13 @@ public class SysUserServiceImpl implements SysUserService {
 		    }
 		  
 		return pageInfo;
+	}
+
+
+
+	@Override
+	public List<SysUser> getUser() {
+		return sysUserMapper.getUser();
 	}
 
 	

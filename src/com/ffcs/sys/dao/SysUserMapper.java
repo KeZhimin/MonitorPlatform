@@ -25,7 +25,11 @@ public interface SysUserMapper {
     SysUser getSysUserByName(String userName);
     
     List<SysUser> selectList(SysUser user);
+    
+    List<SysUser> getUser();
 
+    
+    List<SysUser> getUserByGroupId(Integer id);
 	
 	
  
