@@ -12,7 +12,7 @@ public class AppServerMonitorLog {
 
     private BigDecimal idxItemValue;
 
-    private Date ctime1;
+    private Date ctime;
 
     private String isAlarm;
 
@@ -48,12 +48,12 @@ public class AppServerMonitorLog {
         this.idxItemValue = idxItemValue;
     }
 
-    public Date getCtime1() {
-        return ctime1;
+    public Date getCtime() {
+        return ctime;
     }
 
-    public void setCtime1(Date ctime1) {
-        this.ctime1 = ctime1;
+    public void setCtime(Date ctime) {
+        this.ctime = ctime;
     }
 
     public String getIsAlarm() {

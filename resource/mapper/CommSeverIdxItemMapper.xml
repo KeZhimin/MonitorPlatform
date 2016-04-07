@@ -6,10 +6,10 @@
     <result column="IDX_ITEM_NAME" property="idxItemName" jdbcType="VARCHAR" />
     <result column="IDX_ITME_UNIT" property="idxItmeUnit" jdbcType="VARCHAR" />
     <result column="IDX_DEFAULT_VALUE" property="idxDefaultValue" jdbcType="DECIMAL" />
-    <result column="IDX_ITEM_TYPE" property="idxItemType" jdbcType="DECIMAL" />
+    <result column="IDX_ITME_TYPE" property="idxItmeType" jdbcType="DECIMAL" />
   </resultMap>
   <sql id="Base_Column_List" >
-    IDX_ITEM_ID, IDX_ITEM_NAME, IDX_ITME_UNIT, IDX_DEFAULT_VALUE, IDX_ITEM_TYPE
+    IDX_ITEM_ID, IDX_ITEM_NAME, IDX_ITME_UNIT, IDX_DEFAULT_VALUE, IDX_ITME_TYPE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.ffcs.mp.entity.CommSeverIdxItem" >
     insert into COMM_SEVER_IDX_ITEM (IDX_ITEM_ID, IDX_ITEM_NAME, IDX_ITME_UNIT, 
-      IDX_DEFAULT_VALUE, IDX_ITEM_TYPE)
+      IDX_DEFAULT_VALUE, IDX_ITME_TYPE)
     values (#{idxItemId,jdbcType=DECIMAL}, #{idxItemName,jdbcType=VARCHAR}, #{idxItmeUnit,jdbcType=VARCHAR}, 
-      #{idxDefaultValue,jdbcType=DECIMAL}, #{idxItemType,jdbcType=DECIMAL})
+      #{idxDefaultValue,jdbcType=DECIMAL}, #{idxItmeType,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.ffcs.mp.entity.CommSeverIdxItem" >
     insert into COMM_SEVER_IDX_ITEM
@@ -42,8 +42,8 @@
       <if test="idxDefaultValue != null" >
         IDX_DEFAULT_VALUE,
       </if>
-      <if test="idxItemType != null" >
-        IDX_ITEM_TYPE,
+      <if test="idxItmeType != null" >
+        IDX_ITME_TYPE,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -59,8 +59,8 @@
       <if test="idxDefaultValue != null" >
         #{idxDefaultValue,jdbcType=DECIMAL},
       </if>
-      <if test="idxItemType != null" >
-        #{idxItemType,jdbcType=DECIMAL},
+      <if test="idxItmeType != null" >
+        #{idxItmeType,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -76,8 +76,8 @@
       <if test="idxDefaultValue != null" >
         IDX_DEFAULT_VALUE = #{idxDefaultValue,jdbcType=DECIMAL},
       </if>
-      <if test="idxItemType != null" >
-        IDX_ITEM_TYPE = #{idxItemType,jdbcType=DECIMAL},
+      <if test="idxItmeType != null" >
+        IDX_ITME_TYPE = #{idxItmeType,jdbcType=DECIMAL},
       </if>
     </set>
     where IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL}
@@ -87,7 +87,7 @@
     set IDX_ITEM_NAME = #{idxItemName,jdbcType=VARCHAR},
       IDX_ITME_UNIT = #{idxItmeUnit,jdbcType=VARCHAR},
       IDX_DEFAULT_VALUE = #{idxDefaultValue,jdbcType=DECIMAL},
-      IDX_ITEM_TYPE = #{idxItemType,jdbcType=DECIMAL}
+      IDX_ITME_TYPE = #{idxItmeType,jdbcType=DECIMAL}
     where IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL}
   </update>
 </mapper>

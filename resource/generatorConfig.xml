@@ -80,7 +80,13 @@
 			<property name="ignoreQualifiersAtRuntime" value="false" />
 		</table>
 
-		<table tableName="COMM_ORG_INFO" domainObjectName="CommOrgInfo"
+		<table tableName="COMM_SEVER_ORG_INFO" domainObjectName="CommSeverOrgInfo"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<property name="ignoreQualifiersAtRuntime" value="false" />
+		</table>
+		<table tableName="COMM_SERV_ORG_INFO" domainObjectName="CommServOrgInfo"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">

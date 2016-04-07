@@ -9,7 +9,7 @@ public class CommSeverIdxItem {
 
     private Long idxDefaultValue;
 
-    private Short idxItemType;
+    private Short idxItmeType;
 
     public Integer getIdxItemId() {
         return idxItemId;
@@ -43,11 +43,11 @@ public class CommSeverIdxItem {
         this.idxDefaultValue = idxDefaultValue;
     }
 
-    public Short getIdxItemType() {
-        return idxItemType;
+    public Short getIdxItmeType() {
+        return idxItmeType;
     }
 
-    public void setIdxItemType(Short idxItemType) {
-        this.idxItemType = idxItemType;
+    public void setIdxItmeType(Short idxItmeType) {
+        this.idxItmeType = idxItmeType;
     }
 }

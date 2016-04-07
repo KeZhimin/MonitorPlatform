@@ -1,9 +1,7 @@
 package com.ffcs.mp.entity;
 
-public class CommOrgInfo {
+public class CommSeverOrgInfo {
     private Integer orgId;
-
-    private Integer comOrgId;
 
     private String orgName;
 
@@ -19,14 +17,6 @@ public class CommOrgInfo {
 
     public void setOrgId(Integer orgId) {
         this.orgId = orgId;
-    }
-
-    public Integer getComOrgId() {
-        return comOrgId;
-    }
-
-    public void setComOrgId(Integer comOrgId) {
-        this.comOrgId = comOrgId;
     }
 
     public String getOrgName() {

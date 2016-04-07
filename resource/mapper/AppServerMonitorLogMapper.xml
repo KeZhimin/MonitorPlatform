@@ -6,11 +6,11 @@
     <result column="SEVER_ID" property="severId" jdbcType="DECIMAL" />
     <result column="IDX_ITEM_ID" property="idxItemId" jdbcType="DECIMAL" />
     <result column="IDX_ITEM_VALUE" property="idxItemValue" jdbcType="DECIMAL" />
-    <result column="CTIME1" property="ctime1" jdbcType="TIMESTAMP" />
+    <result column="CTIME" property="ctime" jdbcType="TIMESTAMP" />
     <result column="IS_ALARM" property="isAlarm" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    LOG_ID, SEVER_ID, IDX_ITEM_ID, IDX_ITEM_VALUE, CTIME1, IS_ALARM
+    LOG_ID, SEVER_ID, IDX_ITEM_ID, IDX_ITEM_VALUE, CTIME, IS_ALARM
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -24,10 +24,10 @@
   </delete>
   <insert id="insert" parameterType="com.ffcs.mp.entity.AppServerMonitorLog" >
     insert into APP_SEVER_MONITOR_LOG (LOG_ID, SEVER_ID, IDX_ITEM_ID, 
-      IDX_ITEM_VALUE, CTIME1, IS_ALARM
+      IDX_ITEM_VALUE, CTIME, IS_ALARM
       )
     values (#{logId,jdbcType=DECIMAL}, #{severId,jdbcType=DECIMAL}, #{idxItemId,jdbcType=DECIMAL}, 
-      #{idxItemValue,jdbcType=DECIMAL}, #{ctime1,jdbcType=TIMESTAMP}, #{isAlarm,jdbcType=VARCHAR}
+      #{idxItemValue,jdbcType=DECIMAL}, #{ctime,jdbcType=TIMESTAMP}, #{isAlarm,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ffcs.mp.entity.AppServerMonitorLog" >
@@ -45,8 +45,8 @@
       <if test="idxItemValue != null" >
         IDX_ITEM_VALUE,
       </if>
-      <if test="ctime1 != null" >
-        CTIME1,
+      <if test="ctime != null" >
+        CTIME,
       </if>
       <if test="isAlarm != null" >
         IS_ALARM,
@@ -65,8 +65,8 @@
       <if test="idxItemValue != null" >
         #{idxItemValue,jdbcType=DECIMAL},
       </if>
-      <if test="ctime1 != null" >
-        #{ctime1,jdbcType=TIMESTAMP},
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
       </if>
       <if test="isAlarm != null" >
         #{isAlarm,jdbcType=VARCHAR},
@@ -85,8 +85,8 @@
       <if test="idxItemValue != null" >
         IDX_ITEM_VALUE = #{idxItemValue,jdbcType=DECIMAL},
       </if>
-      <if test="ctime1 != null" >
-        CTIME1 = #{ctime1,jdbcType=TIMESTAMP},
+      <if test="ctime != null" >
+        CTIME = #{ctime,jdbcType=TIMESTAMP},
       </if>
       <if test="isAlarm != null" >
         IS_ALARM = #{isAlarm,jdbcType=VARCHAR},
@@ -99,7 +99,7 @@
     set SEVER_ID = #{severId,jdbcType=DECIMAL},
       IDX_ITEM_ID = #{idxItemId,jdbcType=DECIMAL},
       IDX_ITEM_VALUE = #{idxItemValue,jdbcType=DECIMAL},
-      CTIME1 = #{ctime1,jdbcType=TIMESTAMP},
+      CTIME = #{ctime,jdbcType=TIMESTAMP},
       IS_ALARM = #{isAlarm,jdbcType=VARCHAR}
     where LOG_ID = #{logId,jdbcType=DECIMAL}
   </update>
