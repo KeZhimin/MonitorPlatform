@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ffcs.sys.dao.SysGroupOrgAclMapper" >
+  <resultMap id="BaseResultMap" type="com.ffcs.sys.entity.SysGroupOrgAcl" >
+    <id column="ORG_ACL_ID" property="orgAclId" jdbcType="DECIMAL" />
+    <result column="GROUP_ID" property="groupId" jdbcType="DECIMAL" />
+    <result column="ORG_ID" property="orgId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ORG_ACL_ID, GROUP_ID, ORG_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_GROUP_ORG_ACL
+    where ORG_ACL_ID = #{orgAclId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_GROUP_ORG_ACL
+    where ORG_ACL_ID = #{orgAclId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ffcs.sys.entity.SysGroupOrgAcl" >
+    insert into SYS_GROUP_ORG_ACL (ORG_ACL_ID, GROUP_ID, ORG_ID
+      )
+    values (#{orgAclId,jdbcType=DECIMAL}, #{groupId,jdbcType=DECIMAL}, #{orgId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ffcs.sys.entity.SysGroupOrgAcl" >
+    insert into SYS_GROUP_ORG_ACL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgAclId != null" >
+        ORG_ACL_ID,
+      </if>
+      <if test="groupId != null" >
+        GROUP_ID,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgAclId != null" >
+        #{orgAclId,jdbcType=DECIMAL},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.sys.entity.SysGroupOrgAcl" >
+    update SYS_GROUP_ORG_ACL
+    <set >
+      <if test="groupId != null" >
+        GROUP_ID = #{groupId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ORG_ACL_ID = #{orgAclId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.sys.entity.SysGroupOrgAcl" >
+    update SYS_GROUP_ORG_ACL
+    set GROUP_ID = #{groupId,jdbcType=DECIMAL},
+      ORG_ID = #{orgId,jdbcType=DECIMAL}
+    where ORG_ACL_ID = #{orgAclId,jdbcType=DECIMAL}
+  </update>
+</mapper>
